@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "127739201899",
+    "project_id": "digital-receipts-fd2ce",
+    "storage_bucket": "digital-receipts-fd2ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:127739201899:android:959fe5f2a1f7f58b2da42e",
+        "android_client_info": {
+          "package_name": "com.example.digitalreceipts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "127739201899-5msuoacrvcedrdmb0ok784db9duvcvk2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.digitalreceipts",
+            "certificate_hash": "ec9ea82f92e33c6dc5d89ffa8fe8fac37131b712"
+          }
+        },
+        {
+          "client_id": "127739201899-s99q5m76f49m1tflrqkthtnglqg96uer.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCIl14B40fHWhFGKTJxKO8r0U1jOXSE64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "127739201899-s99q5m76f49m1tflrqkthtnglqg96uer.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

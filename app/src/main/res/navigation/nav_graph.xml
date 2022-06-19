@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginScreenFragment"
-        android:name="com.example.digitalreceipts.LoginScreenFragment"
+        android:name="com.example.digitalreceipts.fragment.LoginScreenFragment"
         android:label="login_screen_fragment"
         tools:layout="@layout/login_screen_fragment" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/receiptsListFragment"
-        android:name="com.example.digitalreceipts.ReceiptsListFragment"
+        android:name="com.example.digitalreceipts.fragment.ReceiptsListFragment"
         android:label="receipts_list_fragment"
         tools:layout="@layout/receipts_list_fragment" />
 </navigation>
