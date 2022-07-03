@@ -21,7 +21,7 @@ private val moshi = Moshi.Builder()
 
 var client: OkHttpClient = OkHttpClient.Builder().addInterceptor { chain ->
     val newRequest: Request = chain.request().newBuilder()
-        .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTIzIiwiaWF0IjoxNjU2Nzg5MzQ2LCJleHAiOjE2NTY4NzU3NDZ9.NkpnAZqDLaew5Jb18_LNWSZG1JWiocxEoTAxcsBanjY")
+        .addHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTIzIiwiaWF0IjoxNjU2ODc2OTM5LCJleHAiOjE2NTY5NjMzMzl9.udTbVTOKfyo4Y9gQlcoBquElX1b9W8mOFnPSiThJhgw")
         .build()
     chain.proceed(newRequest)
 }.build()

@@ -5,19 +5,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.digitalreceipts.R
 import com.example.digitalreceipts.ReceiptApi
-import com.example.digitalreceipts.adapter.ReceiptsListAdapter
-import com.example.digitalreceipts.fragment.ReceiptsListFragment
 import com.example.digitalreceipts.model.Fields
-import com.example.digitalreceipts.model.Receipts
 import kotlinx.coroutines.launch
 
 class ReceiptsListViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
-
     // The internal MutableLiveData that stores the status of the most recent request
     //private val _status = MutableLiveData<String>()
 
@@ -42,12 +34,14 @@ class ReceiptsListViewModel : ViewModel() {
     private fun getReceipts() {
         viewModelScope.launch {
             try {
-                Log.i("JAO", "ViewModel#getReceipts")
                 //val listResult = ReceiptApi.retrofitService.getReceipts()
                 _fields.value = ReceiptApi.retrofitService.getReceipts().receipts
 
+                //Log.i("JAO", "Success: ${listResult.receipts}")
+                //Log.i("JAO", "Success: ${listResult.receipts.map { it.merchantName }}")
                 //_status.value = "Success: ${listResult.receipts.map { it.merchantName }}"
             } catch (e: Exception) {
+                Log.i("JAO", "Failure: ${e.message}")
                 //_status.value = "Failure: ${e.message}"
             }
         }

@@ -7,7 +7,7 @@ data class Fields(
     var status: Int,
     var authentication: String,
     var paymentMethod: Int,
-    var cardInfo: List<CardInfo>,
+    //var cardInfo: List<CardInfo>,
     var merchantName: String,
     var merchantId: String,
     var merchantIcon: String,
