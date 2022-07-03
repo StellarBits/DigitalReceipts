@@ -1,34 +1,50 @@
 package com.example.digitalreceipts.fragment
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.digitalreceipts.ApiInterface
 import com.example.digitalreceipts.R
+import com.example.digitalreceipts.adapter.ReceiptsListAdapter
+import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
 import com.example.digitalreceipts.viewmodel.ReceiptsListViewModel
 
 class ReceiptsListFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ReceiptsListFragment()
-    }
-
-    private lateinit var viewModel: ReceiptsListViewModel
+    private val viewModel: ReceiptsListViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.receipts_list_fragment, container, false)
-    }
+    ): View {
+        val binding = ReceiptsListFragmentBinding.inflate(inflater)
 
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ReceiptsListViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+        // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
+        binding.lifecycleOwner = this
 
+        // Giving the binding access to the OverviewViewModel
+        binding.viewModel = viewModel
+
+        // Sets the adapter of the photosGrid RecyclerView
+        binding.receiptsRecyclerview.adapter = ReceiptsListAdapter()
+
+        return binding.root
+
+        // Simple test RecyclerView
+        /*recyclerView = binding.receiptsRecyclerview
+        recyclerAdapter = context?.let { ReceiptsListAdapter() }!!
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = recyclerAdapter
+
+        viewModel._fieldList.value?.let { recyclerAdapter.setReceiptsListItems(it) }
+        Log.i("JAO", "Fragment#onViewCreated")
+        val list = listOf("Teste", "RecyclerView", "Lista", "Strings")
+        recyclerAdapter.setReceiptsListItems(list)*/
+    }
 }

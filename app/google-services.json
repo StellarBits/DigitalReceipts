@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "127739201899-o44ebh1erpo5jf5p9v4v7qn3ju2210em.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.digitalreceipts",
+            "certificate_hash": "72b45484713f1eb2a944fe2f688df967aad333d6"
+          }
+        },
+        {
           "client_id": "127739201899-s99q5m76f49m1tflrqkthtnglqg96uer.apps.googleusercontent.com",
           "client_type": 3
         }
