@@ -7,7 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.digitalreceipts.ReceiptApi
 import com.example.digitalreceipts.model.Fields
+import com.example.digitalreceipts.model.LoginBody
+import com.example.digitalreceipts.model.LoginResponse
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ReceiptsListViewModel : ViewModel() {
     // The internal MutableLiveData that stores the status of the most recent request
@@ -21,27 +26,55 @@ class ReceiptsListViewModel : ViewModel() {
     val fields: LiveData<List<Fields>> = _fields
 
     /**
-     * Call getMarsPhotos() on init so we can display status immediately.
+     * Call login() on init so we can display status immediately.
      */
     init {
-        getReceipts()
+        val loginBody = LoginBody("m.aleixo@sidi.org.br", "Aleixo123!")
+        login(loginBody)
+    }
+
+    private fun login(loginBody: LoginBody) {
+        viewModelScope.launch {
+            try {
+                ReceiptApi.retrofitService.login(loginBody).enqueue(object: Callback<LoginResponse> {
+                    override fun onResponse(
+                        call: Call<LoginResponse>,
+                        response: Response<LoginResponse>
+                    ) {
+                        if(response.body() != null) {
+                            getReceipts("Bearer ${response.body()!!.token}")
+
+                            Log.i("JAO", "Success: ${response.body()!!.token}")
+                        } else {
+                            Log.i("JAO", "Failure: response is null!")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                        Log.e("JAO", "Failure: ${t.message}")
+                    }
+                })
+            } catch (e: Exception) {
+                Log.e("JAO", "Failure: ${e.message}")
+                //_status.value = "Failure: ${e.message}"
+            }
+        }
     }
 
     /**
-     * Gets Mars photos information from the Mars API Retrofit service and updates the
-     * [MarsPhoto] [List] [LiveData].
+     * Gets Receipts information from the Digital Receipts API Retrofit service and updates...
      */
-    private fun getReceipts() {
+    private fun getReceipts(token: String) {
         viewModelScope.launch {
             try {
-                //val listResult = ReceiptApi.retrofitService.getReceipts()
-                _fields.value = ReceiptApi.retrofitService.getReceipts().receipts
+                val listResult = ReceiptApi.retrofitService.getReceipts(token)
+                _fields.value = ReceiptApi.retrofitService.getReceipts(token).receipts
 
-                //Log.i("JAO", "Success: ${listResult.receipts}")
+                Log.i("JAO", "Success: ${listResult.receipts}")
                 //Log.i("JAO", "Success: ${listResult.receipts.map { it.merchantName }}")
                 //_status.value = "Success: ${listResult.receipts.map { it.merchantName }}"
             } catch (e: Exception) {
-                Log.i("JAO", "Failure: ${e.message}")
+                Log.e("JAO", "Failure: ${e.message}")
                 //_status.value = "Failure: ${e.message}"
             }
         }
