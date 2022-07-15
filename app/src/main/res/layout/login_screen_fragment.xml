@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@color/deep_dark_blue"
+            android:background="@color/dark_grey"
             android:contentDescription="TODO"
             android:src="@drawable/ic_login_screen_logo">
 
@@ -26,7 +26,7 @@
             android:paddingStart="30dp"
             android:paddingTop="40dp"
             android:text="Digital Receipts"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_grey"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -46,11 +46,12 @@
                 android:layout_width="350dp"
                 android:layout_height="60dp"
                 android:drawableStart="@drawable/ic_btn_login_google"
-                android:paddingStart="24dp"
-                android:paddingEnd="16dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="36dp"
                 android:layout_gravity="center"
                 android:text="Sign in with Google"
-                app:backgroundTint="#ffffff" />
+                android:textColor="@color/white"
+                app:backgroundTint="@color/dark_grey" />
 
         </FrameLayout>
 

@@ -17,6 +17,6 @@
     <style name="Theme.DigitalReceipts.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="colorPrimaryVariant">@color/deep_dark_blue</item>
+        <item name="colorPrimaryVariant">@color/dark_grey</item>
     </style>
 </resources>

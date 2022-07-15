@@ -15,6 +15,27 @@
         android:layout_height="match_parent"
         tools:context="com.example.digitalreceipts.fragment.ReceiptsListFragment">
 
+        <LinearLayout
+            android:id="@+id/search"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:layout_height="1dp"
+                android:layout_gravity="bottom"
+                android:background="@color/dark_grey">
+
+            </View>
+
+        </LinearLayout>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/receipts_recyclerview"
             android:layout_width="0dp"
@@ -24,7 +45,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search"
             app:listData="@{viewModel.fields}"
             tools:itemCount="16"
             tools:listitem="@layout/receipts_list_item"/>

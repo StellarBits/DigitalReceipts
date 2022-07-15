@@ -5,30 +5,71 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="fields"
             type="com.example.digitalreceipts.model.Fields" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:id="@+id/iv_merchantImage"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_marginStart="12dp"
+            android:scaleType="fitCenter"
+            android:src="@{fields.merchantIcon}"
+            tools:src="@drawable/cafeteria_logo">
+
+        </ImageView>
+
+        <LinearLayout
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_merchant_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{fields.merchantName}"
+                android:textSize="16sp"
+                tools:text="Messiah Pharmacy">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/tv_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="10:00 PM"
+                android:textSize="12sp">
+
+            </TextView>
+
+        </LinearLayout>
 
         <TextView
-            android:id="@+id/tv_merchant_name"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center_vertical"
-            android:paddingStart="30dp"
-            android:text="@{fields.component7()}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Test">
+            android:id="@+id/tv_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="US$ 274,80"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold">
 
         </TextView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </layout>

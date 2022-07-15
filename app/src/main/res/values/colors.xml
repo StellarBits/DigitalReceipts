@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="deep_dark_blue">#300961</color>
+    <color name="deep_dark_blue">#FF300961</color>
+    <color name="dark_grey">#FF363636</color>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
