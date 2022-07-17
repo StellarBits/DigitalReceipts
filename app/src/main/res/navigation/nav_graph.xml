@@ -18,5 +18,14 @@
         android:id="@+id/receiptsListFragment"
         android:name="com.example.digitalreceipts.fragment.ReceiptsListFragment"
         android:label="receipts_list_fragment"
-        tools:layout="@layout/receipts_list_fragment" />
+        tools:layout="@layout/receipts_list_fragment" >
+        <action
+            android:id="@+id/action_receiptsListFragment_to_receiptsDetailsFragment"
+            app:destination="@id/receiptsDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/receiptsDetailsFragment"
+        android:name="com.example.digitalreceipts.fragment.ReceiptsDetailsFragment"
+        android:label="receipts_details_fragment"
+        tools:layout="@layout/receipts_details_fragment" />
 </navigation>

@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.digitalreceipts.ReceiptApi
+import com.example.digitalreceipts.api.ReceiptApi
 import com.example.digitalreceipts.model.Fields
 import com.example.digitalreceipts.model.LoginBody
 import com.example.digitalreceipts.model.LoginResponse

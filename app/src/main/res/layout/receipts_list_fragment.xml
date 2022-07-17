@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.digitalreceipts.viewmodel.ReceiptsListViewModel" />
@@ -16,20 +17,20 @@
         tools:context="com.example.digitalreceipts.fragment.ReceiptsListFragment">
 
         <LinearLayout
-            android:id="@+id/search"
+            android:id="@+id/search_zone"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:orientation="horizontal">
+            app:layout_constraintTop_toTopOf="parent">
 
             <View
                 android:layout_width="match_parent"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
                 android:layout_height="1dp"
                 android:layout_gravity="bottom"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
                 android:background="@color/cardview_dark_background">
 
             </View>
@@ -45,10 +46,10 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search"
+            app:layout_constraintTop_toBottomOf="@+id/search_zone"
             app:listData="@{viewModel.fields}"
             tools:itemCount="16"
-            tools:listitem="@layout/receipts_list_item"/>
+            tools:listitem="@layout/receipts_list_item" />
 
         <!--<TextView
             android:id="@+id/result"

@@ -1,18 +1,23 @@
 package com.example.digitalreceipts.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.viewModelScope
+import androidx.navigation.Navigation
+import com.example.digitalreceipts.R
 import com.example.digitalreceipts.adapter.ReceiptsListAdapter
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
 import com.example.digitalreceipts.viewmodel.ReceiptsListViewModel
 
-class ReceiptsListFragment : Fragment() {
+class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
 
     private val viewModel: ReceiptsListViewModel by viewModels()
+    private lateinit var mView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,19 +33,20 @@ class ReceiptsListFragment : Fragment() {
 
         // Sets the adapter of the photosGrid RecyclerView
         binding.receiptsRecyclerview.setHasFixedSize(true)
-        binding.receiptsRecyclerview.adapter = ReceiptsListAdapter()
+        binding.receiptsRecyclerview.adapter = ReceiptsListAdapter(this)
 
         return binding.root
+    }
 
-        // Simple test RecyclerView
-        /*recyclerView = binding.receiptsRecyclerview
-        recyclerAdapter = context?.let { ReceiptsListAdapter() }!!
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = recyclerAdapter
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mView = view
+    }
 
-        viewModel._fieldList.value?.let { recyclerAdapter.setReceiptsListItems(it) }
-        Log.i("JAO", "Fragment#onViewCreated")
-        val list = listOf("Teste", "RecyclerView", "Lista", "Strings")
-        recyclerAdapter.setReceiptsListItems(list)*/
+    override fun onReceiptClick(position: Int) {
+        val navController = Navigation.findNavController(mView)
+        navController.navigate(R.id.action_receiptsListFragment_to_receiptsDetailsFragment)
+
+        Log.i("JAO", "onReceiptClick: $position")
     }
 }

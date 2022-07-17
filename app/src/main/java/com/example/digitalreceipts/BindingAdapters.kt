@@ -7,7 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import com.example.digitalreceipts.adapter.ReceiptsListAdapter
 import com.example.digitalreceipts.model.Fields
 import java.util.*
@@ -26,7 +26,20 @@ fun loadImage(imageView: ImageView, imageName: String?) {
     val IMAGES_DRAWABLE_PATH = "android.resource://com.example.digitalreceipts/drawable/"
 
     if (imageName != null) {
-        Glide
+        // Load image using Coil (Recommended from Google)
+        imageView.load(
+            Uri.parse(
+                IMAGES_DRAWABLE_PATH + imageName
+                    .removeSuffix(".png")
+                    .removeSuffix(".jpg")
+            )
+        ) {
+            //placeholder(R.drawable.loading_animation)
+            //error(R.drawable.ic_broken_image)
+        }
+
+        // Load image using Glide
+        /*Glide
             .with(imageView.context)
             .load(
                 Uri.parse(
@@ -39,7 +52,7 @@ fun loadImage(imageView: ImageView, imageName: String?) {
                 RequestOptions()
                     .placeholder(R.drawable.loading_animation)
                     .error(R.drawable.ic_broken_image))*/
-            .into(imageView)
+            .into(imageView)*/
     }
 }
 
