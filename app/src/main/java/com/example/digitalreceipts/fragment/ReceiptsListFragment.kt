@@ -27,6 +27,7 @@ class ReceiptsListFragment : Fragment() {
         binding.viewModel = viewModel
 
         // Sets the adapter of the photosGrid RecyclerView
+        binding.receiptsRecyclerview.setHasFixedSize(true)
         binding.receiptsRecyclerview.adapter = ReceiptsListAdapter()
 
         return binding.root

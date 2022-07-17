@@ -1,6 +1,5 @@
 package com.example.digitalreceipts.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.digitalreceipts.databinding.ReceiptsListItemBinding
 import com.example.digitalreceipts.model.Fields
-import com.example.digitalreceipts.model.Receipts
 
 class ReceiptsListAdapter :
     ListAdapter<Fields, ReceiptsListAdapter.ReceiptsViewHolder>(DiffCallback) {
@@ -16,11 +14,9 @@ class ReceiptsListAdapter :
     class ReceiptsViewHolder(
         private var binding: ReceiptsListItemBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
         fun bind(fields: Fields) {
             binding.fields = fields
-            binding.fields!!.merchantIcon = "@drawable/" + fields.merchantIcon.replace(".png", "")
-            Log.i("JAO", "merchantIcon: " + binding.fields!!.merchantIcon)
-            //binding.fields!!.value = "R$ " + fields.value
 
             // This is important, because it forces the data binding to execute immediately,
             // which allows the RecyclerView to make the correct view size measurements
