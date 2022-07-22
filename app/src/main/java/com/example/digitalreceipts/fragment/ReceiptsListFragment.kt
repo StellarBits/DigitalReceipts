@@ -1,13 +1,15 @@
 package com.example.digitalreceipts.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.core.app.ActivityCompat
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.example.digitalreceipts.R
 import com.example.digitalreceipts.adapter.ReceiptsListAdapter
@@ -35,7 +37,26 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
         binding.receiptsRecyclerview.setHasFixedSize(true)
         binding.receiptsRecyclerview.adapter = ReceiptsListAdapter(this)
 
+        binding.button.setOnClickListener {
+            Log.i("JAO", "Button Click!")
+
+            val filteredFields = viewModel.fields
+            filteredFields.value?.filter { fields -> fields.merchantName.contains("Cafeteria") }
+
+            viewModel.fields = filteredFields
+        }
+
         return binding.root
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                ActivityCompat.finishAffinity(requireActivity())
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

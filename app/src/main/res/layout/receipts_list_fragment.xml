@@ -14,16 +14,30 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context="com.example.digitalreceipts.fragment.ReceiptsListFragment">
 
         <LinearLayout
             android:id="@+id/search_zone"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </Button>
+
+            </FrameLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -34,6 +48,45 @@
                 android:background="@color/cardview_dark_background">
 
             </View>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="18dp"
+                    android:fontFamily="sans-serif-light"
+                    android:text="Olá, Joe!"
+                    android:textSize="32sp"
+                    android:textStyle="bold"
+                    android:visibility="gone">
+
+                </TextView>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/rounded_edit_text"
+                    android:hint="Busca"
+                    android:textCursorDrawable="@drawable/cursor_color"
+                    android:textSize="26sp"
+                    android:visibility="visible"
+                    android:autofillHints="name"
+                    android:inputType="text">
+
+                </EditText>
+
+            </FrameLayout>
 
         </LinearLayout>
 
@@ -50,15 +103,6 @@
             app:listData="@{viewModel.fields}"
             tools:itemCount="16"
             tools:listitem="@layout/receipts_list_item" />
-
-        <!--<TextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@{viewModel.status}"
-            android:textSize="32sp">
-
-        </TextView>-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

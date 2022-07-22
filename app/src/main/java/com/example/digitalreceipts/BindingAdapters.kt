@@ -33,26 +33,7 @@ fun loadImage(imageView: ImageView, imageName: String?) {
                     .removeSuffix(".png")
                     .removeSuffix(".jpg")
             )
-        ) {
-            //placeholder(R.drawable.loading_animation)
-            //error(R.drawable.ic_broken_image)
-        }
-
-        // Load image using Glide
-        /*Glide
-            .with(imageView.context)
-            .load(
-                Uri.parse(
-                    IMAGES_DRAWABLE_PATH + imageName
-                        .removeSuffix(".png")
-                        .removeSuffix(".jpg")
-                )
-            )
-            /*.apply(
-                RequestOptions()
-                    .placeholder(R.drawable.loading_animation)
-                    .error(R.drawable.ic_broken_image))*/
-            .into(imageView)*/
+        )
     }
 }
 

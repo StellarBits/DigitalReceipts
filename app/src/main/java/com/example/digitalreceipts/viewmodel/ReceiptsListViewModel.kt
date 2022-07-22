@@ -23,7 +23,7 @@ class ReceiptsListViewModel : ViewModel() {
 
     private val _fields = MutableLiveData<List<Fields>>()
 
-    val fields: LiveData<List<Fields>> = _fields
+    var fields: LiveData<List<Fields>> = _fields
 
     /**
      * Call login() on init so we can display status immediately.
