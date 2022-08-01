@@ -8,14 +8,14 @@
 
         <variable
             name="viewModel"
-            type="com.example.digitalreceipts.viewmodel.ReceiptsListViewModel" />
+            type="com.example.digitalreceipts.ui.receiptslist.ReceiptsListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context="com.example.digitalreceipts.fragment.ReceiptsListFragment">
+        tools:context="com.example.digitalreceipts.ui.receiptslist.ReceiptsListFragment">
 
         <LinearLayout
             android:id="@+id/search_zone"

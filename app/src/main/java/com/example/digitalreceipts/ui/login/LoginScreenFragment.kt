@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.fragment
+package com.example.digitalreceipts.ui.login
 
 import android.app.Activity
 import android.content.Intent
@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.example.digitalreceipts.R
-import com.example.digitalreceipts.viewmodel.LoginScreenViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient

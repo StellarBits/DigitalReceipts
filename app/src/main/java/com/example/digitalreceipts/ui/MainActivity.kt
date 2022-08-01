@@ -1,7 +1,8 @@
-package com.example.digitalreceipts
+package com.example.digitalreceipts.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.digitalreceipts.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

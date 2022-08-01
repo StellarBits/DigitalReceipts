@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.fragment
+package com.example.digitalreceipts.ui.receiptslist
 
 import android.content.Context
 import android.os.Bundle
@@ -12,9 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.digitalreceipts.R
-import com.example.digitalreceipts.adapter.ReceiptsListAdapter
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
-import com.example.digitalreceipts.viewmodel.ReceiptsListViewModel
 
 class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
 

@@ -1,4 +1,4 @@
-package com.example.digitalreceipts
+package com.example.digitalreceipts.ui
 
 import android.icu.text.NumberFormat
 import android.icu.util.Currency
@@ -8,8 +8,8 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.digitalreceipts.adapter.ReceiptsListAdapter
-import com.example.digitalreceipts.model.Fields
+import com.example.digitalreceipts.ui.receiptslist.ReceiptsListAdapter
+import com.example.digitalreceipts.api.model.Fields
 import java.util.*
 
 /**

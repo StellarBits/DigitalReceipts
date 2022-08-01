@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.viewmodel
+package com.example.digitalreceipts.ui.login
 
 import androidx.lifecycle.ViewModel
 

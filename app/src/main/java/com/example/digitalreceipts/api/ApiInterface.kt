@@ -1,8 +1,8 @@
 package com.example.digitalreceipts.api
 
-import com.example.digitalreceipts.model.LoginBody
-import com.example.digitalreceipts.model.LoginResponse
-import com.example.digitalreceipts.model.Receipts
+import com.example.digitalreceipts.api.model.LoginBody
+import com.example.digitalreceipts.api.model.LoginResponse
+import com.example.digitalreceipts.api.model.Receipts
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient

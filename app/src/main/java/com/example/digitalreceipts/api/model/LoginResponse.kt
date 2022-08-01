@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.model
+package com.example.digitalreceipts.api.model
 
 data class LoginResponse(
     var id: Int,

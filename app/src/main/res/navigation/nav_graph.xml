@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginScreenFragment"
-        android:name="com.example.digitalreceipts.fragment.LoginScreenFragment"
+        android:name="com.example.digitalreceipts.ui.login.LoginScreenFragment"
         android:label="login_screen_fragment"
         tools:layout="@layout/login_screen_fragment" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/receiptsListFragment"
-        android:name="com.example.digitalreceipts.fragment.ReceiptsListFragment"
+        android:name="com.example.digitalreceipts.ui.receiptslist.ReceiptsListFragment"
         android:label="receipts_list_fragment"
         tools:layout="@layout/receipts_list_fragment" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/receiptsDetailsFragment"
-        android:name="com.example.digitalreceipts.fragment.ReceiptsDetailsFragment"
+        android:name="com.example.digitalreceipts.ui.receiptsdetails.ReceiptsDetailsFragment"
         android:label="receipts_details_fragment"
         tools:layout="@layout/receipts_details_fragment" />
 </navigation>

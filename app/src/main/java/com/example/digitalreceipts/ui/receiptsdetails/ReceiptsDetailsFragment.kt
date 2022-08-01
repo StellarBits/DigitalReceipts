@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.fragment
+package com.example.digitalreceipts.ui.receiptsdetails
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.digitalreceipts.R
-import com.example.digitalreceipts.viewmodel.ReceiptsDetailsViewModel
 
 class ReceiptsDetailsFragment : Fragment() {
 

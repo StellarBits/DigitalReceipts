@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.adapter
+package com.example.digitalreceipts.ui.receiptslist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.digitalreceipts.databinding.ReceiptsListItemBinding
-import com.example.digitalreceipts.model.Fields
+import com.example.digitalreceipts.api.model.Fields
 
 class ReceiptsListAdapter(
     private val listener: OnReceiptListener

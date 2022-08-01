@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.viewmodel
+package com.example.digitalreceipts.ui.receiptslist
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.digitalreceipts.api.ReceiptApi
-import com.example.digitalreceipts.model.Fields
-import com.example.digitalreceipts.model.LoginBody
-import com.example.digitalreceipts.model.LoginResponse
+import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.api.model.LoginBody
+import com.example.digitalreceipts.api.model.LoginResponse
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback

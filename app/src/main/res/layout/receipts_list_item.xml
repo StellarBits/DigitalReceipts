@@ -8,7 +8,7 @@
 
         <variable
             name="fields"
-            type="com.example.digitalreceipts.model.Fields" />
+            type="com.example.digitalreceipts.api.model.Fields" />
     </data>
 
     <LinearLayout
