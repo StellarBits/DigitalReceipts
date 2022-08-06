@@ -30,12 +30,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp">
 
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
+                <ImageButton
+                    android:id="@+id/bt_search"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_baseline_search">
 
-                </Button>
+                </ImageButton>
 
             </FrameLayout>
 
@@ -56,6 +59,7 @@
                 android:layout_marginBottom="8dp">
 
                 <TextView
+                    android:id="@+id/tv_welcome"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -64,27 +68,24 @@
                     android:text="Olá, Joe!"
                     android:textSize="32sp"
                     android:textStyle="bold"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                 </TextView>
 
-                <EditText
+                <SearchView
+                    android:id="@+id/sv_search_receipts"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center_vertical"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
                     android:layout_marginStart="12dp"
                     android:layout_marginEnd="12dp"
                     android:background="@drawable/rounded_edit_text"
-                    android:hint="Busca"
-                    android:textCursorDrawable="@drawable/cursor_color"
-                    android:textSize="26sp"
-                    android:visibility="visible"
-                    android:autofillHints="name"
-                    android:inputType="text">
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:visibility="gone"
+                    app:theme="@style/AppSearchView">
 
-                </EditText>
+                </SearchView>
 
             </FrameLayout>
 

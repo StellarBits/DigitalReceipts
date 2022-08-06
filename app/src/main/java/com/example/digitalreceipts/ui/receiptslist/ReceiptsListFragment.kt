@@ -1,23 +1,32 @@
 package com.example.digitalreceipts.ui.receiptslist
 
 import android.content.Context
+import android.opengl.Visibility
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import android.widget.SearchView
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.digitalreceipts.R
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
+import org.w3c.dom.Text
 
 class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
 
     private val viewModel: ReceiptsListViewModel by viewModels()
     private lateinit var mView: View
+    private lateinit var mSearchView: SearchView
+    private lateinit var mWelcomeTextView: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,14 +44,32 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
         binding.receiptsRecyclerview.setHasFixedSize(true)
         binding.receiptsRecyclerview.adapter = ReceiptsListAdapter(this)
 
-        binding.button.setOnClickListener {
+        mWelcomeTextView = binding.tvWelcome
+        mSearchView = binding.svSearchReceipts
+
+        binding.btSearch.setOnClickListener {
             Log.i("JAO", "Button Click!")
 
-            val filteredFields = viewModel.fields
-            filteredFields.value?.filter { fields -> fields.merchantName.contains("Cafeteria") }
-
-            viewModel.fields = filteredFields
+            if (!binding.svSearchReceipts.isVisible) {
+                mWelcomeTextView.visibility = View.GONE
+                mSearchView.visibility = View.VISIBLE
+            }
         }
+
+        mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.getFilter().filter(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+        })
+
+        /*viewModel.fields.observe(viewLifecycleOwner, Observer {
+            Log.i("JAO", "Observer")
+        })*/
 
         return binding.root
     }
@@ -51,7 +78,13 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
         super.onAttach(context)
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                ActivityCompat.finishAffinity(requireActivity())
+                if (mSearchView.isVisible) {
+                    mSearchView.setQuery("", false)
+                    mWelcomeTextView.visibility = View.VISIBLE
+                    mSearchView.visibility = View.GONE
+                } else {
+                    ActivityCompat.finishAffinity(requireActivity())
+                }
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
@@ -67,5 +100,9 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
         navController.navigate(R.id.action_receiptsListFragment_to_receiptsDetailsFragment)
 
         Log.i("JAO", "onReceiptClick: $position")
+    }
+
+    fun Fragment.hideKeyboard() {
+        view?.let { activity?.dismissKeyboardShortcutsHelper() }
     }
 }
