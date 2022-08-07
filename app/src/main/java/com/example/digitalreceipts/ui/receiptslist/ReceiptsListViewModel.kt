@@ -39,8 +39,7 @@ class ReceiptsListViewModel : ViewModel() {
      * Call login() on init so we can display status immediately.
      */
     init {
-        val loginBody = LoginBody("m.aleixo@sidi.org.br", "Aleixo123!")
-        login(loginBody)
+        loadData()
     }
 
     private fun login(loginBody: LoginBody) {
@@ -89,6 +88,11 @@ class ReceiptsListViewModel : ViewModel() {
                 //_status.value = "Failure: ${e.message}"
             }
         }
+    }
+
+    fun loadData() {
+        val loginBody = LoginBody("m.aleixo@sidi.org.br", "Aleixo123!")
+        login(loginBody)
     }
 
     fun getFilter(): Filter {

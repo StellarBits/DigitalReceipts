@@ -16,7 +16,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingTop="18dp"
-        android:paddingBottom="18dp">
+        android:paddingBottom="18dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@drawable/rounded_edge">
 
         <ImageView
             android:id="@+id/iv_merchantImage"
@@ -52,7 +58,8 @@
                 android:id="@+id/tv_hour"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="10:00 PM"
+                bind:time="@{fields.date}"
+                tools:text="10:00 PM"
                 android:textSize="14sp">
 
             </TextView>

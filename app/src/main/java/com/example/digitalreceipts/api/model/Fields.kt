@@ -2,7 +2,7 @@ package com.example.digitalreceipts.api.model
 
 data class Fields(
     var id: String,
-    var date: Int,
+    var date: Long,
     var value: Int,
     var status: Int,
     var authentication: String,

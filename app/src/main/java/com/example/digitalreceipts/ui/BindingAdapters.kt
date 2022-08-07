@@ -1,6 +1,7 @@
 package com.example.digitalreceipts.ui
 
 import android.icu.text.NumberFormat
+import android.icu.text.SimpleDateFormat
 import android.icu.util.Currency
 import android.net.Uri
 import android.widget.ImageView
@@ -10,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.digitalreceipts.ui.receiptslist.ReceiptsListAdapter
 import com.example.digitalreceipts.api.model.Fields
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 import java.util.*
 
 /**
@@ -51,5 +55,22 @@ fun setValue(textView: TextView, receiptValue: Int?) {
             StringBuffer(numberFormat.format(stringValue.toFloat())).insert(2, " ").toString()
 
         textView.text = formattedValue
+    }
+}
+
+@BindingAdapter("bind:time")
+fun setTime(textView: TextView, receiptTime: Long?) {
+    if (receiptTime != null) {
+        /*val localDateTime =
+            LocalDateTime.ofInstant(Instant.ofEpochSecond(receiptTime), ZoneId.systemDefault())*/
+
+        val simpleDate =
+            if (true)
+                SimpleDateFormat("dd/MM/yyyy hh:mm a")
+            else
+                SimpleDateFormat("hh:mm a")
+
+        val currentDate = simpleDate.format(Date.from(Instant.ofEpochSecond(receiptTime)))
+        textView.text = currentDate
     }
 }

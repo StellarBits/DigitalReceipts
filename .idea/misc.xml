@@ -6,10 +6,12 @@
         <entry key="../../../../layout/custom_preview.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/cursor_color.xml" value="0.2775" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search.xml" value="0.321" />
         <entry key="app/src/main/res/drawable/ic_btn_login_google.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_google.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/loading_animation.xml" value="0.2775" />
+        <entry key="app/src/main/res/drawable/rounded_edge.xml" value="0.321" />
         <entry key="app/src/main/res/drawable/rounded_edit_text.xml" value="0.2775" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.298" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.32083333333333336" />

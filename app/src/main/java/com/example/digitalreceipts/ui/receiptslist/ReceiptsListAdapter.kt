@@ -50,7 +50,11 @@ class ReceiptsListAdapter(
         viewType: Int
     ): ReceiptsViewHolder {
         return ReceiptsViewHolder(
-            ReceiptsListItemBinding.inflate(LayoutInflater.from(viewGroup.context))
+            ReceiptsListItemBinding.inflate(
+                LayoutInflater.from(viewGroup.context),
+                viewGroup,
+                false
+            )
         )
     }
 

@@ -1,10 +1,7 @@
 package com.example.digitalreceipts.ui.receiptslist
 
 import android.content.Context
-import android.opengl.Visibility
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,7 +16,6 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.example.digitalreceipts.R
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
-import org.w3c.dom.Text
 
 class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
 
@@ -53,6 +49,8 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
             if (!binding.svSearchReceipts.isVisible) {
                 mWelcomeTextView.visibility = View.GONE
                 mSearchView.visibility = View.VISIBLE
+                mSearchView.isFocusable = true
+                mSearchView.isIconified = false
             }
         }
 
@@ -66,6 +64,12 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
                 return true
             }
         })
+
+        binding.srReceipts.setOnRefreshListener {
+            mSearchView.setQuery("", false)
+            viewModel.loadData()
+            binding.srReceipts.isRefreshing = false
+        }
 
         /*viewModel.fields.observe(viewLifecycleOwner, Observer {
             Log.i("JAO", "Observer")
