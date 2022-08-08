@@ -8,28 +8,33 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import android.widget.SearchView
-import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import com.example.digitalreceipts.R
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
+import com.example.digitalreceipts.ui.adapter.ReceiptsAdapter
+import com.example.digitalreceipts.ui.adapter.ReceiptsListener
+import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
-class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
+class ReceiptsListFragment : Fragment() {
 
-    private val viewModel: ReceiptsListViewModel by viewModels()
+    private val viewModel: ReceiptsListViewModel by viewModel {
+        parametersOf(ApplySearchFilterUseCase())
+    }
     private lateinit var mView: View
-    private lateinit var mSearchView: SearchView
-    private lateinit var mWelcomeTextView: TextView
+
+    private val binding: ReceiptsListFragmentBinding by lazy {
+        ReceiptsListFragmentBinding.inflate(layoutInflater)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = ReceiptsListFragmentBinding.inflate(inflater)
-
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
@@ -38,23 +43,20 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
 
         // Sets the adapter of the photosGrid RecyclerView
         binding.receiptsRecyclerview.setHasFixedSize(true)
-        binding.receiptsRecyclerview.adapter = ReceiptsListAdapter(this)
-
-        mWelcomeTextView = binding.tvWelcome
-        mSearchView = binding.svSearchReceipts
+        //binding.receiptsRecyclerview.adapter = ReceiptsListAdapter(this)
 
         binding.btSearch.setOnClickListener {
             Log.i("JAO", "Button Click!")
 
             if (!binding.svSearchReceipts.isVisible) {
-                mWelcomeTextView.visibility = View.GONE
-                mSearchView.visibility = View.VISIBLE
-                mSearchView.isFocusable = true
-                mSearchView.isIconified = false
+                binding.tvWelcome.visibility = View.GONE
+                binding.svSearchReceipts.visibility = View.VISIBLE
+                binding.svSearchReceipts.isFocusable = true
+                binding.svSearchReceipts.isIconified = false
             }
         }
 
-        mSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.svSearchReceipts.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String?): Boolean {
                 viewModel.getFilter().filter(newText)
                 return true
@@ -66,7 +68,7 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
         })
 
         binding.srReceipts.setOnRefreshListener {
-            mSearchView.setQuery("", false)
+            binding.svSearchReceipts.setQuery("", false)
             viewModel.loadData()
             binding.srReceipts.isRefreshing = false
         }
@@ -75,17 +77,38 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
             Log.i("JAO", "Observer")
         })*/
 
+        initReceiptsList()
+
         return binding.root
+    }
+
+    /**
+     * Observa a lista armazenada no ViewModel, instancia o Adapter e inicializa
+     * a RecyclerView com um layout linear.
+     * Configura os comportamentos (métodos callback) do objeto BusinessCardListener,
+     * passando os respectivos parâmetros.
+     */
+    private fun initReceiptsList() {
+        viewModel.filteredListBusinessCard.observe(viewLifecycleOwner) {
+            val adapter = ReceiptsAdapter(ReceiptsListener(clickListener = { receipts ->
+                navigateToReceiptsDetailsFragment()
+            }
+            ))
+
+            binding.receiptsRecyclerview.layoutManager = LinearLayoutManager(context)
+            binding.receiptsRecyclerview.adapter = adapter
+            adapter.addHeadersAndSubmitList(it)
+        }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (mSearchView.isVisible) {
-                    mSearchView.setQuery("", false)
-                    mWelcomeTextView.visibility = View.VISIBLE
-                    mSearchView.visibility = View.GONE
+                if (binding.svSearchReceipts.isVisible) {
+                    binding.svSearchReceipts.setQuery("", false)
+                    binding.tvWelcome.visibility = View.VISIBLE
+                    binding.svSearchReceipts.visibility = View.GONE
                 } else {
                     ActivityCompat.finishAffinity(requireActivity())
                 }
@@ -99,14 +122,15 @@ class ReceiptsListFragment : Fragment(), ReceiptsListAdapter.OnReceiptListener {
         mView = view
     }
 
-    override fun onReceiptClick(position: Int) {
-        val navController = Navigation.findNavController(mView)
-        navController.navigate(R.id.action_receiptsListFragment_to_receiptsDetailsFragment)
+//    override fun onReceiptClick(position: Int) {
+//        val navController = Navigation.findNavController(mView)
+//        navController.navigate(R.id.navigate_to_receipts_details)
+//
+//        Log.i("JAO", "onReceiptClick: $position")
+//    }
 
-        Log.i("JAO", "onReceiptClick: $position")
-    }
-
-    fun Fragment.hideKeyboard() {
-        view?.let { activity?.dismissKeyboardShortcutsHelper() }
+    private fun navigateToReceiptsDetailsFragment() {
+        val direction = ReceiptsListFragmentDirections.navigateToReceiptsDetails()
+        findNavController().navigate(direction)
     }
 }

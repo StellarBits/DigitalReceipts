@@ -10,6 +10,8 @@ import com.example.digitalreceipts.api.ReceiptApi
 import com.example.digitalreceipts.api.model.Fields
 import com.example.digitalreceipts.api.model.LoginBody
 import com.example.digitalreceipts.api.model.LoginResponse
+import com.example.digitalreceipts.extension.sortedByDate
+import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,12 +20,9 @@ import java.lang.reflect.Field
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ReceiptsListViewModel : ViewModel() {
-    // The internal MutableLiveData that stores the status of the most recent request
-    //private val _status = MutableLiveData<String>()
-
-    // The external immutable LiveData for the request status
-    //val status: LiveData<String> = _status
+class ReceiptsListViewModel(
+    applySearchFilterUseCase: ApplySearchFilterUseCase,
+) : ViewModel() {
 
     private lateinit var mFilterableText: String
     private lateinit var mValueFilter: ValueFilter
@@ -34,6 +33,24 @@ class ReceiptsListViewModel : ViewModel() {
     private val _fields = MutableLiveData<List<Fields>>()
 
     var fields: LiveData<List<Fields>> = _fields
+
+    /**
+     * Esse campo representa a query de busca. Como esse campo é manipulado
+     * por um método setter ele pode ser privado.
+     */
+
+    private val _searchQuery = MutableLiveData<CharSequence>("")
+    val searchQuery: LiveData<CharSequence>
+        get() = _searchQuery
+
+    /**
+     * A lista filtrada é exposta para o Fragment. Como o filtro é aplicado
+     * dinamicamente e gera uma nova lista, os dados do repositório não
+     * são modificados. Ao final é invocada uma função de extensão para
+     * ordenar a lista em ordem alfabética.
+     */
+    val filteredListBusinessCard: LiveData<List<Fields>> =
+        applySearchFilterUseCase.filterList(fields, searchQuery).sortedByDate()
 
     /**
      * Call login() on init so we can display status immediately.

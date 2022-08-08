@@ -4,13 +4,17 @@ import android.icu.text.NumberFormat
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Currency
 import android.net.Uri
+import android.os.Build
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.digitalreceipts.ui.receiptslist.ReceiptsListAdapter
+//import com.example.digitalreceipts.ui.receiptslist.ReceiptsListAdapter
 import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.ui.adapter.DataItem
+import com.google.android.material.textview.MaterialTextView
 import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneId
@@ -19,11 +23,11 @@ import java.util.*
 /**
  * Updates the data shown in the [RecyclerView].
  */
-@BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<Fields>?) {
-    val adapter = recyclerView.adapter as ReceiptsListAdapter
-    adapter.submitList(data)
-}
+//@BindingAdapter("listData")
+//fun bindRecyclerView(recyclerView: RecyclerView, data: List<Fields>?) {
+//    val adapter = recyclerView.adapter as ReceiptsListAdapter
+//    adapter.submitList(data)
+//}
 
 @BindingAdapter("bind:src")
 fun loadImage(imageView: ImageView, imageName: String?) {
@@ -58,6 +62,7 @@ fun setValue(textView: TextView, receiptValue: Int?) {
     }
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bind:time")
 fun setTime(textView: TextView, receiptTime: Long?) {
     if (receiptTime != null) {
@@ -65,12 +70,20 @@ fun setTime(textView: TextView, receiptTime: Long?) {
             LocalDateTime.ofInstant(Instant.ofEpochSecond(receiptTime), ZoneId.systemDefault())*/
 
         val simpleDate =
-            if (true)
+            if (false)
                 SimpleDateFormat("dd/MM/yyyy hh:mm a")
             else
                 SimpleDateFormat("hh:mm a")
 
         val currentDate = simpleDate.format(Date.from(Instant.ofEpochSecond(receiptTime)))
         textView.text = currentDate
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+@BindingAdapter("bind:headerDate")
+fun setKey(textView: TextView, item: DataItem.Header){
+    item.let {
+        textView.text = item.date
     }
 }

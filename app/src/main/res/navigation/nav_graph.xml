@@ -20,7 +20,7 @@
         android:label="receipts_list_fragment"
         tools:layout="@layout/receipts_list_fragment" >
         <action
-            android:id="@+id/action_receiptsListFragment_to_receiptsDetailsFragment"
+            android:id="@+id/navigate_to_receipts_details"
             app:destination="@id/receiptsDetailsFragment" />
     </fragment>
     <fragment

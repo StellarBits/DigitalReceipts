@@ -106,7 +106,6 @@
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:listData="@{viewModel.fields}"
                 tools:itemCount="16"
                 tools:listitem="@layout/receipts_list_item" />
 

@@ -9,6 +9,10 @@
         <variable
             name="fields"
             type="com.example.digitalreceipts.api.model.Fields" />
+
+        <variable
+            name="listener"
+            type="com.example.digitalreceipts.ui.adapter.ReceiptsListener" />
     </data>
 
     <LinearLayout
