@@ -14,12 +14,5 @@ class AppApplication : Application() {
             androidContext(this@AppApplication)
             modules(viewModelModule)
         }
-
-//        /**
-//         * Um hack rápido para evitar a FileUriExposedException. Se fosse um app de produção
-//         * deveria ser usada uma solução baseada em ContentProvider.
-//         */
-//        val builder = StrictMode.VmPolicy.Builder()
-//        StrictMode.setVmPolicy(builder.build())
     }
 }

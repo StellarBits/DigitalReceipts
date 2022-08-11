@@ -14,5 +14,5 @@ val viewModelModule = module {
             applySearchFilterUseCase
         )
     }
-    //viewModel { ReceiptsDetailsViewModel() }
+    viewModel { ReceiptsDetailsViewModel() }
 }

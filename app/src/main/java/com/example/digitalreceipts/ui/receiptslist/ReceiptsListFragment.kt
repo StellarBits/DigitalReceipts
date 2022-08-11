@@ -13,6 +13,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.api.model.Receipts
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
 import com.example.digitalreceipts.ui.adapter.ReceiptsAdapter
 import com.example.digitalreceipts.ui.adapter.ReceiptsListener
@@ -91,7 +93,7 @@ class ReceiptsListFragment : Fragment() {
     private fun initReceiptsList() {
         viewModel.filteredListBusinessCard.observe(viewLifecycleOwner) {
             val adapter = ReceiptsAdapter(ReceiptsListener(clickListener = { receipts ->
-                navigateToReceiptsDetailsFragment()
+                navigateToReceiptsDetailsFragment(receipts)
             }
             ))
 
@@ -129,8 +131,8 @@ class ReceiptsListFragment : Fragment() {
 //        Log.i("JAO", "onReceiptClick: $position")
 //    }
 
-    private fun navigateToReceiptsDetailsFragment() {
-        val direction = ReceiptsListFragmentDirections.navigateToReceiptsDetails()
+    private fun navigateToReceiptsDetailsFragment(receipts: Fields) {
+        val direction = ReceiptsListFragmentDirections.navigateToReceiptsDetails(receipts)
         findNavController().navigate(direction)
     }
 }

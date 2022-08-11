@@ -4,20 +4,14 @@ import android.icu.text.NumberFormat
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Currency
 import android.net.Uri
-import android.os.Build
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 //import com.example.digitalreceipts.ui.receiptslist.ReceiptsListAdapter
-import com.example.digitalreceipts.api.model.Fields
 import com.example.digitalreceipts.ui.adapter.DataItem
-import com.google.android.material.textview.MaterialTextView
 import java.time.Instant
-import java.time.LocalDateTime
-import java.time.ZoneId
 import java.util.*
 
 /**
@@ -29,8 +23,24 @@ import java.util.*
 //    adapter.submitList(data)
 //}
 
-@BindingAdapter("bind:src")
-fun loadImage(imageView: ImageView, imageName: String?) {
+@BindingAdapter("bind:icon")
+fun loadIcon(imageView: ImageView, imageName: String?) {
+    val IMAGES_DRAWABLE_PATH = "android.resource://com.example.digitalreceipts/drawable/"
+
+    if (imageName != null) {
+        // Load image using Coil (Recommended from Google)
+        imageView.load(
+            Uri.parse(
+                IMAGES_DRAWABLE_PATH + imageName
+                    .removeSuffix(".png")
+                    .removeSuffix(".jpg")
+            )
+        )
+    }
+}
+
+@BindingAdapter("bind:cover")
+fun loadCover(imageView: ImageView, imageName: String?) {
     val IMAGES_DRAWABLE_PATH = "android.resource://com.example.digitalreceipts/drawable/"
 
     if (imageName != null) {
@@ -62,7 +72,6 @@ fun setValue(textView: TextView, receiptValue: Int?) {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bind:time")
 fun setTime(textView: TextView, receiptTime: Long?) {
     if (receiptTime != null) {
@@ -80,7 +89,6 @@ fun setTime(textView: TextView, receiptTime: Long?) {
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @BindingAdapter("bind:headerDate")
 fun setKey(textView: TextView, item: DataItem.Header){
     item.let {

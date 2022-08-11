@@ -27,5 +27,9 @@
         android:id="@+id/receiptsDetailsFragment"
         android:name="com.example.digitalreceipts.ui.receiptsdetails.ReceiptsDetailsFragment"
         android:label="receipts_details_fragment"
-        tools:layout="@layout/receipts_details_fragment" />
+        tools:layout="@layout/receipts_details_fragment" >
+        <argument
+            android:name="receipts"
+            app:argType="com.example.digitalreceipts.api.model.Fields" />
+    </fragment>
 </navigation>

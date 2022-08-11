@@ -1,32 +1,40 @@
 package com.example.digitalreceipts.ui.receiptsdetails
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.digitalreceipts.R
+import androidx.navigation.fragment.navArgs
+import com.example.digitalreceipts.databinding.ReceiptsDetailsFragmentBinding
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ReceiptsDetailsFragment : Fragment() {
+    private val mViewModel: ReceiptsDetailsViewModel by viewModel()
 
-    companion object {
-        fun newInstance() = ReceiptsDetailsFragment()
+    private val binding: ReceiptsDetailsFragmentBinding by lazy {
+        ReceiptsDetailsFragmentBinding.inflate(layoutInflater)
     }
 
-    private lateinit var viewModel: ReceiptsDetailsViewModel
+    private val arguments by navArgs<ReceiptsDetailsFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.receipts_details_fragment, container, false)
-    }
+        /**
+         * Define o campo _receivedCard no ViewModel caso receba um
+         * cartão como argumento na navegação, i.e., vai editar um cartão
+         * existente ao invés de criar um novo
+         */
+        arguments.receipts.let {
+            if (it != null) {
+                mViewModel.receiveReceipt(it)
+            }
+        }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[ReceiptsDetailsViewModel::class.java]
-        // TODO: Use the ViewModel
-    }
+        binding.viewModel = mViewModel
 
+        return binding.root
+    }
 }

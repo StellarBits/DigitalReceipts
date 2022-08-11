@@ -1,8 +1,6 @@
 package com.example.digitalreceipts.extension
 
 import android.icu.text.SimpleDateFormat
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import com.example.digitalreceipts.api.model.Fields
@@ -26,7 +24,6 @@ fun LiveData<List<Fields>>.sortedByDate(): LiveData<List<Fields>> =
  * com os cabeçalhos gerados a partir da primeira letra do nome. Em outras
  * palavras: agrupar os contatos pela inicial.
  */
-@RequiresApi(Build.VERSION_CODES.O)
 fun List<Fields>.toListOfDataItem(): List<DataItem> {
 
     val grouping = this.groupBy { fields ->

@@ -4,6 +4,7 @@ plugins {
     id 'com.google.gms.google-services'
     id 'kotlin-kapt'
     id("androidx.navigation.safeargs")
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -11,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.digitalreceipts"
-        minSdk 24
+        minSdk 26
         targetSdk 32
         versionCode 1
         versionName "1.0"

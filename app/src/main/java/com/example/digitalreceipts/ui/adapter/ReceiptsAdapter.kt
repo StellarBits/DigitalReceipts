@@ -16,7 +16,7 @@ import kotlinx.coroutines.withContext
  * Ao invés de receber uma lista de BusinessCard, esse adapter espera uma List<DataItem>,
  * que é a superclasse dos tipos concretos de dados (BusinessCard ou Header).
  */
-class ReceiptsAdapter(val receiptsListener: ReceiptsListener) : ListAdapter<DataItem,
+class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdapter<DataItem,
         DataItemViewHolder>(ReceiptsDiffCallback()) {
     /**
      * Declarar um escopo de corrotina específico para o Adapter. Vai ser usado para as
