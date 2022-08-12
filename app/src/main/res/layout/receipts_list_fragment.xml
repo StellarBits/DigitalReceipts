@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_gradient_background"
         android:fitsSystemWindows="true"
         tools:context="com.example.digitalreceipts.ui.receiptslist.ReceiptsListFragment">
 
@@ -44,11 +45,11 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="3dp"
                 android:layout_gravity="bottom"
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
-                android:background="@color/cardview_dark_background">
+                android:background="@drawable/rounded_edge">
 
             </View>
 
@@ -66,6 +67,7 @@
                     android:layout_marginStart="18dp"
                     android:fontFamily="sans-serif-light"
                     android:text="Olá, Joe!"
+                    android:textColor="@color/white"
                     android:textSize="32sp"
                     android:textStyle="bold"
                     android:visibility="visible">

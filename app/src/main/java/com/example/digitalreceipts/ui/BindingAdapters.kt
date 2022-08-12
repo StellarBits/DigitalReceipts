@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.digitalreceipts.api.model.CardInfo
 //import com.example.digitalreceipts.ui.receiptslist.ReceiptsListAdapter
 import com.example.digitalreceipts.ui.adapter.DataItem
 import java.time.Instant
@@ -94,4 +95,11 @@ fun setKey(textView: TextView, item: DataItem.Header){
     item.let {
         textView.text = item.date
     }
+}
+
+@BindingAdapter("bind:card")
+fun setCreditCard(textView: TextView, item: CardInfo?){
+    val result = if (item?.brand != null) "${item.brand} ${item.last4digits}" else "Money"
+
+    textView.text = result
 }

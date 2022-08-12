@@ -27,7 +27,7 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{() -> listener.onClick(fields)}"
-        android:background="@drawable/rounded_edge">
+        android:background="#535353">
 
         <ImageView
             android:id="@+id/iv_merchantImage"

@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.login.LoginScreenFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/ic_gradient_background"
         android:orientation="vertical">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="250dp"
-            android:background="@color/dark_grey"
             android:contentDescription="TODO"
             android:src="@drawable/ic_login_screen_logo">
 
@@ -26,7 +27,7 @@
             android:paddingStart="30dp"
             android:paddingTop="40dp"
             android:text="Digital Receipts"
-            android:textColor="@color/dark_grey"
+            android:textColor="@color/white"
             android:textSize="36sp"
             android:textStyle="bold" />
 
@@ -34,8 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="55dp"
-            android:paddingTop="15dp"
-            android:text="The power of the receipts in the palm of your hand" />
+            android:paddingTop="10dp"
+            android:text="The power of the receipts in the palm of your hand"
+            android:textColor="@color/white" />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -45,10 +47,10 @@
                 android:id="@+id/sign_in_button"
                 android:layout_width="350dp"
                 android:layout_height="60dp"
+                android:layout_gravity="center"
                 android:drawableStart="@drawable/ic_btn_login_google"
                 android:paddingStart="32dp"
                 android:paddingEnd="36dp"
-                android:layout_gravity="center"
                 android:text="Sign in with Google"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/dark_grey" />
