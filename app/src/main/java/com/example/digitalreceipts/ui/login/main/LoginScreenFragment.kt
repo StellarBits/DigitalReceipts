@@ -7,12 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.RelativeLayout
-import android.widget.Space
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -69,6 +67,11 @@ class LoginScreenFragment : Fragment() {
             val direction = LoginScreenFragmentDirections.navigateToCreateNewAccount()
             findNavController().navigate(direction)
         }
+
+        view.findViewById<TextView>(R.id.tv_forgot_password).setOnClickListener {
+            val direction = LoginScreenFragmentDirections.navigateToForgotPassword()
+            findNavController().navigate(direction)
+        }
     }
 
     override fun onStart() {
@@ -76,7 +79,7 @@ class LoginScreenFragment : Fragment() {
         val user = mAuth!!.currentUser
         if (user != null) {
             val navController = Navigation.findNavController(mView)
-            navController.navigate(R.id.action_loginScreenFragment_to_receiptsListFragment)
+            navController.navigate(R.id.navigate_to_receipts_list)
             Toast.makeText(mActivity, "Welcome, ${user.displayName}!", Toast.LENGTH_SHORT).show()
         }
     }
@@ -126,7 +129,7 @@ class LoginScreenFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = mAuth!!.currentUser
                     val navController = Navigation.findNavController(mView)
-                    navController.navigate(R.id.action_loginScreenFragment_to_receiptsListFragment)
+                    navController.navigate(R.id.navigate_to_receipts_list)
                 } else {
                     Toast.makeText(mActivity, "Sorry auth failed.", Toast.LENGTH_SHORT)
                         .show()

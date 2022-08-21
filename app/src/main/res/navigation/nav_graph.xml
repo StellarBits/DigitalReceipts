@@ -11,11 +11,19 @@
         android:label="login_screen_fragment"
         tools:layout="@layout/login_screen_fragment" >
         <action
-            android:id="@+id/action_loginScreenFragment_to_receiptsListFragment"
-            app:destination="@id/receiptsListFragment" />
+            android:id="@+id/navigate_to_receipts_list"
+            app:destination="@id/receiptsListFragment"
+            app:enterAnim="@android:anim/fade_in" />
         <action
             android:id="@+id/navigate_to_create_new_account"
-            app:destination="@id/createNewAccountFragment" />
+            app:destination="@id/createNewAccountFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/navigate_to_forgot_password"
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/receiptsListFragment"
@@ -24,7 +32,9 @@
         tools:layout="@layout/receipts_list_fragment" >
         <action
             android:id="@+id/navigate_to_receipts_details"
-            app:destination="@id/receiptsDetailsFragment" />
+            app:destination="@id/receiptsDetailsFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/receiptsDetailsFragment"
@@ -40,4 +50,9 @@
         android:name="com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountFragment"
         android:label="create_new_account_fragment"
         tools:layout="@layout/create_new_account_fragment" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.digitalreceipts.ui.login.forgotpassword.ForgotPasswordFragment"
+        android:label="forgot_password_fragment"
+        tools:layout="@layout/forgot_password_fragment" />
 </navigation>
