@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.ui.login
+package com.example.digitalreceipts.ui.login.main
 
 import android.app.Activity
 import android.content.Intent
@@ -7,12 +7,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RelativeLayout
+import android.widget.Space
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.digitalreceipts.R
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -23,12 +27,14 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 
+
 class LoginScreenFragment : Fragment() {
     private lateinit var viewModel: LoginScreenViewModel
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val RC_SIGN_IN = 123
     private var mAuth: FirebaseAuth? = null
+    private lateinit var mHeader: View
     private lateinit var mActivity: Activity
     private lateinit var mView: View
 
@@ -57,6 +63,11 @@ class LoginScreenFragment : Fragment() {
 
         view.findViewById<Button>(R.id.sign_in_button).setOnClickListener {
             signIn()
+        }
+
+        view.findViewById<Button>(R.id.bt_create_new_account).setOnClickListener {
+            val direction = LoginScreenFragmentDirections.navigateToCreateNewAccount()
+            findNavController().navigate(direction)
         }
     }
 

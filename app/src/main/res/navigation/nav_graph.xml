@@ -7,12 +7,15 @@
 
     <fragment
         android:id="@+id/loginScreenFragment"
-        android:name="com.example.digitalreceipts.ui.login.LoginScreenFragment"
+        android:name="com.example.digitalreceipts.ui.login.main.LoginScreenFragment"
         android:label="login_screen_fragment"
         tools:layout="@layout/login_screen_fragment" >
         <action
             android:id="@+id/action_loginScreenFragment_to_receiptsListFragment"
             app:destination="@id/receiptsListFragment" />
+        <action
+            android:id="@+id/navigate_to_create_new_account"
+            app:destination="@id/createNewAccountFragment" />
     </fragment>
     <fragment
         android:id="@+id/receiptsListFragment"
@@ -32,4 +35,9 @@
             android:name="receipts"
             app:argType="com.example.digitalreceipts.api.model.Fields" />
     </fragment>
+    <fragment
+        android:id="@+id/createNewAccountFragment"
+        android:name="com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountFragment"
+        android:label="create_new_account_fragment"
+        tools:layout="@layout/create_new_account_fragment" />
 </navigation>

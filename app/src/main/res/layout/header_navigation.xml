@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@drawable/ic_gradient_background">
+
+    <LinearLayout
+        android:id="@+id/navigation_header_container"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/vw_separator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="0.5"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_baseline_arrow_back_ios_new_24">
+
+        </ImageButton>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1.5"
+            android:textAlignment="center"
+            android:textColor="#DDDDDD"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Receipt Details">
+
+        </TextView>
+
+        <Space
+            android:id="@+id/right_button_placeholder"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="0.5" >
+
+        </Space>
+
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="0.5"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="TODO"
+            android:src="@drawable/ic_baseline_share_24"
+            android:visibility="gone">
+
+        </ImageButton>
+
+        <ImageButton
+            android:id="@+id/bt_search"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="0.5"
+            android:background="?attr/selectableItemBackground"
+            android:contentDescription="TODO"
+            android:visibility="gone"
+            android:src="@drawable/ic_baseline_search">
+
+        </ImageButton>
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/vw_separator"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rounded_edge"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/navigation_header_container">
+
+    </View>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

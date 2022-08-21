@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".ui.login.LoginScreenFragment">
+    tools:context=".ui.login.main.LoginScreenFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,7 +46,7 @@
 
             <EditText
                 android:layout_width="350dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_edit_text"
@@ -61,7 +61,7 @@
 
             <EditText
                 android:layout_width="350dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_edit_text"
@@ -78,7 +78,7 @@
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 android:backgroundTint="#2F6FEC"
                 android:text="Login"
                 android:textColor="@color/white">
@@ -86,10 +86,12 @@
             </Button>
 
             <Button
-                android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:id="@+id/bt_create_new_account"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:background="@drawable/transparent_button"
+                android:foreground="?android:attr/selectableItemBackground"
                 android:text="New Account"
                 android:textColor="@color/white"
                 app:backgroundTint="@null">

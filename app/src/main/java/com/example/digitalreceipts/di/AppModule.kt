@@ -1,6 +1,5 @@
 package com.example.digitalreceipts.di
 
-import com.example.digitalreceipts.ui.login.LoginScreenViewModel
 import com.example.digitalreceipts.ui.receiptsdetails.ReceiptsDetailsViewModel
 import com.example.digitalreceipts.ui.receiptslist.ReceiptsListViewModel
 import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
