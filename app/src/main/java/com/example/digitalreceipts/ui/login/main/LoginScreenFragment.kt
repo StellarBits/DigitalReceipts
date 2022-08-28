@@ -9,8 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
@@ -32,7 +31,6 @@ class LoginScreenFragment : Fragment() {
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val RC_SIGN_IN = 123
     private var mAuth: FirebaseAuth? = null
-    private lateinit var mHeader: View
     private lateinit var mActivity: Activity
     private lateinit var mView: View
 
@@ -40,7 +38,6 @@ class LoginScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
         return inflater.inflate(R.layout.login_screen_fragment, container, false)
     }
 
@@ -70,6 +67,11 @@ class LoginScreenFragment : Fragment() {
 
         view.findViewById<TextView>(R.id.tv_forgot_password).setOnClickListener {
             val direction = LoginScreenFragmentDirections.navigateToForgotPassword()
+            findNavController().navigate(direction)
+        }
+
+        view.findViewById<Button>(R.id.bt_login).setOnClickListener {
+            val direction = LoginScreenFragmentDirections.navigateToHomeScreen()
             findNavController().navigate(direction)
         }
     }
@@ -135,5 +137,15 @@ class LoginScreenFragment : Fragment() {
                         .show()
                 }
             }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 }

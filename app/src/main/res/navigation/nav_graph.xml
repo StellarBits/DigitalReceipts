@@ -11,10 +11,6 @@
         android:label="login_screen_fragment"
         tools:layout="@layout/login_screen_fragment" >
         <action
-            android:id="@+id/navigate_to_receipts_list"
-            app:destination="@id/receiptsListFragment"
-            app:enterAnim="@android:anim/fade_in" />
-        <action
             android:id="@+id/navigate_to_create_new_account"
             app:destination="@id/createNewAccountFragment"
             app:enterAnim="@android:anim/slide_in_left"
@@ -24,6 +20,9 @@
             app:destination="@id/forgotPasswordFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/navigate_to_home_screen"
+            app:destination="@id/homeScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/receiptsListFragment"
@@ -55,4 +54,13 @@
         android:name="com.example.digitalreceipts.ui.login.forgotpassword.ForgotPasswordFragment"
         android:label="forgot_password_fragment"
         tools:layout="@layout/forgot_password_fragment" />
+    <fragment
+        android:id="@+id/homeScreenFragment"
+        android:name="com.example.digitalreceipts.ui.home.HomeScreenFragment"
+        android:label="home_screen_fragment"
+        tools:layout="@layout/home_screen_fragment" >
+        <action
+            android:id="@+id/navigate_to_receipts_list"
+            app:destination="@id/receiptsListFragment" />
+    </fragment>
 </navigation>
