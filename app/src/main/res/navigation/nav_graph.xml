@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/loginScreenFragment"
         android:name="com.example.digitalreceipts.ui.login.main.LoginScreenFragment"
-        android:label="login_screen_fragment"
+        android:label=""
         tools:layout="@layout/login_screen_fragment" >
         <action
             android:id="@+id/navigate_to_create_new_account"
@@ -23,11 +23,14 @@
         <action
             android:id="@+id/navigate_to_home_screen"
             app:destination="@id/homeScreenFragment" />
+        <action
+            android:id="@+id/navigate_to_receipts_list_directly"
+            app:destination="@id/receiptsListFragment" />
     </fragment>
     <fragment
         android:id="@+id/receiptsListFragment"
         android:name="com.example.digitalreceipts.ui.receiptslist.ReceiptsListFragment"
-        android:label="receipts_list_fragment"
+        android:label="All receipts"
         tools:layout="@layout/receipts_list_fragment" >
         <action
             android:id="@+id/navigate_to_receipts_details"
@@ -38,7 +41,7 @@
     <fragment
         android:id="@+id/receiptsDetailsFragment"
         android:name="com.example.digitalreceipts.ui.receiptsdetails.ReceiptsDetailsFragment"
-        android:label="receipts_details_fragment"
+        android:label="Receipt details"
         tools:layout="@layout/receipts_details_fragment" >
         <argument
             android:name="receipts"
@@ -47,17 +50,17 @@
     <fragment
         android:id="@+id/createNewAccountFragment"
         android:name="com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountFragment"
-        android:label="create_new_account_fragment"
+        android:label="Create new account"
         tools:layout="@layout/create_new_account_fragment" />
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.digitalreceipts.ui.login.forgotpassword.ForgotPasswordFragment"
-        android:label="forgot_password_fragment"
+        android:label="Forgot password"
         tools:layout="@layout/forgot_password_fragment" />
     <fragment
         android:id="@+id/homeScreenFragment"
         android:name="com.example.digitalreceipts.ui.home.HomeScreenFragment"
-        android:label="home_screen_fragment"
+        android:label=""
         tools:layout="@layout/home_screen_fragment" >
         <action
             android:id="@+id/navigate_to_receipts_list"

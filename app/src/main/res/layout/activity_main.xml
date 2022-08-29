@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
+        android:theme="@style/Theme.DigitalReceipts.AppBarOverlay"
         tools:translationZ="-5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,6 +22,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/Theme.DigitalReceipts.PopupOverlay"
+            app:tint="@null"
             app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>

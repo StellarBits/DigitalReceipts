@@ -3,16 +3,17 @@ package com.example.digitalreceipts.ui.receiptslist
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.activity.OnBackPressedCallback
 import android.widget.SearchView
 import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.navigateUp
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.digitalreceipts.R
 import com.example.digitalreceipts.api.model.Fields
 import com.example.digitalreceipts.api.model.Receipts
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
@@ -37,6 +38,8 @@ class ReceiptsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
+
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
@@ -47,7 +50,7 @@ class ReceiptsListFragment : Fragment() {
         binding.receiptsRecyclerview.setHasFixedSize(true)
         //binding.receiptsRecyclerview.adapter = ReceiptsListAdapter(this)
 
-        binding.btSearch.setOnClickListener {
+        /*binding.btSearch.setOnClickListener {
             Log.i("JAO", "Button Click!")
 
             if (!binding.svSearchReceipts.isVisible) {
@@ -73,7 +76,7 @@ class ReceiptsListFragment : Fragment() {
             binding.svSearchReceipts.setQuery("", false)
             viewModel.loadData()
             binding.srReceipts.isRefreshing = false
-        }
+        }*/
 
         /*viewModel.fields.observe(viewLifecycleOwner, Observer {
             Log.i("JAO", "Observer")
@@ -107,13 +110,15 @@ class ReceiptsListFragment : Fragment() {
         super.onAttach(context)
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                if (binding.svSearchReceipts.isVisible) {
+                ActivityCompat.finishAffinity(requireActivity())
+
+                /*if (binding.svSearchReceipts.isVisible) {
                     binding.svSearchReceipts.setQuery("", false)
                     binding.tvWelcome.visibility = View.VISIBLE
                     binding.svSearchReceipts.visibility = View.GONE
                 } else {
                     ActivityCompat.finishAffinity(requireActivity())
-                }
+                }*/
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
@@ -122,6 +127,12 @@ class ReceiptsListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mView = view
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_main, menu)
     }
 
 //    override fun onReceiptClick(position: Int) {

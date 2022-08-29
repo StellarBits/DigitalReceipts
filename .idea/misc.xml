@@ -21,7 +21,7 @@
         <entry key="app/src/main/res/layout/create_new_account_fragment.xml" value="0.16" />
         <entry key="app/src/main/res/layout/forgot_password_fragment.xml" value="0.18" />
         <entry key="app/src/main/res/layout/header_navigation.xml" value="0.240625" />
-        <entry key="app/src/main/res/layout/home_screen_fragment.xml" value="0.11875" />
+        <entry key="app/src/main/res/layout/home_screen_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/login_screen_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/receipt_list_header.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/receipts_details_fragment.xml" value="0.33" />
@@ -29,6 +29,7 @@
         <entry key="app/src/main/res/layout/receipts_list_header.xml" value="0.3302083333333333" />
         <entry key="app/src/main/res/layout/receipts_list_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/search_receipts_fragment.xml" value="0.3302083333333333" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.240625" />
       </map>
     </option>
   </component>

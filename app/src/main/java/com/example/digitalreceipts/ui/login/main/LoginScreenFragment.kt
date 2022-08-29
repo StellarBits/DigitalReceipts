@@ -81,7 +81,7 @@ class LoginScreenFragment : Fragment() {
         val user = mAuth!!.currentUser
         if (user != null) {
             val navController = Navigation.findNavController(mView)
-            navController.navigate(R.id.navigate_to_receipts_list)
+            navController.navigate(R.id.navigate_to_receipts_list_directly)
             Toast.makeText(mActivity, "Welcome, ${user.displayName}!", Toast.LENGTH_SHORT).show()
         }
     }
@@ -131,7 +131,7 @@ class LoginScreenFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = mAuth!!.currentUser
                     val navController = Navigation.findNavController(mView)
-                    navController.navigate(R.id.navigate_to_receipts_list)
+                    navController.navigate(R.id.navigate_to_receipts_list_directly)
                 } else {
                     Toast.makeText(mActivity, "Sorry auth failed.", Toast.LENGTH_SHORT)
                         .show()
