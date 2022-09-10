@@ -18,8 +18,8 @@
         <entry key="app/src/main/res/drawable/test.xml" value="0.298" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.32083333333333336" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.240625" />
-        <entry key="app/src/main/res/layout/create_new_account_fragment.xml" value="0.16" />
-        <entry key="app/src/main/res/layout/forgot_password_fragment.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/create_new_account_fragment.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/forgot_password_fragment.xml" value="0.25" />
         <entry key="app/src/main/res/layout/header_navigation.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/home_screen_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/login_screen_fragment.xml" value="0.22" />

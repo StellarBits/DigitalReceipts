@@ -24,7 +24,6 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:paddingTop="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,7 +107,7 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edit_text"
-            android:hint="Enter your e-mail"
+            android:hint="Enter your e-mail address"
             android:paddingStart="10dp"
             android:textColor="@color/cardview_dark_background"
             android:textColorHint="#9C9C9C"
@@ -137,7 +136,7 @@
             android:layout_marginEnd="12dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/rounded_edit_text"
-            android:hint="Enter your CPF"
+            android:hint="Enter your CPF number"
             android:paddingStart="10dp"
             android:textColor="@color/cardview_dark_background"
             android:textColorHint="#9C9C9C"
@@ -216,17 +215,22 @@
 
         </androidx.appcompat.widget.SwitchCompat>
 
-        <Button
-            android:layout_width="300dp"
-            android:layout_height="60dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:backgroundTint="#2F6FEC"
-            android:text="Register"
-            android:textColor="@color/white">
-
-        </Button>
-
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center"
+        android:backgroundTint="#2F6FEC"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginEnd="56dp"
+        android:text="Register"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </Button>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
