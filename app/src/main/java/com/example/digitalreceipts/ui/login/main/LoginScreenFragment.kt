@@ -15,6 +15,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.digitalreceipts.R
+import com.example.digitalreceipts.databinding.CreateNewAccountFragmentBinding
+import com.example.digitalreceipts.databinding.LoginScreenFragmentBinding
+import com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -23,10 +26,15 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class LoginScreenFragment : Fragment() {
-    private lateinit var viewModel: LoginScreenViewModel
+    private val mViewModel: LoginScreenViewModel by viewModel()
+
+    private val binding: LoginScreenFragmentBinding by lazy {
+        LoginScreenFragmentBinding.inflate(layoutInflater)
+    }
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
     private val RC_SIGN_IN = 123
@@ -38,14 +46,7 @@ class LoginScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.login_screen_fragment, container, false)
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this)[LoginScreenViewModel::class.java]
-        // TODO: Use the ViewModel
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,21 +57,21 @@ class LoginScreenFragment : Fragment() {
         mAuth = FirebaseAuth.getInstance()
         createRequest()
 
-        view.findViewById<Button>(R.id.sign_in_button).setOnClickListener {
+        binding.signInButton.setOnClickListener {
             signIn()
         }
 
-        view.findViewById<Button>(R.id.bt_create_new_account).setOnClickListener {
+        binding.btCreateNewAccount.setOnClickListener {
             val direction = LoginScreenFragmentDirections.navigateToCreateNewAccount()
             findNavController().navigate(direction)
         }
 
-        view.findViewById<TextView>(R.id.tv_forgot_password).setOnClickListener {
+        binding.tvForgotPassword.setOnClickListener {
             val direction = LoginScreenFragmentDirections.navigateToForgotPassword()
             findNavController().navigate(direction)
         }
 
-        view.findViewById<Button>(R.id.bt_login).setOnClickListener {
+        binding.btLogin.setOnClickListener {
             val direction = LoginScreenFragmentDirections.navigateToHomeScreen()
             findNavController().navigate(direction)
         }

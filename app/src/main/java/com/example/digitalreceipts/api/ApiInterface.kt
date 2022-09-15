@@ -1,8 +1,6 @@
 package com.example.digitalreceipts.api
 
-import com.example.digitalreceipts.api.model.LoginBody
-import com.example.digitalreceipts.api.model.LoginResponse
-import com.example.digitalreceipts.api.model.Receipts
+import com.example.digitalreceipts.api.model.*
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -12,7 +10,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL = "https://shielded-crag-65206.herokuapp.com/api/"
+//private const val BASE_URL = "https://shielded-crag-65206.herokuapp.com/api/"
+private const val BASE_URL = "http://sidi-proj-capacitacao.herokuapp.com/api/"
 
 interface ApiInterface {
     @GET("v1/receipts")
@@ -20,6 +19,9 @@ interface ApiInterface {
 
     @POST("v1/users/login")
     fun login(@Body loginBody: LoginBody): Call<LoginResponse>
+
+    @POST("v2/users")
+    fun createNewUser(@Body newUser: NewUser): Call<GenericResponse>
 }
 
 /**

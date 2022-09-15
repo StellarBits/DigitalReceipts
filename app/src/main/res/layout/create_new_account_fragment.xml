@@ -32,16 +32,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="5dp"
             android:text="Name"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:textSize="16sp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/et_name"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -61,16 +62,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="5dp"
             android:text="Phone number"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:textSize="16sp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/et_phone"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -90,16 +92,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="5dp"
             android:text="E-mail"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:textSize="16sp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/et_email"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -119,16 +122,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="5dp"
             android:text="CPF"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:textSize="16sp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/et_cpf"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -148,16 +152,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="5dp"
             android:text="Password"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:textSize="16sp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/et_pass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -177,16 +182,17 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:textSize="16sp"
             android:layout_marginStart="12dp"
             android:layout_marginEnd="12dp"
+            android:layout_marginBottom="5dp"
             android:text="Confirm password"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:textSize="16sp">
 
         </TextView>
 
         <EditText
+            android:id="@+id/et_confirmpass"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -203,11 +209,12 @@
         </EditText>
 
         <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/sc_agree"
             style="@style/CardView.Dark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="15dp"
             android:layout_marginEnd="12dp"
             android:text="I agree with the Terms of Service and Privacy Policy information"
             android:textColor="@color/white"
@@ -218,13 +225,14 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/bt_register"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:backgroundTint="#2F6FEC"
-        android:layout_marginBottom="20dp"
         android:layout_marginStart="56dp"
         android:layout_marginEnd="56dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#2F6FEC"
         android:text="Register"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
