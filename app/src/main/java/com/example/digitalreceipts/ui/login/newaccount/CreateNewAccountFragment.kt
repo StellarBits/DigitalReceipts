@@ -2,21 +2,14 @@ package com.example.digitalreceipts.ui.login.newaccount
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.digitalreceipts.api.model.NewUser
 import com.example.digitalreceipts.databinding.CreateNewAccountFragmentBinding
-import com.example.digitalreceipts.ui.adapter.ReceiptsAdapter
-import com.example.digitalreceipts.ui.adapter.ReceiptsListener
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import okhttp3.internal.wait
+import com.example.digitalreceipts.ui.custom.dialog.ProgressHUD
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateNewAccountFragment : Fragment() {
@@ -26,6 +19,8 @@ class CreateNewAccountFragment : Fragment() {
     private val binding: CreateNewAccountFragmentBinding by lazy {
         CreateNewAccountFragmentBinding.inflate(layoutInflater)
     }
+
+    private lateinit var mProgressHUD: ProgressHUD
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,11 +36,21 @@ class CreateNewAccountFragment : Fragment() {
                 binding.scAgree.isChecked
             )
 
+            mProgressHUD = ProgressHUD.show(
+                context, "Loading",
+                indeterminate = true,
+                cancelable = true
+            )
+
+            mProgressHUD.show()
+
             mViewModel.createNewUser(newUser)
         }
 
         mViewModel.test.observe(viewLifecycleOwner) {
             Log.i("JAO", "Observer code result: $it")
+
+            mProgressHUD.dismiss()
 
             if (it == 201) {
                 findNavController().popBackStack()

@@ -5,6 +5,8 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.2513586956521739" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.298" />
+        <entry key="app/src/main/res/drawable-v24/progress_hud_bg.xml" value="0.24" />
+        <entry key="app/src/main/res/drawable-v24/spinner.xml" value="0.24" />
         <entry key="app/src/main/res/drawable/action_bar_background.xml" value="0.31" />
         <entry key="app/src/main/res/drawable/cursor_color.xml" value="0.2775" />
         <entry key="app/src/main/res/drawable/ic_baseline_search.xml" value="0.321" />
@@ -23,6 +25,7 @@
         <entry key="app/src/main/res/layout/header_navigation.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/home_screen_fragment.xml" value="0.22" />
         <entry key="app/src/main/res/layout/login_screen_fragment.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/progress_hud.xml" value="0.240625" />
         <entry key="app/src/main/res/layout/receipt_list_header.xml" value="0.32916666666666666" />
         <entry key="app/src/main/res/layout/receipts_details_fragment.xml" value="0.33" />
         <entry key="app/src/main/res/layout/receipts_list_fragment.xml" value="0.33" />
