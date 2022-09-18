@@ -1,32 +1,71 @@
 package com.example.digitalreceipts.ui.login.forgotpassword
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.digitalreceipts.R
+import androidx.navigation.fragment.findNavController
+import com.example.digitalreceipts.api.model.NewUser
+import com.example.digitalreceipts.api.model.ResetPassword
+import com.example.digitalreceipts.databinding.CreateNewAccountFragmentBinding
+import com.example.digitalreceipts.databinding.ForgotPasswordFragmentBinding
+import com.example.digitalreceipts.ui.custom.dialog.ProgressHUD
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForgotPasswordFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ForgotPasswordFragment()
+    private val mViewModel: ForgotPasswordViewModel by viewModel()
+
+    private val binding: ForgotPasswordFragmentBinding by lazy {
+        ForgotPasswordFragmentBinding.inflate(layoutInflater)
     }
 
-    private lateinit var viewModel: ForgotPasswordViewModel
+    private lateinit var mProgressHUD: ProgressHUD
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.forgot_password_fragment, container, false)
-    }
+        binding.btSendVerification.setOnClickListener {
+            val resetPassword = ResetPassword(
+                binding.etEmail.text.toString(),
+                binding.etCpf.text.toString(),
+                binding.etPhone.text.toString()
+            )
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ForgotPasswordViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
+            mProgressHUD = ProgressHUD.show(
+                context, "Resetting password",
+                indeterminate = true,
+                cancelable = true,
+                spinnerGone = false
+            )
 
+            mProgressHUD.show()
+
+            mViewModel.sendResetEmail(resetPassword)
+        }
+
+        mViewModel.apiResponse.observe(viewLifecycleOwner) {
+            Log.i("JAO", "Observer code result: $it")
+
+            mProgressHUD.dismiss()
+
+            mProgressHUD = ProgressHUD.show(
+                context, it.resultMessage,
+                indeterminate = false,
+                cancelable = true,
+                spinnerGone = true
+            )
+
+            mProgressHUD.show()
+
+            if (it.code == 200) {
+                findNavController().popBackStack()
+            }
+        }
+
+        return binding.root
+    }
 }

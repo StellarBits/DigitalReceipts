@@ -37,9 +37,10 @@ class CreateNewAccountFragment : Fragment() {
             )
 
             mProgressHUD = ProgressHUD.show(
-                context, "Loading",
-                indeterminate = true,
-                cancelable = true
+                context, "Creating user",
+                indeterminate = false,
+                cancelable = false,
+                spinnerGone = false
             )
 
             mProgressHUD.show()
@@ -47,12 +48,21 @@ class CreateNewAccountFragment : Fragment() {
             mViewModel.createNewUser(newUser)
         }
 
-        mViewModel.test.observe(viewLifecycleOwner) {
+        mViewModel.apiResponse.observe(viewLifecycleOwner) {
             Log.i("JAO", "Observer code result: $it")
 
             mProgressHUD.dismiss()
 
-            if (it == 201) {
+            mProgressHUD = ProgressHUD.show(
+                context, it.resultMessage,
+                indeterminate = false,
+                cancelable = true,
+                spinnerGone = true
+            )
+
+            mProgressHUD.show()
+
+            if (it.code == 201) {
                 findNavController().popBackStack()
             }
         }

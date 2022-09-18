@@ -29,7 +29,11 @@ class ProgressHUD(context: Context?, theme: Int) : Dialog(context!!, theme) {
 
     companion object {
         fun show(
-            context: Context?, message: CharSequence?, indeterminate: Boolean, cancelable: Boolean,
+            context: Context?,
+            message: CharSequence?,
+            indeterminate: Boolean,
+            cancelable: Boolean,
+            spinnerGone: Boolean
         ): ProgressHUD {
             val dialog = ProgressHUD(context!!, R.style.ProgressHUD)
             dialog.setTitle("")
@@ -42,6 +46,9 @@ class ProgressHUD(context: Context?, theme: Int) : Dialog(context!!, theme) {
             } else {
                 txt.text = message
             }
+
+            val spinner = dialog.findViewById<View>(R.id.spinnerImageView) as ImageView
+            spinner.visibility = if (spinnerGone) View.GONE else View.VISIBLE
 
             dialog.setCancelable(cancelable)
             //dialog.setOnCancelListener(cancelListener)

@@ -5,6 +5,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ResetPassword(
-    // TODO
-    var todo: String?
+    var email: String?,
+    var cpf: String?,
+    var phonenumber: String?
 ) : Parcelable

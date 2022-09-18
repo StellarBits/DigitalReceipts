@@ -22,6 +22,9 @@ interface ApiInterface {
 
     @POST("v2/users")
     fun createNewUser(@Body newUser: NewUser): Call<GenericResponse>
+
+    @POST("v2/users/resetPassword")
+    fun resetPassword(@Body resetPassword: ResetPassword): Call<GenericResponse>
 }
 
 /**
