@@ -1,5 +1,6 @@
 package com.example.digitalreceipts.di
 
+import com.example.digitalreceipts.ui.home.HomeScreenViewModel
 import com.example.digitalreceipts.ui.login.forgotpassword.ForgotPasswordViewModel
 import com.example.digitalreceipts.ui.login.main.LoginScreenViewModel
 import com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountViewModel
@@ -19,4 +20,5 @@ val viewModelModule = module {
     viewModel { ReceiptsDetailsViewModel() }
     viewModel { CreateNewAccountViewModel() }
     viewModel { ForgotPasswordViewModel() }
+    viewModel { HomeScreenViewModel() }
 }

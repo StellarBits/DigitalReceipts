@@ -1,32 +1,34 @@
 package com.example.digitalreceipts.ui.home
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.digitalreceipts.R
+import androidx.navigation.fragment.navArgs
+import com.example.digitalreceipts.databinding.HomeScreenFragmentBinding
+import com.example.digitalreceipts.ui.receiptsdetails.ReceiptsDetailsFragmentArgs
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeScreenFragment : Fragment() {
+    private val mViewModel: HomeScreenViewModel by viewModel()
 
-    companion object {
-        fun newInstance() = HomeScreenFragment()
+    private val binding: HomeScreenFragmentBinding by lazy {
+        HomeScreenFragmentBinding.inflate(layoutInflater)
     }
 
-    private lateinit var viewModel: HomeScreenViewModel
+    private val arguments by navArgs<HomeScreenFragmentArgs>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.home_screen_fragment, container, false)
-    }
+        arguments.userData.let {
+            if (it != null) {
+                binding.tvTest.text = it.name
+            }
+        }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(HomeScreenViewModel::class.java)
-        // TODO: Use the ViewModel
+        return binding.root
     }
-
 }

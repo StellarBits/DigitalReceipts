@@ -56,35 +56,7 @@ class ReceiptsListViewModel(
      * Call login() on init so we can display status immediately.
      */
     init {
-        loadData()
-    }
-
-    private fun login(loginBody: LoginBody) {
-        viewModelScope.launch {
-            try {
-                ReceiptApi.retrofitService.login(loginBody).enqueue(object: Callback<LoginResponse> {
-                    override fun onResponse(
-                        call: Call<LoginResponse>,
-                        response: Response<LoginResponse>
-                    ) {
-                        if(response.body() != null) {
-                            getReceipts("Bearer ${response.body()!!.token}")
-
-                            Log.i("JAO", "Success: ${response.body()!!.token}")
-                        } else {
-                            Log.i("JAO", "Failure: response is null!")
-                        }
-                    }
-
-                    override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                        Log.e("JAO", "Failure: ${t.message}")
-                    }
-                })
-            } catch (e: Exception) {
-                Log.e("JAO", "Failure: ${e.message}")
-                //_status.value = "Failure: ${e.message}"
-            }
-        }
+        getReceipts("Bearer "/*${response.body()!!.token}*/)
     }
 
     /**
@@ -105,11 +77,6 @@ class ReceiptsListViewModel(
                 //_status.value = "Failure: ${e.message}"
             }
         }
-    }
-
-    fun loadData() {
-        val loginBody = LoginBody("m.aleixo@sidi.org.br", "Aleixo123!")
-        login(loginBody)
     }
 
     fun getFilter(): Filter {

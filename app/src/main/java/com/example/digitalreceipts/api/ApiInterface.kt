@@ -17,8 +17,8 @@ interface ApiInterface {
     @GET("v1/receipts")
     suspend fun getReceipts(@Header("Authorization") token: String): Receipts
 
-    @POST("v1/users/login")
-    fun login(@Body loginBody: LoginBody): Call<LoginResponse>
+    @POST("v2/users/login")
+    fun requestLogin(@Body loginBody: LoginBody): Call<LoginResponse>
 
     @POST("v2/users")
     fun createNewUser(@Body newUser: NewUser): Call<GenericResponse>

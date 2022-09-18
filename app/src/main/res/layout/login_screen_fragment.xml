@@ -45,12 +45,13 @@
             android:orientation="vertical">
 
             <EditText
+                android:id="@+id/et_email"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_edit_text"
-                android:hint="Phone number or e-mail"
+                android:hint="E-mail"
                 android:paddingStart="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
@@ -60,12 +61,14 @@
             </EditText>
 
             <EditText
+                android:id="@+id/et_password"
                 android:layout_width="350dp"
                 android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_edit_text"
                 android:hint="Password"
+                android:inputType="textPassword"
                 android:paddingStart="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
@@ -100,7 +103,7 @@
             </Button>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/sign_in_button"
+                android:id="@+id/acb_sign_in_with_google"
                 android:layout_width="300dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center"

@@ -3,6 +3,7 @@ package com.example.digitalreceipts.ui.login.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.digitalreceipts.R
+import com.example.digitalreceipts.api.model.LoginBody
+import com.example.digitalreceipts.api.model.LoginResponse
+import com.example.digitalreceipts.api.model.ResetPassword
 import com.example.digitalreceipts.databinding.CreateNewAccountFragmentBinding
 import com.example.digitalreceipts.databinding.LoginScreenFragmentBinding
+import com.example.digitalreceipts.ui.custom.dialog.ProgressHUD
 import com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -41,11 +46,62 @@ class LoginScreenFragment : Fragment() {
     private var mAuth: FirebaseAuth? = null
     private lateinit var mActivity: Activity
     private lateinit var mView: View
+    private lateinit var mProgressHUD: ProgressHUD
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        mViewModel.apiResponse.observe(viewLifecycleOwner) {
+            mProgressHUD.dismiss()
+
+            if (it.code() == 200) {
+                navigateToHomeScreenFragment(it.body()!!)
+            } else {
+                mProgressHUD = ProgressHUD.show(
+                    context,
+                    "Problem accessing account.\n\nPlease review your e-mail and password and try again.",
+                    indeterminate = false,
+                    cancelable = true,
+                    spinnerGone = true
+                )
+
+                mProgressHUD.show()
+            }
+        }
+
+        binding.btLogin.setOnClickListener {
+            val loginBody = LoginBody(
+                binding.etEmail.text.toString(),
+                binding.etPassword.text.toString()
+            )
+
+            mProgressHUD = ProgressHUD.show(
+                context, "Accessing",
+                indeterminate = false,
+                cancelable = false,
+                spinnerGone = false
+            )
+
+            mProgressHUD.show()
+
+            mViewModel.login(loginBody)
+        }
+
+        binding.btCreateNewAccount.setOnClickListener {
+            val direction = LoginScreenFragmentDirections.navigateToCreateNewAccount()
+            findNavController().navigate(direction)
+        }
+
+        binding.acbSignInWithGoogle.setOnClickListener {
+            signIn()
+        }
+
+        binding.tvForgotPassword.setOnClickListener {
+            val direction = LoginScreenFragmentDirections.navigateToForgotPassword()
+            findNavController().navigate(direction)
+        }
+
         return binding.root
     }
 
@@ -56,28 +112,9 @@ class LoginScreenFragment : Fragment() {
         mView = view
         mAuth = FirebaseAuth.getInstance()
         createRequest()
-
-        binding.signInButton.setOnClickListener {
-            signIn()
-        }
-
-        binding.btCreateNewAccount.setOnClickListener {
-            val direction = LoginScreenFragmentDirections.navigateToCreateNewAccount()
-            findNavController().navigate(direction)
-        }
-
-        binding.tvForgotPassword.setOnClickListener {
-            val direction = LoginScreenFragmentDirections.navigateToForgotPassword()
-            findNavController().navigate(direction)
-        }
-
-        binding.btLogin.setOnClickListener {
-            val direction = LoginScreenFragmentDirections.navigateToHomeScreen()
-            findNavController().navigate(direction)
-        }
     }
 
-    override fun onStart() {
+    /*override fun onStart() {
         super.onStart()
         val user = mAuth!!.currentUser
         if (user != null) {
@@ -85,7 +122,7 @@ class LoginScreenFragment : Fragment() {
             navController.navigate(R.id.navigate_to_receipts_list_directly)
             Toast.makeText(mActivity, "Welcome, ${user.displayName}!", Toast.LENGTH_SHORT).show()
         }
-    }
+    }*/
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -98,7 +135,11 @@ class LoginScreenFragment : Fragment() {
                 // Google Sign In was successful, authenticate with Firebase
                 val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
                 firebaseAuthWithGoogle(account)
-                Toast.makeText(mActivity, "Welcome, ${mAuth!!.currentUser?.displayName}!", Toast.LENGTH_SHORT)
+                Toast.makeText(
+                    mActivity,
+                    "Welcome, ${mAuth!!.currentUser?.displayName}!",
+                    Toast.LENGTH_SHORT
+                )
                     .show()
             } catch (e: ApiException) {
                 // Google Sign In failed, update UI appropriately
@@ -148,5 +189,10 @@ class LoginScreenFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
+    private fun navigateToHomeScreenFragment(userData: LoginResponse) {
+        val direction = LoginScreenFragmentDirections.navigateToHomeScreen(userData)
+        findNavController().navigate(direction)
     }
 }
