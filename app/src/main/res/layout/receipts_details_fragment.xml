@@ -18,73 +18,25 @@
         android:fitsSystemWindows="true"
         tools:context=".ui.receiptsdetails.ReceiptsDetailsFragment">
 
-        <LinearLayout
-            android:id="@+id/search_zone"
+        <Space
+            android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toTopOf="@+id/vw_separator"
+            android:layout_height="?attr/actionBarSize"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="0.5"
-                android:background="?attr/selectableItemBackground"
-                android:contentDescription="TODO"
-                android:src="@drawable/ic_baseline_arrow_back_ios_new_24">
-
-            </ImageButton>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1.5"
-                android:text="Receipt Details"
-                android:textAlignment="center"
-                android:textColor="#DDDDDD"
-                android:textSize="18sp"
-                android:textStyle="bold">
-
-            </TextView>
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_height="56dp"
-                android:layout_weight="0.5"
-                android:background="?attr/selectableItemBackground"
-                android:contentDescription="TODO"
-                android:src="@drawable/ic_baseline_share_24">
-
-            </ImageButton>
-
-        </LinearLayout>
-
-        <View
-            android:id="@+id/vw_separator"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:layout_gravity="bottom"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/rounded_edge"
-            app:layout_constraintBottom_toBottomOf="@+id/search_zone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-        </View>
+        </Space>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@+id/header"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_zone">
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -152,7 +104,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"
-                bind:card="@{viewModel.cardInfoField}"
+                android:text="@{viewModel.cardInfoBrandField}"
                 tools:text="Credit Card: Visa 9985">
 
             </TextView>

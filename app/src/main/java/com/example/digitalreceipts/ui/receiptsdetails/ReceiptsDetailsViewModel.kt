@@ -3,9 +3,7 @@ package com.example.digitalreceipts.ui.receiptsdetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.digitalreceipts.api.model.CardInfo
 import com.example.digitalreceipts.api.model.Fields
-import com.example.digitalreceipts.api.model.Receipts
 
 class ReceiptsDetailsViewModel : ViewModel() {
 
@@ -17,9 +15,9 @@ class ReceiptsDetailsViewModel : ViewModel() {
      */
     val merchantImageField = MutableLiveData("")
     val merchantNameField = MutableLiveData("")
-    val receiptValueField = MutableLiveData(0)
+    val receiptValueField = MutableLiveData(0f)
     val dateField = MutableLiveData<Long>(0)
-    val cardInfoField = MutableLiveData<CardInfo>(null)
+    val cardInfoBrandField = MutableLiveData("")
     val authenticationField = MutableLiveData("")
 
     private val _receipts = MutableLiveData<Fields>()
@@ -42,11 +40,11 @@ class ReceiptsDetailsViewModel : ViewModel() {
      */
     private fun initFields(receipts: Fields) {
         with(receipts) {
-            merchantImageField.value = merchantImage
+            merchantImageField.value = message
             merchantNameField.value = merchantName
             receiptValueField.value = value
             dateField.value = date
-            cardInfoField.value = cardInfo
+            cardInfoBrandField.value = cardInfoBrand
             authenticationField.value = authentication
         }
     }

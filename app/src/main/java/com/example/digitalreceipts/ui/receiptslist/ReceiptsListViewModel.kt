@@ -8,17 +8,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.digitalreceipts.api.ReceiptApi
 import com.example.digitalreceipts.api.model.Fields
-import com.example.digitalreceipts.api.model.LoginBody
-import com.example.digitalreceipts.api.model.LoginResponse
+import com.example.digitalreceipts.api.model.GetUserReceipts
+import com.example.digitalreceipts.api.model.NewReceipt
+import com.example.digitalreceipts.api.model.NewReceiptResponse
 import com.example.digitalreceipts.extension.sortedByDate
 import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.reflect.Field
 import java.util.*
-import kotlin.collections.ArrayList
 
 class ReceiptsListViewModel(
     applySearchFilterUseCase: ApplySearchFilterUseCase,
@@ -53,28 +52,59 @@ class ReceiptsListViewModel(
         applySearchFilterUseCase.filterList(fields, searchQuery).sortedByDate()
 
     /**
-     * Call login() on init so we can display status immediately.
+     * Gets GetUserReceipts information from the Digital GetUserReceipts API Retrofit service and updates...
      */
-    init {
-        getReceipts("Bearer "/*${response.body()!!.token}*/)
-    }
-
-    /**
-     * Gets Receipts information from the Digital Receipts API Retrofit service and updates...
-     */
-    private fun getReceipts(token: String) {
+    fun getReceipts(token: String) {
         viewModelScope.launch {
             try {
-                val listResult = ReceiptApi.retrofitService.getReceipts(token)
-                _fields.value = ReceiptApi.retrofitService.getReceipts(token).receipts
-                mOriginalFieldsList = ReceiptApi.retrofitService.getReceipts(token).receipts
+                ReceiptApi.retrofitService.getReceipts(token).enqueue(object :
+                    Callback<GetUserReceipts> {
+                    override fun onResponse(
+                        call: Call<GetUserReceipts>,
+                        response: Response<GetUserReceipts>
+                    ) {
+                        if (response.body() != null) {
+                            _fields.value = response.body()?.receipts
+                            mOriginalFieldsList = response.body()?.receipts!!
 
-                Log.i("JAO", "Success: ${listResult.receipts}")
-                //Log.i("JAO", "Success: ${listResult.receipts.map { it.merchantName }}")
-                //_status.value = "Success: ${listResult.receipts.map { it.merchantName }}"
+                            Log.i("JAO", "Success: ${_fields.value}")
+                        } else {
+                            Log.i("JAO", "createNewUser - Failure: response is null!")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<GetUserReceipts>, t: Throwable) {
+                        Log.e("JAO", "onFailure: ${t.message}")
+                    }
+                })
             } catch (e: Exception) {
                 Log.e("JAO", "Failure: ${e.message}")
-                //_status.value = "Failure: ${e.message}"
+            }
+        }
+    }
+
+    fun createReceipt(token: String, newReceipt: NewReceipt) {
+        viewModelScope.launch {
+            try {
+                ReceiptApi.retrofitService.createNewReceipt(token, newReceipt).enqueue(object :
+                    Callback<NewReceiptResponse> {
+                    override fun onResponse(
+                        call: Call<NewReceiptResponse>,
+                        response: Response<NewReceiptResponse>
+                    ) {
+                        Log.i("JAO", "onResponse: $response")
+
+                        if (response.isSuccessful) {
+                            Log.i("JAO", "createReceipt: ${response.body()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<NewReceiptResponse>, t: Throwable) {
+                        Log.i("JAO", "onFailure: $t")
+                    }
+                })
+            } catch (e: Exception) {
+                Log.e("JAO", "Failure: ${e.message}")
             }
         }
     }
@@ -97,7 +127,7 @@ class ReceiptsListViewModel(
                     val stringToFilter = p0.toString().lowercase(Locale.US)
                     mFilterableText = stringToFilter
 
-                    if (fields.merchantName.lowercase(Locale.US).contains(stringToFilter)) {
+                    if (fields.merchantName!!.lowercase(Locale.US).contains(stringToFilter)) {
                         localFieldsList.add(fields)
                     }
                 }

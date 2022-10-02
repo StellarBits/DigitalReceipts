@@ -3,26 +3,19 @@ package com.example.digitalreceipts.ui.login.main
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.digitalreceipts.R
 import com.example.digitalreceipts.api.model.LoginBody
 import com.example.digitalreceipts.api.model.LoginResponse
-import com.example.digitalreceipts.api.model.ResetPassword
-import com.example.digitalreceipts.databinding.CreateNewAccountFragmentBinding
 import com.example.digitalreceipts.databinding.LoginScreenFragmentBinding
 import com.example.digitalreceipts.ui.custom.dialog.ProgressHUD
-import com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -56,7 +49,7 @@ class LoginScreenFragment : Fragment() {
             mProgressHUD.dismiss()
 
             if (it.code() == 200) {
-                navigateToHomeScreenFragment(it.body()!!)
+                navigateToReceiptsListFragment(it.body()!!)
             } else {
                 mProgressHUD = ProgressHUD.show(
                     context,
@@ -173,7 +166,7 @@ class LoginScreenFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
                     val user = mAuth!!.currentUser
                     val navController = Navigation.findNavController(mView)
-                    navController.navigate(R.id.navigate_to_receipts_list_directly)
+                    navController.navigate(R.id.navigate_to_receipts_list)
                 } else {
                     Toast.makeText(mActivity, "Sorry auth failed.", Toast.LENGTH_SHORT)
                         .show()
@@ -191,8 +184,8 @@ class LoginScreenFragment : Fragment() {
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
-    private fun navigateToHomeScreenFragment(userData: LoginResponse) {
-        val direction = LoginScreenFragmentDirections.navigateToHomeScreen(userData)
+    private fun navigateToReceiptsListFragment(userData: LoginResponse) {
+        val direction = LoginScreenFragmentDirections.navigateToReceiptsList(userData)
         findNavController().navigate(direction)
     }
 }

@@ -21,10 +21,7 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
         <action
-            android:id="@+id/navigate_to_home_screen"
-            app:destination="@id/homeScreenFragment" />
-        <action
-            android:id="@+id/navigate_to_receipts_list_directly"
+            android:id="@+id/navigate_to_receipts_list"
             app:destination="@id/receiptsListFragment" />
     </fragment>
     <fragment
@@ -37,6 +34,9 @@
             app:destination="@id/receiptsDetailsFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <argument
+            android:name="userData"
+            app:argType="com.example.digitalreceipts.api.model.LoginResponse" />
     </fragment>
     <fragment
         android:id="@+id/receiptsDetailsFragment"
@@ -57,16 +57,4 @@
         android:name="com.example.digitalreceipts.ui.login.forgotpassword.ForgotPasswordFragment"
         android:label="Forgot password"
         tools:layout="@layout/forgot_password_fragment" />
-    <fragment
-        android:id="@+id/homeScreenFragment"
-        android:name="com.example.digitalreceipts.ui.home.HomeScreenFragment"
-        android:label=""
-        tools:layout="@layout/home_screen_fragment" >
-        <action
-            android:id="@+id/navigate_to_receipts_list"
-            app:destination="@id/receiptsListFragment" />
-        <argument
-            android:name="userData"
-            app:argType="com.example.digitalreceipts.api.model.LoginResponse" />
-    </fragment>
 </navigation>

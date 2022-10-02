@@ -37,7 +37,7 @@
             android:layout_marginStart="18dp"
             android:contentDescription="TODO"
             android:scaleType="fitCenter"
-            bind:icon="@{fields.merchantIcon}"
+            bind:icon="@{fields.message}"
             tools:src="@drawable/cafeteria_logo">
 
         </ImageView>

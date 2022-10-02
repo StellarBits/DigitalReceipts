@@ -4,17 +4,13 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Fields(
-    var id: String,
-    var idUser: String,
+data class NewReceipt(
     var value: Float,
     var status: Int,
     var paymentMethod: Int,
     var cardInfoBrand: String,
     var merchantName: String,
-    var date: Long,
-    var authentication: String,
-    var merchantIcon: String,
-    var merchantImage: String,
-    var message: String
-) : Parcelable
+    var message: String,
+    var date: Int,
+    var idUserToSend: String
+): Parcelable

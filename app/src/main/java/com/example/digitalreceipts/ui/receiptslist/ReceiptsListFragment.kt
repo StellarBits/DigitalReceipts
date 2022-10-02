@@ -5,17 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.activity.OnBackPressedCallback
-import android.widget.SearchView
 import androidx.core.app.ActivityCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.digitalreceipts.R
 import com.example.digitalreceipts.api.model.Fields
-import com.example.digitalreceipts.api.model.Receipts
+import com.example.digitalreceipts.api.model.LoginResponse
+import com.example.digitalreceipts.api.model.NewReceipt
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
 import com.example.digitalreceipts.ui.adapter.ReceiptsAdapter
 import com.example.digitalreceipts.ui.adapter.ReceiptsListener
@@ -25,7 +23,7 @@ import org.koin.core.parameter.parametersOf
 
 class ReceiptsListFragment : Fragment() {
 
-    private val viewModel: ReceiptsListViewModel by viewModel {
+    private val mViewModel: ReceiptsListViewModel by viewModel {
         parametersOf(ApplySearchFilterUseCase())
     }
     private lateinit var mView: View
@@ -34,53 +32,45 @@ class ReceiptsListFragment : Fragment() {
         ReceiptsListFragmentBinding.inflate(layoutInflater)
     }
 
+    private val arguments by navArgs<ReceiptsListFragmentArgs>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
 
+        var token: String
+        var userData: LoginResponse
+
         // Allows Data Binding to Observe LiveData with the lifecycle of this Fragment
         binding.lifecycleOwner = this
 
         // Giving the binding access to the OverviewViewModel
-        binding.viewModel = viewModel
+        binding.viewModel = mViewModel
 
         // Sets the adapter of the photosGrid RecyclerView
         binding.receiptsRecyclerview.setHasFixedSize(true)
-        //binding.receiptsRecyclerview.adapter = ReceiptsListAdapter(this)
 
-        /*binding.btSearch.setOnClickListener {
-            Log.i("JAO", "Button Click!")
+        arguments.userData.let {
+            userData = it
+            token = "Bearer ${it.token}"
 
-            if (!binding.svSearchReceipts.isVisible) {
-                binding.tvWelcome.visibility = View.GONE
-                binding.svSearchReceipts.visibility = View.VISIBLE
-                binding.svSearchReceipts.isFocusable = true
-                binding.svSearchReceipts.isIconified = false
-            }
+            Log.i("JAO", "arguments userData: $it")
+
+            mViewModel.getReceipts(token)
         }
 
-        binding.svSearchReceipts.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.getFilter().filter(newText)
-                return true
+        mViewModel.fields.observe(viewLifecycleOwner) {
+            Log.i("JAO", "observe fields: $it")
+
+            if (it.isNullOrEmpty()) {
+                createReceipts(userData.idUser!!).forEach {
+                    mViewModel.createReceipt(token, it)
+                    Log.i("JAO", "Token: $token / Receipt: $it")
+                }
             }
-
-            override fun onQueryTextSubmit(p0: String?): Boolean {
-                return true
-            }
-        })
-
-        binding.srReceipts.setOnRefreshListener {
-            binding.svSearchReceipts.setQuery("", false)
-            viewModel.loadData()
-            binding.srReceipts.isRefreshing = false
-        }*/
-
-        /*viewModel.fields.observe(viewLifecycleOwner, Observer {
-            Log.i("JAO", "Observer")
-        })*/
+        }
 
         initReceiptsList()
 
@@ -94,7 +84,7 @@ class ReceiptsListFragment : Fragment() {
      * passando os respectivos parâmetros.
      */
     private fun initReceiptsList() {
-        viewModel.filteredListBusinessCard.observe(viewLifecycleOwner) {
+        mViewModel.filteredListBusinessCard.observe(viewLifecycleOwner) {
             val adapter = ReceiptsAdapter(ReceiptsListener(clickListener = { receipts ->
                 navigateToReceiptsDetailsFragment(receipts)
             }
@@ -111,14 +101,6 @@ class ReceiptsListFragment : Fragment() {
         val callback: OnBackPressedCallback = object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
                 ActivityCompat.finishAffinity(requireActivity())
-
-                /*if (binding.svSearchReceipts.isVisible) {
-                    binding.svSearchReceipts.setQuery("", false)
-                    binding.tvWelcome.visibility = View.VISIBLE
-                    binding.svSearchReceipts.visibility = View.GONE
-                } else {
-                    ActivityCompat.finishAffinity(requireActivity())
-                }*/
             }
         }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
@@ -135,15 +117,93 @@ class ReceiptsListFragment : Fragment() {
         inflater.inflate(R.menu.menu_main, menu)
     }
 
-//    override fun onReceiptClick(position: Int) {
-//        val navController = Navigation.findNavController(mView)
-//        navController.navigate(R.id.navigate_to_receipts_details)
-//
-//        Log.i("JAO", "onReceiptClick: $position")
-//    }
-
     private fun navigateToReceiptsDetailsFragment(receipts: Fields) {
         val direction = ReceiptsListFragmentDirections.navigateToReceiptsDetails(receipts)
         findNavController().navigate(direction)
+    }
+
+    private fun createReceipts(idUser: String): List<NewReceipt> {
+        return listOf(
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 1642458486,
+                value = 274.89f,
+                status = 0,
+                paymentMethod = 1,
+                cardInfoBrand = "Visa",
+                merchantName = "Farmacia do Messias",
+                message = "farmacia"
+            ),
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 1641662706,
+                value = 78.90f,
+                status = 0,
+                paymentMethod = 1,
+                cardInfoBrand = "Visa",
+                merchantName = "Venda do Zé Pinga",
+                message = "venda_do_ze"
+            ),
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 1636900468,
+                value = 18.90f,
+                status = 0,
+                paymentMethod = 2,
+                cardInfoBrand = "Master",
+                merchantName = "Padaria do TK",
+                message = "padaria_tk"
+            ),
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 1634553628,
+                value = 5690.90f,
+                status = 0,
+                paymentMethod = 1,
+                cardInfoBrand = "Master",
+                merchantName = "Lojas Samsung",
+                message = "samsung"
+            ),
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 1634575768,
+                value = 119.90f,
+                status = 0,
+                paymentMethod = 1,
+                cardInfoBrand = "Visa",
+                merchantName = "Cafeteria do Marcos",
+                message = "cafeteria"
+            ),
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 3390,
+                value = 18.90f,
+                status = 0,
+                paymentMethod = 3,
+                cardInfoBrand = "",
+                merchantName = "Locadora do Adnan",
+                message = "locadora"
+            ),
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 3390,
+                value = 18.90f,
+                status = 0,
+                paymentMethod = 3,
+                cardInfoBrand = "",
+                merchantName = "Locadora do Adnan",
+                message = "locadora"
+            ),
+            NewReceipt(
+                idUserToSend = idUser,
+                date = 3390,
+                value = 18.90f,
+                status = 0,
+                paymentMethod = 3,
+                cardInfoBrand = "",
+                merchantName = "Locadora do Adnan",
+                message = "locadora"
+            )
+        )
     }
 }

@@ -8,14 +8,22 @@ import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import retrofit2.http.*
+import retrofit2.http.Body
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
 
-//private const val BASE_URL = "https://shielded-crag-65206.herokuapp.com/api/"
-private const val BASE_URL = "http://sidi-proj-capacitacao.herokuapp.com/api/"
+private const val BASE_URL = "https://receipts-sidi-server.onrender.com/api/"
 
 interface ApiInterface {
-    @GET("v1/receipts")
-    suspend fun getReceipts(@Header("Authorization") token: String): Receipts
+    @GET("v2/receipt")
+    fun getReceipts(@Header("Authorization") token: String): Call<GetUserReceipts>
+
+    @POST("v2/receipt")
+    fun createNewReceipt(
+        @Header("Authorization") token: String,
+        @Body newReceipt: NewReceipt
+    ): Call<NewReceiptResponse>
 
     @POST("v2/users/login")
     fun requestLogin(@Body loginBody: LoginBody): Call<LoginResponse>
