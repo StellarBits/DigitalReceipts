@@ -13,7 +13,7 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 
-private const val BASE_URL = "https://receipts-sidi-server.onrender.com/api/"
+private const val BASE_URL = "http://sidi-proj-capacitacao.herokuapp.com/api/"
 
 interface ApiInterface {
     @GET("v2/receipt")

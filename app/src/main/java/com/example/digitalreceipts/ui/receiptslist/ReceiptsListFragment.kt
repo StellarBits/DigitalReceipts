@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.SearchView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -115,6 +116,20 @@ class ReceiptsListFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, menuInflater: MenuInflater) {
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.menu_main, menu)
+
+        val myActionMenuItem = menu.findItem(R.id.app_bar_search)
+        val searchView: SearchView = myActionMenuItem.actionView as SearchView
+
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                mViewModel.getFilter().filter(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(p0: String?): Boolean {
+                return true
+            }
+        })
     }
 
     private fun navigateToReceiptsDetailsFragment(receipts: Fields) {
