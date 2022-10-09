@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.ui.login.newaccount
+package com.example.digitalreceipts.ui.main.login.forgotpassword
 
 import android.os.Bundle
 import android.util.Log
@@ -7,17 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.example.digitalreceipts.api.model.NewUser
-import com.example.digitalreceipts.databinding.CreateNewAccountFragmentBinding
+import com.example.digitalreceipts.api.model.ResetPassword
+import com.example.digitalreceipts.databinding.ForgotPasswordFragmentBinding
 import com.example.digitalreceipts.ui.custom.dialog.ProgressHUD
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class CreateNewAccountFragment : Fragment() {
+class ForgotPasswordFragment : Fragment() {
 
-    private val mViewModel: CreateNewAccountViewModel by viewModel()
+    private val mViewModel: ForgotPasswordViewModel by viewModel()
 
-    private val binding: CreateNewAccountFragmentBinding by lazy {
-        CreateNewAccountFragmentBinding.inflate(layoutInflater)
+    private val binding: ForgotPasswordFragmentBinding by lazy {
+        ForgotPasswordFragmentBinding.inflate(layoutInflater)
     }
 
     private lateinit var mProgressHUD: ProgressHUD
@@ -26,26 +26,23 @@ class CreateNewAccountFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding.btRegister.setOnClickListener {
-            val newUser = NewUser(
-                binding.etName.text.toString(),
+        binding.btSendVerification.setOnClickListener {
+            val resetPassword = ResetPassword(
                 binding.etEmail.text.toString(),
-                binding.etPass.text.toString(),
                 binding.etCpf.text.toString(),
-                binding.etPhone.text.toString(),
-                binding.scAgree.isChecked
+                binding.etPhone.text.toString()
             )
 
             mProgressHUD = ProgressHUD.show(
-                context, "Creating user",
-                indeterminate = false,
-                cancelable = false,
+                context, "Resetting password",
+                indeterminate = true,
+                cancelable = true,
                 spinnerGone = false
             )
 
             mProgressHUD.show()
 
-            mViewModel.createNewUser(newUser)
+            mViewModel.sendResetEmail(resetPassword)
         }
 
         mViewModel.apiResponse.observe(viewLifecycleOwner) {
@@ -62,7 +59,7 @@ class CreateNewAccountFragment : Fragment() {
 
             mProgressHUD.show()
 
-            if (it.code == 201) {
+            if (it.code == 200) {
                 findNavController().popBackStack()
             }
         }

@@ -1,9 +1,9 @@
 package com.example.digitalreceipts.di
 
 import com.example.digitalreceipts.ui.home.HomeScreenViewModel
-import com.example.digitalreceipts.ui.login.forgotpassword.ForgotPasswordViewModel
-import com.example.digitalreceipts.ui.login.main.LoginScreenViewModel
-import com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountViewModel
+import com.example.digitalreceipts.ui.main.login.forgotpassword.ForgotPasswordViewModel
+import com.example.digitalreceipts.ui.main.login.login.LoginScreenViewModel
+import com.example.digitalreceipts.ui.main.login.newaccount.CreateNewAccountViewModel
 import com.example.digitalreceipts.ui.receiptsdetails.ReceiptsDetailsViewModel
 import com.example.digitalreceipts.ui.receiptslist.ReceiptsListViewModel
 import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
@@ -14,7 +14,7 @@ val viewModelModule = module {
     viewModel { LoginScreenViewModel() }
     viewModel { (applySearchFilterUseCase: ApplySearchFilterUseCase) ->
         ReceiptsListViewModel(
-            applySearchFilterUseCase
+            applySearchFilterUseCase = applySearchFilterUseCase
         )
     }
     viewModel { ReceiptsDetailsViewModel() }

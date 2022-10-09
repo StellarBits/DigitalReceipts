@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/ic_gradient_background"
     android:fitsSystemWindows="true"
-    tools:context=".ui.login.newaccount.CreateNewAccountFragment">
+    tools:context=".ui.main.login.newaccount.CreateNewAccountFragment">
 
     <Space
         android:id="@+id/header"

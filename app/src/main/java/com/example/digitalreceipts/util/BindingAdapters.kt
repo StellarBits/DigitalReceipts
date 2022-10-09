@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.ui
+package com.example.digitalreceipts.util
 
 //import com.example.digitalreceipts.ui.receiptslist.ReceiptsListAdapter
 import android.icu.text.SimpleDateFormat

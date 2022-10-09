@@ -1,12 +1,10 @@
-package com.example.digitalreceipts.ui.login.main
+package com.example.digitalreceipts.ui.main.login.login
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.digitalreceipts.api.ReceiptApi
-import com.example.digitalreceipts.api.model.CardInfo
-import com.example.digitalreceipts.api.model.Fields
 import com.example.digitalreceipts.api.model.LoginBody
 import com.example.digitalreceipts.api.model.LoginResponse
 import kotlinx.coroutines.launch

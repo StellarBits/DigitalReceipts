@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.ui.login.newaccount
+package com.example.digitalreceipts.ui.main.login.newaccount
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

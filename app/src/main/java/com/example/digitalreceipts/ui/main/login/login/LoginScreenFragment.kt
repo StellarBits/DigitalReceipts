@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.ui.login.main
+package com.example.digitalreceipts.ui.main.login.login
 
 import android.app.Activity
 import android.content.Intent
@@ -25,7 +25,6 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
-
 
 class LoginScreenFragment : Fragment() {
     private val mViewModel: LoginScreenViewModel by viewModel()

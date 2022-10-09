@@ -1,4 +1,4 @@
-package com.example.digitalreceipts.ui.login.forgotpassword
+package com.example.digitalreceipts.ui.main.login.forgotpassword
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

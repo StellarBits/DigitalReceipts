@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginScreenFragment"
-        android:name="com.example.digitalreceipts.ui.login.main.LoginScreenFragment"
+        android:name="com.example.digitalreceipts.ui.main.login.login.LoginScreenFragment"
         android:label=""
         tools:layout="@layout/login_screen_fragment" >
         <action
@@ -49,12 +49,12 @@
     </fragment>
     <fragment
         android:id="@+id/createNewAccountFragment"
-        android:name="com.example.digitalreceipts.ui.login.newaccount.CreateNewAccountFragment"
+        android:name="com.example.digitalreceipts.ui.main.login.newaccount.CreateNewAccountFragment"
         android:label="Create new account"
         tools:layout="@layout/create_new_account_fragment" />
     <fragment
         android:id="@+id/forgotPasswordFragment"
-        android:name="com.example.digitalreceipts.ui.login.forgotpassword.ForgotPasswordFragment"
+        android:name="com.example.digitalreceipts.ui.main.login.forgotpassword.ForgotPasswordFragment"
         android:label="Forgot password"
         tools:layout="@layout/forgot_password_fragment" />
 </navigation>
