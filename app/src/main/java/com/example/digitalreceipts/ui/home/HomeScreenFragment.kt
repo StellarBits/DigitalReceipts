@@ -6,11 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.digitalreceipts.databinding.HomeScreenFragmentBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeScreenFragment : Fragment() {
-    private val mViewModel: HomeScreenViewModel by viewModel()
-
     private val binding: HomeScreenFragmentBinding by lazy {
         HomeScreenFragmentBinding.inflate(layoutInflater)
     }
@@ -18,7 +15,7 @@ class HomeScreenFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         return binding.root
     }

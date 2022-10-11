@@ -1,10 +1,10 @@
 package com.example.digitalreceipts.ui.receiptsdetails
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.example.digitalreceipts.databinding.ReceiptsDetailsFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -21,16 +21,14 @@ class ReceiptsDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         /**
          * Define o campo _receivedCard no ViewModel caso receba um
          * cartão como argumento na navegação, i.e., vai editar um cartão
          * existente ao invés de criar um novo
          */
         arguments.receipts.let {
-            if (it != null) {
-                mViewModel.receiveReceipt(it)
-            }
+            mViewModel.receiveReceipt(it)
         }
 
         binding.viewModel = mViewModel

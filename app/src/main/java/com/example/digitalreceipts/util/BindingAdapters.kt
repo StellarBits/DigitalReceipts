@@ -24,10 +24,10 @@ import java.util.*
 //    adapter.submitList(data)
 //}
 
+private const val IMAGES_DRAWABLE_PATH = "android.resource://com.example.digitalreceipts/drawable/"
+
 @BindingAdapter("bind:icon")
 fun loadIcon(imageView: ImageView, imageName: String?) {
-    val IMAGES_DRAWABLE_PATH = "android.resource://com.example.digitalreceipts/drawable/"
-
     if (imageName != null) {
         val logo = imageName + "_logo"
 
@@ -44,8 +44,6 @@ fun loadIcon(imageView: ImageView, imageName: String?) {
 
 @BindingAdapter("bind:cover")
 fun loadCover(imageView: ImageView, imageName: String?) {
-    val IMAGES_DRAWABLE_PATH = "android.resource://com.example.digitalreceipts/drawable/"
-
     if (imageName != null) {
         // Load image using Coil (Recommended from Google)
         imageView.load(
@@ -74,9 +72,9 @@ fun setTime(textView: TextView, receiptTime: Long?) {
 
         val simpleDate =
             if (false)
-                SimpleDateFormat("dd/MM/yyyy hh:mm a")
+                SimpleDateFormat("dd/MM/yyyy hh:mm a", Locale.getDefault())
             else
-                SimpleDateFormat("hh:mm a")
+                SimpleDateFormat("hh:mm a", Locale.getDefault())
 
         val currentDate = simpleDate.format(Date.from(Instant.ofEpochSecond(receiptTime)))
         textView.text = currentDate

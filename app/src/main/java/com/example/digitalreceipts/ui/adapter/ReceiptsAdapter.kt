@@ -11,6 +11,12 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
+ * Essas constantes indicam o tipo de item que vai ser retornado.
+ */
+private const val ITEM_VIEW_TYPE_HEADER = 0
+private const val ITEM_VIEW_TYPE_ITEM = 1
+
+/**
  * O adapter implementa a interface ListAdapter com DiffUtil; tanto a inflação do layout
  * quanto a vinculação de dados ocorrem na classe ViewHolder.
  * Ao invés de receber uma lista de BusinessCard, esse adapter espera uma List<DataItem>,
@@ -24,17 +30,11 @@ class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdap
      */
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
-    /**
-     * Essas constantes indicam o tipo de item que vai ser retornado.
-     */
-    private val ITEM_VIEW_TYPE_HEADER = 0
-    private val ITEM_VIEW_TYPE_ITEM = 1
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataItemViewHolder {
         return when (viewType) {
             ITEM_VIEW_TYPE_HEADER -> DataItemViewHolder.HeaderViewHolder.from(parent)
             ITEM_VIEW_TYPE_ITEM -> DataItemViewHolder.ReceiptsViewHolder.from(parent)
-            else -> throw ClassCastException("ViewType desconhecido ${viewType}")
+            else -> throw ClassCastException("ViewType desconhecido $viewType")
         }
     }
 

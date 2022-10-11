@@ -31,7 +31,6 @@ class ProgressHUD(context: Context?, theme: Int) : Dialog(context!!, theme) {
         fun show(
             context: Context?,
             message: CharSequence?,
-            indeterminate: Boolean,
             cancelable: Boolean,
             spinnerGone: Boolean
         ): ProgressHUD {

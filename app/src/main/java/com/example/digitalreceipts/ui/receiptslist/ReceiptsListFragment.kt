@@ -62,10 +62,10 @@ class ReceiptsListFragment : Fragment() {
             mViewModel.getReceipts(token)
         }
 
-        mViewModel.fields.observe(viewLifecycleOwner) {
-            Log.i("JAO", "observe fields: $it")
+        mViewModel.fields.observe(viewLifecycleOwner) { list ->
+            Log.i("JAO", "observe fields: $list")
 
-            if (it.isNullOrEmpty()) {
+            if (list.isNullOrEmpty()) {
                 createReceipts(userData.idUser!!).forEach {
                     mViewModel.createReceipt(token, it)
                     Log.i("JAO", "Token: $token / Receipt: $it")

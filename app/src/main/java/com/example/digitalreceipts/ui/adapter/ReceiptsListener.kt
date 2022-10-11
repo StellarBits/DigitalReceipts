@@ -1,6 +1,5 @@
 package com.example.digitalreceipts.ui.adapter
 
-import android.view.View
 import com.example.digitalreceipts.api.model.Fields
 
 class ReceiptsListener(

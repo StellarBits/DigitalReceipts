@@ -35,7 +35,7 @@
             android:layout_height="64dp"
             android:layout_weight="0.2"
             android:layout_marginStart="18dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/merchant_logo_image_view"
             android:scaleType="fitCenter"
             bind:icon="@{fields.message}"
             tools:src="@drawable/cafeteria_logo">

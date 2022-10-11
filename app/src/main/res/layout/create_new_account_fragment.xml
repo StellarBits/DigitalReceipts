@@ -30,7 +30,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,7 +43,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="5dp"
-                android:text="Name"
+                android:text="@string/account_name_field_title"
                 android:textColor="@color/white"
                 android:textSize="16sp">
 
@@ -60,12 +60,15 @@
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
-                android:hint="Enter your name"
+                android:hint="@string/account_name_field_hint"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:autofillHints="name"
+                android:inputType="textPersonName">
 
             </EditText>
 
@@ -75,7 +78,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="5dp"
-                android:text="Phone number"
+                android:text="@string/account_phone_field_title"
                 android:textColor="@color/white"
                 android:textSize="16sp">
 
@@ -92,12 +95,15 @@
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
-                android:hint="Enter your phone number"
+                android:hint="@string/account_phone_field_hint"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:inputType="phone"
+                android:autofillHints="phone">
 
             </EditText>
 
@@ -107,7 +113,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="5dp"
-                android:text="E-mail"
+                android:text="@string/account_email_field_title"
                 android:textColor="@color/white"
                 android:textSize="16sp">
 
@@ -124,12 +130,15 @@
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
-                android:hint="Enter your e-mail address"
+                android:hint="@string/account_email_field_hint"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:autofillHints="emailAddress"
+                android:inputType="textEmailAddress">
 
             </EditText>
 
@@ -139,7 +148,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="5dp"
-                android:text="CPF"
+                android:text="@string/account_cpf_field_title"
                 android:textColor="@color/white"
                 android:textSize="16sp">
 
@@ -156,12 +165,15 @@
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
-                android:hint="Enter your CPF number"
+                android:hint="@string/account_cpf_field_hint"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:autofillHints="number"
+                android:inputType="number">
 
             </EditText>
 
@@ -171,7 +183,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="5dp"
-                android:text="Password"
+                android:text="@string/account_password_field_title"
                 android:textColor="@color/white"
                 android:textSize="16sp">
 
@@ -187,13 +199,15 @@
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
-                android:hint="Enter your password"
-                android:inputType="textPassword"
+                android:hint="@string/account_password_field_hint"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:autofillHints="password"
+                android:inputType="textPassword">
 
             </EditText>
 
@@ -203,7 +217,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="5dp"
-                android:text="Confirm password"
+                android:text="@string/account_confirm_field_title"
                 android:textColor="@color/white"
                 android:textSize="16sp">
 
@@ -218,13 +232,15 @@
                 android:layout_marginEnd="12dp"
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
-                android:hint="Confirm your password"
-                android:inputType="textPassword"
+                android:hint="@string/account_confirm_field_hint"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:autofillHints="password"
+                android:inputType="textPassword">
 
             </EditText>
 
@@ -236,7 +252,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="12dp"
-                android:text="I agree with the Terms of Service and Privacy Policy information"
+                android:text="@string/account_agree_terms_field"
                 android:textColor="@color/white"
                 android:textSize="16sp">
 
@@ -251,7 +267,7 @@
                 android:layout_marginEnd="56dp"
                 android:layout_marginTop="20dp"
                 android:backgroundTint="#2F6FEC"
-                android:text="Register"
+                android:text="@string/account_register_button_title"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

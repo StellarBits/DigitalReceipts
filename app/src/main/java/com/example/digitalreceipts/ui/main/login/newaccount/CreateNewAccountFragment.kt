@@ -25,7 +25,7 @@ class CreateNewAccountFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding.btRegister.setOnClickListener {
             val newUser = NewUser(
                 binding.etName.text.toString(),
@@ -38,7 +38,6 @@ class CreateNewAccountFragment : Fragment() {
 
             mProgressHUD = ProgressHUD.show(
                 context, "Creating user",
-                indeterminate = false,
                 cancelable = false,
                 spinnerGone = false
             )
@@ -55,7 +54,6 @@ class CreateNewAccountFragment : Fragment() {
 
             mProgressHUD = ProgressHUD.show(
                 context, it.resultMessage,
-                indeterminate = false,
                 cancelable = true,
                 spinnerGone = true
             )

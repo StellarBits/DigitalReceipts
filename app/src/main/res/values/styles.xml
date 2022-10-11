@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="AppSearchView" parent="Widget.AppCompat.SearchView" >
-        <item name="android:textSize">26sp</item>
-        <item name="android:textCursorDrawable">@drawable/cursor_color</item>
-    </style>
 
     <style name="ProgressHUD" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>

@@ -6,7 +6,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-private const val BASE_URL = "http://sidi-proj-capacitacao.herokuapp.com/api/"
+private const val BASE_URL = "https://sidi-proj-capacitacao.herokuapp.com/api/"
 
 interface RetrofitService {
     @GET("v2/receipt")

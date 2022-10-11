@@ -1,4 +1,57 @@
 <resources>
     <string name="app_name">Digital Receipts</string>
+
+    <!-- Home Screen -->
+    <string name="home_screen_add_receipt_floating_button">Add receipt</string>
+
+    <!-- Login Screen -->
+    <string name="login_app_logo_image_view">Application logo</string>
+    <string name="login_app_subtitle">The power of the receipts in the palm of your hand</string>
+
+    <string name="login_login_button_title">Login</string>
+    <string name="login_new_account_button_title">New Account</string>
+    <string name="login_google_login_button_title">Sign in with Google</string>
+
     <string name="forgot_password"><u>Forgot Password?</u></string>
+
+    <!-- Manage account screens -->
+    <string name="account_name_field_title">Name</string>
+    <string name="account_name_field_hint">Enter your name</string>
+
+    <string name="account_phone_field_title">Phone number</string>
+    <string name="account_phone_field_hint">Enter your phone number</string>
+
+    <string name="account_email_field_title">E-mail</string>
+    <string name="account_email_field_hint">Enter your e-mail address</string>
+
+    <string name="account_cpf_field_title">CPF</string>
+    <string name="account_cpf_field_hint">Enter your CPF number</string>
+
+    <string name="account_password_field_title">Password</string>
+    <string name="account_password_field_hint">Enter your password</string>
+
+    <string name="account_confirm_field_title">Confirm password</string>
+    <string name="account_confirm_field_hint">Confirm your password</string>
+
+    <string name="account_agree_terms_field">I agree with the Terms of Service and Privacy Policy information</string>
+
+    <string name="account_register_button_title">Register</string>
+    <string name="account_send_verification_link_button_title">Send verification link</string>
+
+    <!-- Menu Main -->
+    <string name="menu_search">Search</string>
+    <string name="menu_settings">Settings</string>
+
+    <!-- Progress Dialog -->
+    <string name="progress_dialog_loading">Loading animation</string>
+
+    <!-- Receipts list Screen -->
+    <string name="merchant_logo_image_view">Merchant logo</string>
+
+    <!-- Receipt details Screen -->
+    <string name="merchant_cover_image_view">Merchant cover</string>
+    <string name="favorite_receipt_button_title">Favorite</string>
+    <string name="favorite_receipt_image_button">Favorite button</string>
+    <string name="add_receipt_category_button_title">Add category</string>
+    <string name="add_receipt_category_image_button">Add category button</string>
 </resources>

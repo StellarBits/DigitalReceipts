@@ -39,7 +39,7 @@ class ReceiptsListViewModel(
      */
 
     private val _searchQuery = MutableLiveData<CharSequence>("")
-    val searchQuery: LiveData<CharSequence>
+    private val searchQuery: LiveData<CharSequence>
         get() = _searchQuery
 
     /**
@@ -127,7 +127,7 @@ class ReceiptsListViewModel(
                     val stringToFilter = p0.toString().lowercase(Locale.US)
                     mFilterableText = stringToFilter
 
-                    if (fields.merchantName!!.lowercase(Locale.US).contains(stringToFilter)) {
+                    if (fields.merchantName.lowercase(Locale.US).contains(stringToFilter)) {
                         localFieldsList.add(fields)
                     }
                 }
@@ -141,6 +141,8 @@ class ReceiptsListViewModel(
 
         override fun publishResults(p0: CharSequence?, p1: FilterResults?) {
             Log.i("JAO", "publishResults")
+
+            @Suppress("UNCHECKED_CAST")
             mFilteredList = p1?.values as ArrayList<Fields>
             _fields.value = mFilteredList
         }

@@ -41,7 +41,7 @@
         android:id="@+id/floatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription="TODO"
+        android:contentDescription="@string/home_screen_add_receipt_floating_button"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:srcCompat="@drawable/ic_baseline_add_24"

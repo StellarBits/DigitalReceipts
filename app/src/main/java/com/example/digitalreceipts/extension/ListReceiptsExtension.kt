@@ -27,7 +27,7 @@ fun LiveData<List<Fields>>.sortedByDate(): LiveData<List<Fields>> =
 fun List<Fields>.toListOfDataItem(): List<DataItem> {
 
     val grouping = this.groupBy { fields ->
-        val simpleDate = SimpleDateFormat("dd/MM/yyyy")
+        val simpleDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
         val currentDate = simpleDate.format(Date.from(Instant.ofEpochSecond(fields.date)))
         currentDate
     }

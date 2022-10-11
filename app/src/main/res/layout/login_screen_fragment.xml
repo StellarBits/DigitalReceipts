@@ -16,7 +16,7 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="225dp"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/login_app_logo_image_view"
             android:src="@drawable/ic_login_screen_logo">
 
         </ImageView>
@@ -25,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingStart="30dp"
+            android:paddingEnd="30dp"
             android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="40sp"
@@ -33,9 +34,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="55dp"
+            android:paddingStart="45dp"
+            android:paddingEnd="45dp"
             android:paddingTop="5dp"
-            android:text="The power of the receipts in the palm of your hand"
+            android:text="@string/login_app_subtitle"
             android:textColor="@color/white" />
 
         <LinearLayout
@@ -53,12 +55,15 @@
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
-                android:hint="E-mail"
+                android:hint="@string/account_email_field_title"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:autofillHints="emailAddress"
+                android:inputType="textEmailAddress">
 
             </EditText>
 
@@ -70,13 +75,15 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
-                android:hint="Password"
-                android:inputType="textPassword"
+                android:hint="@string/account_password_field_title"
                 android:paddingStart="10dp"
+                android:paddingEnd="10dp"
                 android:textColor="@color/cardview_dark_background"
                 android:textColorHint="#9C9C9C"
                 android:textCursorDrawable="@null"
-                android:textSize="18dp">
+                android:textSize="18sp"
+                android:autofillHints="password"
+                android:inputType="textPassword">
 
             </EditText>
 
@@ -87,7 +94,7 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="25dp"
                 android:backgroundTint="#2F6FEC"
-                android:text="Login"
+                android:text="@string/login_login_button_title"
                 android:textColor="@color/white">
 
             </Button>
@@ -99,7 +106,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/transparent_button"
                 android:foreground="?android:attr/selectableItemBackground"
-                android:text="New Account"
+                android:text="@string/login_new_account_button_title"
                 android:textColor="@color/white"
                 app:backgroundTint="@null">
 
@@ -113,7 +120,7 @@
                 android:drawableStart="@drawable/ic_btn_login_google"
                 android:paddingStart="32dp"
                 android:paddingEnd="36dp"
-                android:text="Sign in with Google"
+                android:text="@string/login_google_login_button_title"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/dark_grey" />
 

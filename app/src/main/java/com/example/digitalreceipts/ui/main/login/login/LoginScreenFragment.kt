@@ -26,6 +26,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+private const val RC_SIGN_IN = 123
+
 class LoginScreenFragment : Fragment() {
     private val mViewModel: LoginScreenViewModel by viewModel()
 
@@ -34,7 +36,6 @@ class LoginScreenFragment : Fragment() {
     }
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
-    private val RC_SIGN_IN = 123
     private var mAuth: FirebaseAuth? = null
     private lateinit var mActivity: Activity
     private lateinit var mView: View
@@ -43,7 +44,7 @@ class LoginScreenFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         mViewModel.apiResponse.observe(viewLifecycleOwner) {
             mProgressHUD.dismiss()
 
@@ -53,7 +54,6 @@ class LoginScreenFragment : Fragment() {
                 mProgressHUD = ProgressHUD.show(
                     context,
                     "Problem accessing account.\n\nPlease review your e-mail and password and try again.",
-                    indeterminate = false,
                     cancelable = true,
                     spinnerGone = true
                 )
@@ -70,7 +70,6 @@ class LoginScreenFragment : Fragment() {
 
             mProgressHUD = ProgressHUD.show(
                 context, "Accessing",
-                indeterminate = false,
                 cancelable = false,
                 spinnerGone = false
             )
@@ -163,7 +162,7 @@ class LoginScreenFragment : Fragment() {
             .addOnCompleteListener(mActivity) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-                    val user = mAuth!!.currentUser
+                    //val user = mAuth!!.currentUser
                     val navController = Navigation.findNavController(mView)
                     navController.navigate(R.id.navigate_to_receipts_list)
                 } else {

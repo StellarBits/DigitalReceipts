@@ -1,7 +1,6 @@
 package com.example.digitalreceipts.ui.adapter
 
 import com.example.digitalreceipts.api.model.Fields
-import java.util.*
 
 sealed class DataItem {
     abstract val id: String

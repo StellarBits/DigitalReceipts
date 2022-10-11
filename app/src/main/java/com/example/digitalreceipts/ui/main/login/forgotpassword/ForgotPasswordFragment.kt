@@ -25,7 +25,7 @@ class ForgotPasswordFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding.btSendVerification.setOnClickListener {
             val resetPassword = ResetPassword(
                 binding.etEmail.text.toString(),
@@ -35,7 +35,6 @@ class ForgotPasswordFragment : Fragment() {
 
             mProgressHUD = ProgressHUD.show(
                 context, "Resetting password",
-                indeterminate = true,
                 cancelable = true,
                 spinnerGone = false
             )
@@ -52,7 +51,6 @@ class ForgotPasswordFragment : Fragment() {
 
             mProgressHUD = ProgressHUD.show(
                 context, it.resultMessage,
-                indeterminate = false,
                 cancelable = true,
                 spinnerGone = true
             )

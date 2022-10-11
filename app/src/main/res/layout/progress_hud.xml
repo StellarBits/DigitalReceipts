@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:background="@drawable/progress_hud_bg"
     android:alpha="0.9"
@@ -17,13 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
+        android:contentDescription="@string/progress_dialog_loading"
         android:background="@drawable/spinner" />
 
     <TextView
         android:id="@+id/message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Message"
+        tools:text="Message"
         android:textColor="#FFFFFF" />
 
 </LinearLayout>
