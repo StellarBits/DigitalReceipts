@@ -3,7 +3,7 @@ package com.example.digitalreceipts.extension
 import android.icu.text.SimpleDateFormat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
-import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.api.model.Receipt
 import com.example.digitalreceipts.ui.adapter.DataItem
 import java.time.Instant
 import java.util.*
@@ -12,7 +12,7 @@ import java.util.*
  * Uma função de extensão para ordenar a lista alfabeticamente pelo
  * nome do contato.
  */
-fun LiveData<List<Fields>>.sortedByDate(): LiveData<List<Fields>> =
+fun LiveData<List<Receipt>>.sortedByDate(): LiveData<List<Receipt>> =
     this.map { list ->
         list.sortedByDescending { receipts ->
             receipts.date
@@ -20,11 +20,11 @@ fun LiveData<List<Fields>>.sortedByDate(): LiveData<List<Fields>> =
     }
 
 /**
- * Essa função de extensão é usada para concatenar a lista de BusinessCard
+ * Essa função de extensão é usada para concatenar a lista de Receipts
  * com os cabeçalhos gerados a partir da primeira letra do nome. Em outras
  * palavras: agrupar os contatos pela inicial.
  */
-fun List<Fields>.toListOfDataItem(): List<DataItem> {
+fun List<Receipt>.toListOfDataItem(): List<DataItem> {
 
     val grouping = this.groupBy { fields ->
         val simpleDate = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

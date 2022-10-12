@@ -27,10 +27,10 @@ interface RetrofitService {
     @POST("v2/users/resetPassword")
     fun resetPassword(@Body resetPassword: ResetPassword): Call<GenericResponse>
 
-    @DELETE("v2/receipt")
+    @DELETE("v2/receipt/{receiptId}")
     fun deleteReceipt(
         @Header("Authorization") token: String,
-        @Query("receiptId") receiptNumber: String
+        @Path("receiptId") receiptNumber: String
     ): Call<GenericResponse>
 }
 

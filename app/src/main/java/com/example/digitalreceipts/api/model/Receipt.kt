@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Fields(
+data class Receipt(
     var id: String,
     var idUser: String,
     var value: Float,

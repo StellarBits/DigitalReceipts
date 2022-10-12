@@ -19,7 +19,7 @@ import java.util.*
  * Updates the data shown in the [RecyclerView].
  */
 //@BindingAdapter("listData")
-//fun bindRecyclerView(recyclerView: RecyclerView, data: List<Fields>?) {
+//fun bindRecyclerView(recyclerView: RecyclerView, data: List<Receipt>?) {
 //    val adapter = recyclerView.adapter as ReceiptsListAdapter
 //    adapter.submitList(data)
 //}

@@ -7,10 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.digitalreceipts.api.ReceiptApi
-import com.example.digitalreceipts.api.model.Fields
-import com.example.digitalreceipts.api.model.GetUserReceipts
-import com.example.digitalreceipts.api.model.NewReceipt
-import com.example.digitalreceipts.api.model.NewReceiptResponse
+import com.example.digitalreceipts.api.model.*
 import com.example.digitalreceipts.extension.sortedByDate
 import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
 import kotlinx.coroutines.launch
@@ -25,13 +22,13 @@ class ReceiptsListViewModel(
 
     private lateinit var mFilterableText: String
     private lateinit var mValueFilter: ValueFilter
-    private lateinit var mFilteredList: ArrayList<Fields>
+    private lateinit var mFilteredList: ArrayList<Receipt>
 
-    private var mOriginalFieldsList: List<Fields> = listOf()
+    private var mOriginalReceiptList: List<Receipt> = listOf()
 
-    private val _fields = MutableLiveData<List<Fields>>()
+    private val _fields = MutableLiveData<List<Receipt>>()
 
-    var fields: LiveData<List<Fields>> = _fields
+    var receipt: LiveData<List<Receipt>> = _fields
 
     /**
      * Esse campo representa a query de busca. Como esse campo é manipulado
@@ -48,8 +45,10 @@ class ReceiptsListViewModel(
      * são modificados. Ao final é invocada uma função de extensão para
      * ordenar a lista em ordem alfabética.
      */
-    val filteredListBusinessCard: LiveData<List<Fields>> =
-        applySearchFilterUseCase.filterList(fields, searchQuery).sortedByDate()
+    val filteredListReceipt: LiveData<List<Receipt>> =
+        applySearchFilterUseCase.filterList(receipt, searchQuery).sortedByDate()
+
+    val deletedReceiptPosition = MutableLiveData<Int>()
 
     /**
      * Gets GetUserReceipts information from the Digital GetUserReceipts API Retrofit service and updates...
@@ -65,7 +64,7 @@ class ReceiptsListViewModel(
                     ) {
                         if (response.body() != null) {
                             _fields.value = response.body()?.receipts
-                            mOriginalFieldsList = response.body()?.receipts!!
+                            mOriginalReceiptList = response.body()?.receipts!!
 
                             Log.i("JAO", "Success: ${_fields.value}")
                         } else {
@@ -109,6 +108,36 @@ class ReceiptsListViewModel(
         }
     }
 
+    fun deleteReceipt(token: String, receiptPosition: Int) {
+        viewModelScope.launch {
+            try {
+                ReceiptApi.retrofitService.deleteReceipt(
+                    token, filteredListReceipt.value!![receiptPosition].id
+                ).enqueue(object :
+                    Callback<GenericResponse> {
+                    override fun onResponse(
+                        call: Call<GenericResponse>,
+                        response: Response<GenericResponse>
+                    ) {
+                        Log.i("JAO", "deleteReceipt - onResponse(): $response")
+
+                        if (response.isSuccessful) {
+                            deletedReceiptPosition.postValue(receiptPosition)
+
+                            Log.i("JAO", "deleteReceipt - isSuccessful: ${response.body()}")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<GenericResponse>, t: Throwable) {
+                        Log.i("JAO", "deleteReceipt - onFailure(): $t")
+                    }
+                })
+            } catch (e: Exception) {
+                Log.e("JAO", "Failure: ${e.message}")
+            }
+        }
+    }
+
     fun getFilter(): Filter {
         mValueFilter = ValueFilter()
 
@@ -118,12 +147,12 @@ class ReceiptsListViewModel(
     private inner class ValueFilter: Filter() {
         override fun performFiltering(p0: CharSequence?): FilterResults {
             val results = FilterResults()
-            val localFieldsList = ArrayList<Fields>()
+            val localFieldsList = ArrayList<Receipt>()
 
             mFilterableText = ""
 
             if (p0 != null) {
-                for (fields in mOriginalFieldsList) {
+                for (fields in mOriginalReceiptList) {
                     val stringToFilter = p0.toString().lowercase(Locale.US)
                     mFilterableText = stringToFilter
 
@@ -143,7 +172,7 @@ class ReceiptsListViewModel(
             Log.i("JAO", "publishResults")
 
             @Suppress("UNCHECKED_CAST")
-            mFilteredList = p1?.values as ArrayList<Fields>
+            mFilteredList = p1?.values as ArrayList<Receipt>
             _fields.value = mFilteredList
         }
     }

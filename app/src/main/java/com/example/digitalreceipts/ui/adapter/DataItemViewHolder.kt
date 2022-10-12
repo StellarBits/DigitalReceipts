@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.api.model.Receipt
 import com.example.digitalreceipts.databinding.ReceiptsListHeaderBinding
 import com.example.digitalreceipts.databinding.ReceiptsListItemBinding
 
@@ -29,9 +29,9 @@ sealed class DataItemViewHolder(open val binding: ViewBinding) :
          * tudo manualmente aqui na classe ViewHolder, mas preferi adotar BindingAdapters para
          * deixar a solução mais flexível e fácil de manter.
          */
-        fun bind(item: Fields, cardListener: ReceiptsListener) {
+        fun bind(item: Receipt, cardListener: ReceiptsListener) {
             with(binding) {
-                fields = item
+                receipt = item
                 listener = cardListener
                 executePendingBindings()
             }

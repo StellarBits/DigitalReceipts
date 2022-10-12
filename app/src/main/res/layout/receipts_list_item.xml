@@ -7,8 +7,8 @@
     <data>
 
         <variable
-            name="fields"
-            type="com.example.digitalreceipts.api.model.Fields" />
+            name="receipt"
+            type="com.example.digitalreceipts.api.model.Receipt" />
 
         <variable
             name="listener"
@@ -24,7 +24,7 @@
         android:background="@drawable/rounded_edge"
         android:clickable="true"
         android:focusable="true"
-        android:onClick="@{() -> listener.onClick(fields)}"
+        android:onClick="@{() -> listener.onClick(receipt)}"
         android:orientation="horizontal"
         android:paddingTop="18dp"
         android:paddingBottom="18dp">
@@ -37,7 +37,7 @@
             android:layout_marginStart="18dp"
             android:contentDescription="@string/merchant_logo_image_view"
             android:scaleType="fitCenter"
-            bind:icon="@{fields.message}"
+            bind:icon="@{receipt.message}"
             tools:src="@drawable/cafeteria_logo">
 
         </ImageView>
@@ -55,7 +55,7 @@
                 android:id="@+id/tv_merchant_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{fields.merchantName}"
+                android:text="@{receipt.merchantName}"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="18sp"
                 tools:text="Cafeteria do Marcos">
@@ -68,7 +68,7 @@
                 android:layout_height="match_parent"
                 android:textColor="@color/cardview_dark_background"
                 android:textSize="14sp"
-                bind:time="@{fields.date}"
+                bind:time="@{receipt.date}"
                 tools:text="10:00 PM">
 
             </TextView>
@@ -86,7 +86,7 @@
             android:textColor="@color/cardview_dark_background"
             android:textSize="20sp"
             android:textStyle="bold"
-            bind:value="@{fields.value}"
+            bind:value="@{receipt.value}"
             tools:ignore="RtlCompat"
             tools:text="R$ 274,80">
 

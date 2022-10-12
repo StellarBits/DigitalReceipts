@@ -45,7 +45,7 @@
         tools:layout="@layout/receipts_details_fragment" >
         <argument
             android:name="receipts"
-            app:argType="com.example.digitalreceipts.api.model.Fields" />
+            app:argType="com.example.digitalreceipts.api.model.Receipt" />
     </fragment>
     <fragment
         android:id="@+id/createNewAccountFragment"

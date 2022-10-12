@@ -3,25 +3,25 @@ package com.example.digitalreceipts.usecase
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.map
-import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.api.model.Receipt
 
 /**
  * Esse use case filtra a lista conforme a string searchQuery, usando a função
  * Transformations.switchMap { }. Ele observa mudanças no valor da searchQuery
- * e atualiza a lista, emitindo-a como uma LiveData<List<BusinessCard>>. O filtro
+ * e atualiza a lista, emitindo-a como uma LiveData<List<Receipt>>. O filtro
  * busca por matches em 3 campos: nome, email e empresa.
  */
 class ApplySearchFilterUseCase {
     fun filterList(
-        list: LiveData<List<Fields>>,
+        list: LiveData<List<Receipt>>,
         searchQuery: LiveData<CharSequence>
-    ): LiveData<List<Fields>> =
+    ): LiveData<List<Receipt>> =
         Transformations.switchMap(searchQuery) {
             list.map { list ->
                 searchQuery.value?.let {
-                    list.filter { businessCard ->
+                    list.filter { receipts ->
                         val query = searchQuery.value.toString()
-                        with(businessCard) {
+                        with(receipts) {
                             applyQuery(query)
                         }
                     }
@@ -29,7 +29,7 @@ class ApplySearchFilterUseCase {
             }
         }
 
-    private fun Fields.applyQuery(query: String) =
+    private fun Receipt.applyQuery(query: String) =
         merchantName.contains(query, true) /*||
                 nome.contains(query, true) ||
                 email.contains(query, true)*/

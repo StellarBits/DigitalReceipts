@@ -3,14 +3,14 @@ package com.example.digitalreceipts.ui.receiptsdetails
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.api.model.Receipt
 
 class ReceiptsDetailsViewModel : ViewModel() {
 
     /**
      * Esses campos servem para fazer o DataBinding bidirecional com os componentes EditText
      * do layout. Eles são inicializados com strings vazias e podem ser alterados no método
-     * initFields(), quando é recebido um BusinessCard. No momento da criação do cartão
+     * initFields(), quando é recebido um Receipt. No momento da criação do cartão
      * o campo nome passa por um teste de validação.
      */
     val merchantImageField = MutableLiveData("")
@@ -20,14 +20,14 @@ class ReceiptsDetailsViewModel : ViewModel() {
     val cardInfoBrandField = MutableLiveData("")
     val authenticationField = MutableLiveData("")
 
-    private val _receipts = MutableLiveData<Fields>()
+    private val _receipts = MutableLiveData<Receipt>()
 
-    var receipts: LiveData<Fields> = _receipts
+    var receipts: LiveData<Receipt> = _receipts
 
     /**
-     * Recebe um BusinessCard e atribui à variável _receivedCard
+     * Recebe um Receipt e atribui à variável _receivedCard
      */
-    fun receiveReceipt(receipts: Fields) {
+    fun receiveReceipt(receipts: Receipt) {
         with(receipts) {
             _receipts.value = receipts
             initFields(this)
@@ -38,7 +38,7 @@ class ReceiptsDetailsViewModel : ViewModel() {
      * Inicializa os campos do formulário com os valores do
      * cartão recebido.
      */
-    private fun initFields(receipts: Fields) {
+    private fun initFields(receipts: Receipt) {
         with(receipts) {
             merchantImageField.value = message
             merchantNameField.value = merchantName

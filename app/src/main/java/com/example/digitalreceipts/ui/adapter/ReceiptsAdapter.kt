@@ -3,7 +3,7 @@ package com.example.digitalreceipts.ui.adapter
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.digitalreceipts.api.model.Fields
+import com.example.digitalreceipts.api.model.Receipt
 import com.example.digitalreceipts.extension.toListOfDataItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -19,8 +19,8 @@ private const val ITEM_VIEW_TYPE_ITEM = 1
 /**
  * O adapter implementa a interface ListAdapter com DiffUtil; tanto a inflação do layout
  * quanto a vinculação de dados ocorrem na classe ViewHolder.
- * Ao invés de receber uma lista de BusinessCard, esse adapter espera uma List<DataItem>,
- * que é a superclasse dos tipos concretos de dados (BusinessCard ou Header).
+ * Ao invés de receber uma lista de Receipts, esse adapter espera uma List<DataItem>,
+ * que é a superclasse dos tipos concretos de dados (Receipts ou Header).
  */
 class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdapter<DataItem,
         DataItemViewHolder>(ReceiptsDiffCallback()) {
@@ -69,7 +69,7 @@ class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdap
      * conforme a primeira inicial e submete. O processamento acontece
      * no escopo específico do Adapter para não bloquear a Thread principal.
      */
-    fun addHeadersAndSubmitList(list: List<Fields>?) {
+    fun addHeadersAndSubmitList(list: List<Receipt>?) {
 
         adapterScope.launch {
             val listDataItem = list?.toListOfDataItem()
