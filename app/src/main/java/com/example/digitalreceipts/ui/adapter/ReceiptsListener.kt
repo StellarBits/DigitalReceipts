@@ -4,20 +4,19 @@ import com.example.digitalreceipts.api.model.Receipt
 
 class ReceiptsListener(
     val clickListener: (receipts: Receipt) -> Unit,
+    val longClickListener: (receipts: Receipt) -> Boolean
     //val shareBtnClickListener: (view: View) -> Unit,
-    //val longClickListener: (receipts: Receipt) -> Boolean
 ) {
-
     fun onClick(receipt: Receipt) {
         clickListener(receipt)
     }
 
-    /*fun onLongClick(receipt: Receipt) : Boolean {
+    fun onLongClick(receipt: Receipt) : Boolean {
         longClickListener(receipt)
         return true
     }
 
-    fun onShareBtnClick(view: View) {
+    /*fun onShareBtnClick(view: View) {
         shareBtnClickListener(view)
     }*/
 }

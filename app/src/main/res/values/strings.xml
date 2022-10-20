@@ -41,6 +41,7 @@
     <!-- Menu Main -->
     <string name="menu_search">Search</string>
     <string name="menu_settings">Settings</string>
+    <string name="menu_load_receipts">Load receipts</string>
 
     <!-- Progress Dialog -->
     <string name="progress_dialog_loading">Loading animation</string>

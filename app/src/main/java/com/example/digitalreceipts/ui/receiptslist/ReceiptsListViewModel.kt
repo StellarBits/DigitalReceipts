@@ -26,9 +26,8 @@ class ReceiptsListViewModel(
 
     private var mOriginalReceiptList: List<Receipt> = listOf()
 
-    private val _fields = MutableLiveData<List<Receipt>>()
-
-    var receipt: LiveData<List<Receipt>> = _fields
+    private val _receiptList = MutableLiveData<List<Receipt>>()
+    var receiptList: LiveData<List<Receipt>> = _receiptList
 
     /**
      * Esse campo representa a query de busca. Como esse campo é manipulado
@@ -36,8 +35,7 @@ class ReceiptsListViewModel(
      */
 
     private val _searchQuery = MutableLiveData<CharSequence>("")
-    private val searchQuery: LiveData<CharSequence>
-        get() = _searchQuery
+    private val searchQuery: LiveData<CharSequence> = _searchQuery
 
     /**
      * A lista filtrada é exposta para o Fragment. Como o filtro é aplicado
@@ -46,9 +44,9 @@ class ReceiptsListViewModel(
      * ordenar a lista em ordem alfabética.
      */
     val filteredListReceipt: LiveData<List<Receipt>> =
-        applySearchFilterUseCase.filterList(receipt, searchQuery).sortedByDate()
+        applySearchFilterUseCase.filterList(receiptList, searchQuery).sortedByDate()
 
-    val deletedReceiptPosition = MutableLiveData<Int>()
+    val deleteResult = MutableLiveData<Boolean>()
 
     /**
      * Gets GetUserReceipts information from the Digital GetUserReceipts API Retrofit service and updates...
@@ -63,10 +61,10 @@ class ReceiptsListViewModel(
                         response: Response<GetUserReceipts>
                     ) {
                         if (response.body() != null) {
-                            _fields.value = response.body()?.receipts
+                            _receiptList.value = response.body()?.receipts
                             mOriginalReceiptList = response.body()?.receipts!!
 
-                            Log.i("JAO", "Success: ${_fields.value}")
+                            Log.i("JAO", "Success: ${_receiptList.value}")
                         } else {
                             Log.i("JAO", "createNewUser - Failure: response is null!")
                         }
@@ -108,12 +106,10 @@ class ReceiptsListViewModel(
         }
     }
 
-    fun deleteReceipt(token: String, receiptPosition: Int) {
+    fun deleteReceipt(token: String, receipt: Receipt) {
         viewModelScope.launch {
             try {
-                ReceiptApi.retrofitService.deleteReceipt(
-                    token, filteredListReceipt.value!![receiptPosition].id
-                ).enqueue(object :
+                ReceiptApi.retrofitService.deleteReceipt(token, receipt.id).enqueue(object :
                     Callback<GenericResponse> {
                     override fun onResponse(
                         call: Call<GenericResponse>,
@@ -122,8 +118,7 @@ class ReceiptsListViewModel(
                         Log.i("JAO", "deleteReceipt - onResponse(): $response")
 
                         if (response.isSuccessful) {
-                            deletedReceiptPosition.postValue(receiptPosition)
-
+                            deleteResult.postValue(true)
                             Log.i("JAO", "deleteReceipt - isSuccessful: ${response.body()}")
                         }
                     }
@@ -147,22 +142,22 @@ class ReceiptsListViewModel(
     private inner class ValueFilter: Filter() {
         override fun performFiltering(p0: CharSequence?): FilterResults {
             val results = FilterResults()
-            val localFieldsList = ArrayList<Receipt>()
+            val localReceiptsList = ArrayList<Receipt>()
 
             mFilterableText = ""
 
             if (p0 != null) {
-                for (fields in mOriginalReceiptList) {
-                    val stringToFilter = p0.toString().lowercase(Locale.US)
+                for (receipt in mOriginalReceiptList) {
+                    val stringToFilter = p0.toString().lowercase(Locale.getDefault())
                     mFilterableText = stringToFilter
 
-                    if (fields.merchantName.lowercase(Locale.US).contains(stringToFilter)) {
-                        localFieldsList.add(fields)
+                    if (receipt.merchantName.lowercase(Locale.getDefault()).contains(stringToFilter)) {
+                        localReceiptsList.add(receipt)
                     }
                 }
 
-                results.values = localFieldsList
-                results.count = localFieldsList.size
+                results.values = localReceiptsList
+                results.count = localReceiptsList.size
             }
 
             return results
@@ -173,7 +168,7 @@ class ReceiptsListViewModel(
 
             @Suppress("UNCHECKED_CAST")
             mFilteredList = p1?.values as ArrayList<Receipt>
-            _fields.value = mFilteredList
+            _receiptList.value = mFilteredList
         }
     }
 }

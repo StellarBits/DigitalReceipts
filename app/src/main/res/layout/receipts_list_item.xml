@@ -25,6 +25,7 @@
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{() -> listener.onClick(receipt)}"
+        android:onLongClick="@{() -> listener.onLongClick(receipt)}"
         android:orientation="horizontal"
         android:paddingTop="18dp"
         android:paddingBottom="18dp">

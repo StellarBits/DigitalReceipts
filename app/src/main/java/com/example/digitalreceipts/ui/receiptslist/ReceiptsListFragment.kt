@@ -5,14 +5,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.digitalreceipts.R
 import com.example.digitalreceipts.api.model.LoginResponse
 import com.example.digitalreceipts.api.model.NewReceipt
@@ -20,15 +19,14 @@ import com.example.digitalreceipts.api.model.Receipt
 import com.example.digitalreceipts.databinding.ReceiptsListFragmentBinding
 import com.example.digitalreceipts.ui.adapter.ReceiptsAdapter
 import com.example.digitalreceipts.ui.adapter.ReceiptsListener
-import com.example.digitalreceipts.ui.adapter.SwipeToDeleteCallback
 import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class ReceiptsListFragment : Fragment() {
 
-    lateinit var mToken: String
-    lateinit var mUserData: LoginResponse
+    private lateinit var mToken: String
+    private lateinit var mUserData: LoginResponse
 
     private val mViewModel: ReceiptsListViewModel by viewModel {
         parametersOf(ApplySearchFilterUseCase())
@@ -61,26 +59,18 @@ class ReceiptsListFragment : Fragment() {
             mToken = "Bearer ${it.token}"
 
             Log.i("JAO", "arguments userData: $it")
-
-            mViewModel.getReceipts(mToken)
         }
 
-        mViewModel.receipt.observe(viewLifecycleOwner) { list ->
+        mViewModel.receiptList.observe(viewLifecycleOwner) { list ->
             Log.i("JAO", "observe receipt: $list")
-
-            if (list.isNullOrEmpty()) {
-                createReceipts(mUserData.idUser!!).forEach {
-                    mViewModel.createReceipt(mToken, it)
-                    Log.i("JAO", "Token: $mToken / Receipt: $it")
-                }
-            }
         }
 
         binding.srReceipts.setOnRefreshListener {
-            //mViewModel.load()
+            loadReceipts()
             binding.srReceipts.isRefreshing = false
         }
 
+        loadReceipts()
         initReceiptsList()
 
         return binding.root
@@ -94,29 +84,34 @@ class ReceiptsListFragment : Fragment() {
      */
     private fun initReceiptsList() {
         mViewModel.filteredListReceipt.observe(viewLifecycleOwner) {
-            val adapter = ReceiptsAdapter(ReceiptsListener(clickListener = { receipts ->
-                navigateToReceiptsDetailsFragment(receipts)
-            }
+            Log.i("JAO", "onSwiped - observe")
+
+            val receiptsAdapter = ReceiptsAdapter(ReceiptsListener(
+                clickListener = { receipt ->
+                    navigateToReceiptsDetailsFragment(receipt)
+                },
+                longClickListener = { receipt ->
+                    mViewModel.deleteReceipt(mToken, receipt)
+                    true
+                }
             ))
 
-            binding.receiptsRecyclerview.layoutManager = LinearLayoutManager(context)
-            binding.receiptsRecyclerview.adapter = adapter
-            adapter.addHeadersAndSubmitList(it)
-        }
-
-        val swipeToDeleteCallback = object : SwipeToDeleteCallback() {
-            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val position = viewHolder.adapterPosition
-                mViewModel.deleteReceipt(mToken, position)
+            binding.receiptsRecyclerview.apply {
+                layoutManager = LinearLayoutManager(context)
+                adapter = receiptsAdapter
             }
+
+            receiptsAdapter.addHeadersAndSubmitList(it)
         }
 
-        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallback)
-        itemTouchHelper.attachToRecyclerView(binding.receiptsRecyclerview)
+        mViewModel.deleteResult.observe(viewLifecycleOwner) {
+            loadReceipts()
 
-        mViewModel.deletedReceiptPosition.observe(viewLifecycleOwner) {
-            //it.drop(position)
-            binding.receiptsRecyclerview.adapter?.notifyItemRemoved(it)
+            Toast.makeText(
+                context,
+                "Recibo excluído com sucesso!",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
@@ -155,9 +150,28 @@ class ReceiptsListFragment : Fragment() {
         })
     }
 
+    @Deprecated("Deprecated in Java")
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.load_receipts -> {
+                createReceipts(mUserData.idUser!!).forEach {
+                    mViewModel.createReceipt(mToken, it)
+                    Log.i("JAO", "Token: $mToken / Receipt: $it")
+                }
+                loadReceipts()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
     private fun navigateToReceiptsDetailsFragment(receipts: Receipt) {
         val direction = ReceiptsListFragmentDirections.navigateToReceiptsDetails(receipts)
         findNavController().navigate(direction)
+    }
+
+    private fun loadReceipts() {
+        mViewModel.getReceipts(mToken)
     }
 
     private fun createReceipts(idUser: String): List<NewReceipt> {
