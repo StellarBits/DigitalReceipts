@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:theme="@style/Theme.DigitalReceipts.AppBarOverlay"
-        tools:translationZ="-5dp"
+        tools:translationZ="@dimen/appbar_layout_translation_z"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

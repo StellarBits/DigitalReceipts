@@ -5,19 +5,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_gravity="center"
     android:background="@drawable/progress_hud_bg"
-    android:alpha="0.9"
+    android:alpha="@dimen/progress_background_alpha"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    android:paddingLeft="30dp"
-    android:paddingTop="20dp"
-    android:paddingRight="30dp"
-    android:paddingBottom="20dp">
+    android:paddingLeft="@dimen/progress_background_horizontal_padding"
+    android:paddingTop="@dimen/progress_background_vertical_padding"
+    android:paddingRight="@dimen/progress_background_horizontal_padding"
+    android:paddingBottom="@dimen/progress_background_vertical_padding">
 
     <ImageView
         android:id="@+id/spinnerImageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="@dimen/progress_loading_imageview_bottom_margin"
         android:contentDescription="@string/progress_dialog_loading"
         android:background="@drawable/spinner" />
 
@@ -26,6 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Message"
-        android:textColor="#FFFFFF" />
+        android:textColor="@color/white" />
 
 </LinearLayout>

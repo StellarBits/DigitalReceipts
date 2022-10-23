@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Neutral -->
+    <dimen name="zero_dp">0dp</dimen>
+
+    <!-- General -->
+        <!-- EditText -->
+        <dimen name="edittext_horizontal_margin">18dp</dimen>
+        <dimen name="edittext_vertical_margin">10dp</dimen>
+        <dimen name="edittext_height">50dp</dimen>
+        <dimen name="edittext_horizontal_paddings">10dp</dimen>
+        <dimen name="edittext_text_size">18sp</dimen>
+
+        <!-- Button -->
+        <dimen name="button_horizontal_margin">56dp</dimen>
+        <dimen name="button_vertical_margin">20dp</dimen>
+        <dimen name="button_height">60dp</dimen>
+        <dimen name="button_horizontal_paddings">10dp</dimen>
+        <dimen name="button_text_size">18sp</dimen>
+
+        <!-- AppBarLayout -->
+        <dimen name="appbar_layout_translation_z">-5dp</dimen>
+
+    <!-- Login Screen -->
+        <!-- ImageView -->
+        <dimen name="login_logo_imageview_height">230dp</dimen>
+        <dimen name="login_new_account_button_height">50dp</dimen>
+        <dimen name="login_sign_in_with_google_button_horizontal_margin">52dp</dimen>
+        <dimen name="login_sign_in_with_google_button_horizontal_padding">36dp</dimen>
+
+        <!-- LinearLayout -->
+        <dimen name="login_interactive_section_linearlayout_top_margin">20dp</dimen>
+
+        <!-- TextView -->
+        <dimen name="login_title_textview_horizontal_margin">30dp</dimen>
+        <dimen name="login_title_textview_text_size">40sp</dimen>
+        <dimen name="login_subtitle_textview_start_margin">50dp</dimen>
+        <dimen name="login_subtitle_textview_end_margin">18dp</dimen>
+        <dimen name="login_subtitle_textview_padding_top">5dp</dimen>
+        <dimen name="login_reset_password_textview_top_margin">10dp</dimen>
+        <dimen name="login_reset_password_textview_text_size">16sp</dimen>
+
+    <!-- Create new account and reset password screen -->
+        <!-- TextView -->
+        <dimen name="account_field_title_textview_horizontal_margin">18dp</dimen>
+        <dimen name="account_field_title_textview_vertical_margin">5dp</dimen>
+        <dimen name="account_field_title_textview_text_size">16sp</dimen>
+
+        <!-- SwitchCompat -->
+        <dimen name="account_agree_switch_button_horizontal_margin">18dp</dimen>
+        <dimen name="account_agree_switch_button_vertical_margin">15dp</dimen>
+        <dimen name="account_agree_switch_button_text_size">16sp</dimen>
+
+    <!-- Progress Hud -->
+        <!-- LinearLayout -->
+        <dimen name="progress_background_horizontal_padding">30dp</dimen>
+        <dimen name="progress_background_vertical_padding">20dp</dimen>
+
+        <!-- ImageView -->
+        <dimen name="progress_loading_imageview_bottom_margin">15dp</dimen>
+
+    <!-- Receipt details screen -->
+        <!-- CardView -->
+        <dimen name="details_receipt_cover_card_view_height">320dp</dimen>
+        <dimen name="details_receipt_cover_card_view_horizontal_margin">5dp</dimen>
+        <dimen name="details_receipt_cover_card_view_vertical_margin">15dp</dimen>
+        <dimen name="details_receipt_cover_card_view_corner_radius">5dp</dimen>
+
+        <!-- Buttons section -->
+            <!-- ImageButton -->
+            <dimen name="details_receipt_image_button_width">44dp</dimen>
+            <dimen name="details_receipt_image_button_height">44dp</dimen>
+
+            <!-- TextView -->
+            <dimen name="details_receipt_button_title_text_vertical_margin">5dp</dimen>
+
+        <!-- TextView -->
+            <!-- Merchant Name -->
+            <dimen name="details_receipt_merchant_name_textview_vertical_margin">20dp</dimen>
+            <dimen name="details_receipt_merchant_name_textview_text_size">26sp</dimen>
+
+            <!-- Receipt Value -->
+            <dimen name="details_receipt_receipt_value_textview_vertical_margin">5dp</dimen>
+            <dimen name="details_receipt_receipt_value_textview_text_size">24sp</dimen>
+
+            <!-- Purchase Date -->
+            <dimen name="details_receipt_purchase_date_textview_vertical_margin">10dp</dimen>
+            <dimen name="details_receipt_purchase_date_textview_text_size">16sp</dimen>
+
+            <!-- Form of Payment -->
+            <dimen name="details_receipt_form_of_payment_textview_vertical_margin">10dp</dimen>
+            <dimen name="details_receipt_form_of_payment_textview_text_size">16sp</dimen>
+
+            <!-- Authentication Code -->
+            <dimen name="details_receipt_authentication_code_textview_vertical_margin">10dp</dimen>
+            <dimen name="details_receipt_authentication_code_textview_text_size">16sp</dimen>
+
+    <!-- Receipt list header -->
+        <!-- ConstraintLayout -->
+        <dimen name="receipt_list_header_constraint_layout_start_margin">10dp</dimen>
+        <dimen name="receipt_list_header_constraint_layout_top_margin">10dp</dimen>
+        <dimen name="receipt_list_header_constraint_layout_bottom_margin">5dp</dimen>
+
+        <!-- TextView -->
+        <dimen name="receipt_list_header_header_text_size">18sp</dimen>
+
+    <!-- Receipt list item -->
+        <!-- LinearLayout -->
+        <dimen name="receipt_list_item_linear_layout_edge_margins">8dp</dimen>
+        <dimen name="receipt_list_item_linear_layout_vertical_paddings">18dp</dimen>
+
+        <!-- ImageView -->
+        <dimen name="receipt_list_item_merchant_imageview_height">64dp</dimen>
+        <dimen name="receipt_list_item_merchant_imageview_start_margin">18dp</dimen>
+
+        <!-- LinearLayout -->
+        <dimen name="receipt_list_item_receipt_info_start_margin">20dp</dimen>
+        <dimen name="receipt_list_item_receipt_info_top_margin">5dp</dimen>
+
+        <!-- TextView -->
+        <dimen name="receipt_list_item_merchant_name_text_size">18sp</dimen>
+        <dimen name="receipt_list_item_purchase_date_text_size">14sp</dimen>
+        <dimen name="receipt_list_item_value_end_margin">18dp</dimen>
+        <dimen name="receipt_list_item_value_text_size">20sp</dimen>
+
+</resources>

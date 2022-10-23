@@ -14,6 +14,7 @@
         android:theme="@style/Theme.DigitalReceipts">
         <activity
             android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/Theme.DigitalReceipts.NoActionBar">
             <intent-filter>

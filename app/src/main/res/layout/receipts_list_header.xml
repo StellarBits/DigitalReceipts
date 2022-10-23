@@ -14,14 +14,17 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="4dp">
+        android:layout_marginStart="@dimen/receipt_list_header_constraint_layout_start_margin"
+        android:layout_marginTop="@dimen/receipt_list_header_constraint_layout_top_margin"
+        android:layout_marginBottom="@dimen/receipt_list_header_constraint_layout_bottom_margin">
 
         <TextView
             android:id="@+id/tv_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="22sp"
+            android:textSize="@dimen/receipt_list_header_header_text_size"
+            android:textStyle="bold"
+            android:textColor="@color/white"
             bind:headerDate="@{header}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

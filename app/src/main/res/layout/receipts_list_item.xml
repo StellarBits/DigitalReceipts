@@ -18,24 +18,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="@dimen/receipt_list_item_linear_layout_edge_margins"
+        android:layout_marginEnd="@dimen/receipt_list_item_linear_layout_edge_margins"
+        android:layout_marginBottom="@dimen/receipt_list_item_linear_layout_edge_margins"
         android:background="@drawable/rounded_edge"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{() -> listener.onClick(receipt)}"
         android:onLongClick="@{() -> listener.onLongClick(receipt)}"
         android:orientation="horizontal"
-        android:paddingTop="18dp"
-        android:paddingBottom="18dp">
+        android:paddingTop="@dimen/receipt_list_item_linear_layout_vertical_paddings"
+        android:paddingBottom="@dimen/receipt_list_item_linear_layout_vertical_paddings">
 
         <ImageView
             android:id="@+id/iv_merchantImage"
-            android:layout_width="0dp"
-            android:layout_height="64dp"
-            android:layout_weight="0.2"
-            android:layout_marginStart="18dp"
+            android:layout_width="@dimen/zero_dp"
+            android:layout_height="@dimen/receipt_list_item_merchant_imageview_height"
+            android:layout_weight="@dimen/receipt_list_item_merchant_imageview_weight"
+            android:layout_marginStart="@dimen/receipt_list_item_merchant_imageview_start_margin"
             android:contentDescription="@string/merchant_logo_image_view"
             android:scaleType="fitCenter"
             bind:icon="@{receipt.message}"
@@ -44,12 +44,12 @@
         </ImageView>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.50"
+            android:layout_weight="@dimen/receipt_list_item_receipt_info_weight"
             android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginStart="@dimen/receipt_list_item_receipt_info_start_margin"
+            android:layout_marginTop="@dimen/receipt_list_item_receipt_info_top_margin"
             android:orientation="vertical">
 
             <TextView
@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:text="@{receipt.merchantName}"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="18sp"
+                android:textSize="@dimen/receipt_list_item_merchant_name_text_size"
                 tools:text="Cafeteria do Marcos">
 
             </TextView>
@@ -68,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:textColor="@color/cardview_dark_background"
-                android:textSize="14sp"
+                android:textSize="@dimen/receipt_list_item_purchase_date_text_size"
                 bind:time="@{receipt.date}"
                 tools:text="10:00 PM">
 
@@ -78,14 +78,14 @@
 
         <TextView
             android:id="@+id/tv_value"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/zero_dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_weight="0.3"
-            android:layout_marginEnd="18dp"
+            android:layout_weight="@dimen/receipt_list_item_value_text_weight"
+            android:layout_marginEnd="@dimen/receipt_list_item_value_end_margin"
             android:textAlignment="textEnd"
             android:textColor="@color/cardview_dark_background"
-            android:textSize="20sp"
+            android:textSize="@dimen/receipt_list_item_value_text_size"
             android:textStyle="bold"
             bind:value="@{receipt.value}"
             tools:ignore="RtlCompat"

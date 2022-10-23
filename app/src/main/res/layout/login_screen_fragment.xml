@@ -15,7 +15,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="225dp"
+            android:layout_height="@dimen/login_logo_imageview_height"
             android:contentDescription="@string/login_app_logo_image_view"
             android:src="@drawable/ic_login_screen_logo">
 
@@ -24,44 +24,46 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="30dp"
-            android:paddingEnd="30dp"
+            android:paddingStart="@dimen/login_title_textview_horizontal_margin"
+            android:paddingEnd="@dimen/login_title_textview_horizontal_margin"
             android:text="@string/app_name"
             android:textColor="@color/white"
-            android:textSize="40sp"
+            android:textSize="@dimen/login_title_textview_text_size"
             android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingStart="45dp"
-            android:paddingEnd="45dp"
-            android:paddingTop="5dp"
+            android:paddingStart="@dimen/login_subtitle_textview_start_margin"
+            android:paddingEnd="@dimen/login_subtitle_textview_end_margin"
+            android:paddingTop="@dimen/login_subtitle_textview_padding_top"
             android:text="@string/login_app_subtitle"
             android:textColor="@color/white" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/login_interactive_section_linearlayout_top_margin"
             android:orientation="vertical">
 
             <EditText
                 android:id="@+id/et_email"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="@dimen/edittext_horizontal_margin"
+                android:layout_marginEnd="@dimen/edittext_horizontal_margin"
+                android:layout_marginTop="@dimen/edittext_vertical_margin"
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
                 android:singleLine="true"
                 android:hint="@string/account_email_field_title"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="@dimen/edittext_horizontal_paddings"
+                android:paddingEnd="@dimen/edittext_horizontal_paddings"
                 android:textColor="@color/cardview_dark_background"
-                android:textColorHint="#9C9C9C"
+                android:textColorHint="@color/edittext_text_hint"
                 android:textCursorDrawable="@null"
-                android:textSize="18sp"
+                android:textSize="@dimen/edittext_text_size"
                 android:autofillHints="emailAddress"
                 android:inputType="textEmailAddress">
 
@@ -69,19 +71,21 @@
 
             <EditText
                 android:id="@+id/et_password"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/edittext_height"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="@dimen/edittext_horizontal_margin"
+                android:layout_marginEnd="@dimen/edittext_horizontal_margin"
+                android:layout_marginTop="@dimen/edittext_vertical_margin"
                 android:background="@drawable/rounded_edit_text"
                 android:imeOptions="actionNext"
                 android:hint="@string/account_password_field_title"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp"
+                android:paddingStart="@dimen/edittext_horizontal_paddings"
+                android:paddingEnd="@dimen/edittext_horizontal_paddings"
                 android:textColor="@color/cardview_dark_background"
-                android:textColorHint="#9C9C9C"
+                android:textColorHint="@color/edittext_text_hint"
                 android:textCursorDrawable="@null"
-                android:textSize="18sp"
+                android:textSize="@dimen/edittext_text_size"
                 android:autofillHints="password"
                 android:inputType="textPassword">
 
@@ -89,11 +93,13 @@
 
             <Button
                 android:id="@+id/bt_login"
-                android:layout_width="290dp"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
                 android:layout_gravity="center"
-                android:layout_marginTop="25dp"
-                android:backgroundTint="#2F6FEC"
+                android:layout_marginStart="@dimen/button_horizontal_margin"
+                android:layout_marginEnd="@dimen/button_horizontal_margin"
+                android:layout_marginTop="@dimen/button_vertical_margin"
+                android:backgroundTint="@color/button_affirmative_button_background"
                 android:text="@string/login_login_button_title"
                 android:textColor="@color/white">
 
@@ -101,9 +107,11 @@
 
             <Button
                 android:id="@+id/bt_create_new_account"
-                android:layout_width="290dp"
-                android:layout_height="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/login_new_account_button_height"
                 android:layout_gravity="center"
+                android:layout_marginStart="@dimen/button_horizontal_margin"
+                android:layout_marginEnd="@dimen/button_horizontal_margin"
                 android:background="@drawable/transparent_button"
                 android:foreground="?android:attr/selectableItemBackground"
                 android:text="@string/login_new_account_button_title"
@@ -114,12 +122,14 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/acb_sign_in_with_google"
-                android:layout_width="300dp"
-                android:layout_height="60dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
                 android:layout_gravity="center"
+                android:layout_marginStart="@dimen/login_sign_in_with_google_button_horizontal_margin"
+                android:layout_marginEnd="@dimen/login_sign_in_with_google_button_horizontal_margin"
                 android:drawableStart="@drawable/ic_btn_login_google"
-                android:paddingStart="32dp"
-                android:paddingEnd="36dp"
+                android:paddingStart="@dimen/login_sign_in_with_google_button_horizontal_padding"
+                android:paddingEnd="@dimen/login_sign_in_with_google_button_horizontal_padding"
                 android:text="@string/login_google_login_button_title"
                 android:textColor="@color/white"
                 app:backgroundTint="@color/dark_grey" />
@@ -129,11 +139,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/login_reset_password_textview_top_margin"
                 android:linksClickable="true"
                 android:text="@string/forgot_password"
                 android:textColor="@color/white"
-                android:textSize="16sp"
+                android:textSize="@dimen/login_reset_password_textview_text_size"
                 android:textStyle="bold">
 
             </TextView>
