@@ -10,6 +10,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="edittext_text_hint">#9C9C9C</color>
-    <color name="button_affirmative_button_background">#2F6FEC</color>
+    <color name="light_blue">#2F6FEC</color>
     <color name="textview_purchase_date_text">#B1B1B1</color>
+    <color name="app_theme">#F44336</color>
 </resources>
