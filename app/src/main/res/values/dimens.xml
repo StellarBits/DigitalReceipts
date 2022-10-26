@@ -78,15 +78,15 @@
         <!-- TextView -->
             <!-- Merchant Name -->
             <dimen name="details_receipt_merchant_name_textview_vertical_margin">20dp</dimen>
-            <dimen name="details_receipt_merchant_name_textview_text_size">26sp</dimen>
+            <dimen name="details_receipt_merchant_name_textview_text_size">32sp</dimen>
 
             <!-- Receipt Value -->
             <dimen name="details_receipt_receipt_value_textview_vertical_margin">5dp</dimen>
-            <dimen name="details_receipt_receipt_value_textview_text_size">24sp</dimen>
+            <dimen name="details_receipt_receipt_value_textview_text_size">30sp</dimen>
 
             <!-- Purchase Date -->
             <dimen name="details_receipt_purchase_date_textview_vertical_margin">10dp</dimen>
-            <dimen name="details_receipt_purchase_date_textview_text_size">16sp</dimen>
+            <dimen name="details_receipt_purchase_date_textview_text_size">22sp</dimen>
 
             <!-- Form of Payment -->
             <dimen name="details_receipt_form_of_payment_textview_vertical_margin">10dp</dimen>
@@ -99,11 +99,11 @@
     <!-- Receipt list header -->
         <!-- ConstraintLayout -->
         <dimen name="receipt_list_header_constraint_layout_start_margin">10dp</dimen>
-        <dimen name="receipt_list_header_constraint_layout_top_margin">10dp</dimen>
+        <dimen name="receipt_list_header_constraint_layout_top_margin">15dp</dimen>
         <dimen name="receipt_list_header_constraint_layout_bottom_margin">5dp</dimen>
 
         <!-- TextView -->
-        <dimen name="receipt_list_header_header_text_size">18sp</dimen>
+        <dimen name="receipt_list_header_header_text_size">30sp</dimen>
 
     <!-- Receipt list item -->
         <!-- LinearLayout -->

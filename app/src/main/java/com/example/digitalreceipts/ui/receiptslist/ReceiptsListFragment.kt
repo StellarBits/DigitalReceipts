@@ -22,6 +22,8 @@ import com.example.digitalreceipts.ui.adapter.ReceiptsListener
 import com.example.digitalreceipts.usecase.ApplySearchFilterUseCase
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
+import java.time.LocalDateTime
+import java.time.ZoneId
 
 class ReceiptsListFragment : Fragment() {
 
@@ -175,10 +177,13 @@ class ReceiptsListFragment : Fragment() {
     }
 
     private fun createReceipts(idUser: String): List<NewReceipt> {
+        val currentTimestamp =
+            LocalDateTime.now().atZone(ZoneId.of("UTC")).toInstant().epochSecond.toInt()
+
         return listOf(
             NewReceipt(
                 idUserToSend = idUser,
-                date = 1642458486,
+                date = currentTimestamp,
                 value = 274.89f,
                 status = 0,
                 paymentMethod = 1,
@@ -188,47 +193,47 @@ class ReceiptsListFragment : Fragment() {
             ),
             NewReceipt(
                 idUserToSend = idUser,
-                date = 1641662706,
+                date = currentTimestamp - (86400 * 1),
                 value = 78.90f,
                 status = 0,
-                paymentMethod = 1,
-                cardInfoBrand = "Visa",
+                paymentMethod = 2,
+                cardInfoBrand = "Master",
                 merchantName = "Venda do Zé Pinga",
                 message = "venda_do_ze"
             ),
             NewReceipt(
                 idUserToSend = idUser,
-                date = 1636900468,
+                date = currentTimestamp - (86400 * 2),
                 value = 18.90f,
                 status = 0,
-                paymentMethod = 2,
-                cardInfoBrand = "Master",
+                paymentMethod = 6,
+                cardInfoBrand = "",
                 merchantName = "Padaria do TK",
                 message = "padaria_tk"
             ),
             NewReceipt(
                 idUserToSend = idUser,
-                date = 1634553628,
+                date = currentTimestamp - (86400 * 3),
                 value = 5690.90f,
                 status = 0,
-                paymentMethod = 1,
-                cardInfoBrand = "Master",
+                paymentMethod = 4,
+                cardInfoBrand = "",
                 merchantName = "Lojas Samsung",
                 message = "samsung"
             ),
             NewReceipt(
                 idUserToSend = idUser,
-                date = 1634575768,
+                date = currentTimestamp - (86400 * 4),
                 value = 119.90f,
                 status = 0,
-                paymentMethod = 1,
-                cardInfoBrand = "Visa",
+                paymentMethod = 5,
+                cardInfoBrand = "",
                 merchantName = "Cafeteria do Marcos",
                 message = "cafeteria"
             ),
             NewReceipt(
                 idUserToSend = idUser,
-                date = 3390,
+                date = currentTimestamp - (86400 * 5),
                 value = 18.90f,
                 status = 0,
                 paymentMethod = 3,
@@ -238,7 +243,7 @@ class ReceiptsListFragment : Fragment() {
             ),
             NewReceipt(
                 idUserToSend = idUser,
-                date = 3390,
+                date = currentTimestamp - (86400 * 6),
                 value = 18.90f,
                 status = 0,
                 paymentMethod = 3,
@@ -248,7 +253,7 @@ class ReceiptsListFragment : Fragment() {
             ),
             NewReceipt(
                 idUserToSend = idUser,
-                date = 3390,
+                date = currentTimestamp - (86400 * 7),
                 value = 18.90f,
                 status = 0,
                 paymentMethod = 3,

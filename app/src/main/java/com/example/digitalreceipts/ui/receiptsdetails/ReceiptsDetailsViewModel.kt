@@ -17,19 +17,19 @@ class ReceiptsDetailsViewModel : ViewModel() {
     val merchantNameField = MutableLiveData("")
     val receiptValueField = MutableLiveData(0f)
     val dateField = MutableLiveData<Long>(0)
-    val cardInfoBrandField = MutableLiveData("")
+    private val cardInfoBrandField = MutableLiveData("")
     val authenticationField = MutableLiveData("")
 
-    private val _receipts = MutableLiveData<Receipt>()
+    private val _receipt = MutableLiveData<Receipt>()
 
-    var receipts: LiveData<Receipt> = _receipts
+    var receipt: LiveData<Receipt> = _receipt
 
     /**
      * Recebe um Receipt e atribui à variável _receivedCard
      */
     fun receiveReceipt(receipts: Receipt) {
         with(receipts) {
-            _receipts.value = receipts
+            _receipt.value = receipts
             initFields(this)
         }
     }

@@ -104,7 +104,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/details_receipt_form_of_payment_textview_text_size"
-                android:text="@{viewModel.cardInfoBrandField}"
+                bind:card="@{viewModel.receipt}"
                 tools:text="Credit Card: Visa 9985">
 
             </TextView>
