@@ -9,25 +9,25 @@ import com.example.digitalreceipts.databinding.ReceiptsListHeaderBinding
 import com.example.digitalreceipts.databinding.ReceiptsListItemBinding
 
 /**
- * Essa classe mantém os diferentes ViewHolders. Optei por usar uma classe selada para limitar
- * a extensão dessa classe.
+ * Essa classe é responsável por manter os dois ViewHolders (recibo e cabeçalho).
+ * A classe selada serve para limitar a extensão da mesma. TODO estudar mais classes seladas
  */
 sealed class DataItemViewHolder(open val binding: ViewBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     /**
-     * Implementei o ViewHolder como uma classe aninhada para conseguir adotar a boa prática
-     * de fazer a inflação do ViewHolder a partir de si mesmo. O binding dos dados e métodos
-     * também é responsabilidade da classe ViewHolder. Necessita também um binding object
-     * definido no XML do item.
+     * ViewHolder foi implementado como uma classe aninhada pois é uma boa prática
+     * realizar a inflação do ViewHolder a partir dele mesmo mesmo.
+     * O binding dos dados e métodos também são responsabilidade da classe ViewHolder.
+     * Também é necessário um binding object definido no XML do item.
+     * TODO entender melhor a constante sobrescrita
      */
     class ReceiptsViewHolder(override val binding: ReceiptsListItemBinding) :
         DataItemViewHolder(binding) {
 
         /**
-         * Esse método faz a vinculação dos dados com os componentes visuais. É possível fazer
-         * tudo manualmente aqui na classe ViewHolder, mas preferi adotar BindingAdapters para
-         * deixar a solução mais flexível e fácil de manter.
+         * Esse método faz a vinculação dos dados com os componentes visuais usando
+         * BindingAdapters.
          */
         fun bind(item: Receipt, cardListener: ReceiptsListener) {
             with(binding) {
@@ -39,7 +39,7 @@ sealed class DataItemViewHolder(open val binding: ViewBinding) :
 
         /**
          * Esse companion object permite que o ListAdapter obtenha uma instância
-         * do ViewHolder passando apenas o parent.
+         * do ViewHolder passando apenas o parent. TODO estudar mais esse companion object
          */
         companion object {
             fun from(parent: ViewGroup): ReceiptsViewHolder {

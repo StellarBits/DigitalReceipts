@@ -1,42 +1,32 @@
 package com.example.digitalreceipts.ui.main.login.login
 
 import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.example.digitalreceipts.R
 import com.example.digitalreceipts.api.model.LoginBody
 import com.example.digitalreceipts.api.model.LoginResponse
 import com.example.digitalreceipts.databinding.LoginScreenFragmentBinding
 import com.example.digitalreceipts.ui.custom.dialog.ProgressHUD
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-private const val RC_SIGN_IN = 123
-
+/**
+ * Fragmento responsável pelo controle de UI da tela de login.
+ */
 class LoginScreenFragment : Fragment() {
+
+    // Instância do ViewModel através da injeção de dependência.
     private val mViewModel: LoginScreenViewModel by viewModel()
 
+    // Ligando o layout com o binding para acesso dos componentes.
     private val binding: LoginScreenFragmentBinding by lazy {
         LoginScreenFragmentBinding.inflate(layoutInflater)
     }
 
-    private var mGoogleSignInClient: GoogleSignInClient? = null
-    private var mAuth: FirebaseAuth? = null
     private lateinit var mActivity: Activity
     private lateinit var mView: View
     private lateinit var mProgressHUD: ProgressHUD
@@ -45,9 +35,16 @@ class LoginScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        // Resposta da API depois da requisição de login.
         mViewModel.apiResponse.observe(viewLifecycleOwner) {
+
+            // Caso tiver algum dialog sendo exibido, é dispensado.
             mProgressHUD.dismiss()
 
+            // Se o login foi realizado com sucesso, navega para a tela da lista de recibos passando
+            // o corpo da resposta como parâmetro (que depois será passado como argumento).
+            // Caso não, exibe um dialog informando que não foi possível realizar o login.
             if (it.code() == 200) {
                 navigateToReceiptsListFragment(it.body()!!)
             } else {
@@ -62,12 +59,16 @@ class LoginScreenFragment : Fragment() {
             }
         }
 
+        // Clique do botão de login.
         binding.btLogin.setOnClickListener {
+
+            // Cria o corpo da requisição de login.
             val loginBody = LoginBody(
                 binding.etEmail.text.toString(),
                 binding.etPassword.text.toString()
             )
 
+            // Cria dialog de loading.
             mProgressHUD = ProgressHUD.show(
                 context, "Accessing",
                 cancelable = false,
@@ -76,18 +77,17 @@ class LoginScreenFragment : Fragment() {
 
             mProgressHUD.show()
 
+            // Envia a requisição para o ViewModel.
             mViewModel.login(loginBody)
         }
 
+        // Clique do botão de criar nova conta.
         binding.btCreateNewAccount.setOnClickListener {
             val direction = LoginScreenFragmentDirections.navigateToCreateNewAccount()
             findNavController().navigate(direction)
         }
 
-        binding.acbSignInWithGoogle.setOnClickListener {
-            signIn()
-        }
-
+        // Clique da TextView de "esqueci minha senha".
         binding.tvForgotPassword.setOnClickListener {
             val direction = LoginScreenFragmentDirections.navigateToForgotPassword()
             findNavController().navigate(direction)
@@ -101,87 +101,21 @@ class LoginScreenFragment : Fragment() {
 
         mActivity = requireActivity()
         mView = view
-        mAuth = FirebaseAuth.getInstance()
-        createRequest()
     }
 
-    /*override fun onStart() {
-        super.onStart()
-        val user = mAuth!!.currentUser
-        if (user != null) {
-            val navController = Navigation.findNavController(mView)
-            navController.navigate(R.id.navigate_to_receipts_list_directly)
-            Toast.makeText(mActivity, "Welcome, ${user.displayName}!", Toast.LENGTH_SHORT).show()
-        }
-    }*/
-
-    @Deprecated("Deprecated in Java")
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account: GoogleSignInAccount = task.getResult(ApiException::class.java)
-                firebaseAuthWithGoogle(account)
-                Toast.makeText(
-                    mActivity,
-                    "Welcome, ${mAuth!!.currentUser?.displayName}!",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Toast.makeText(mActivity, e.message, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun createRequest() {
-
-        // Configure Google Sign In
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(mActivity, gso)
-    }
-
-    private fun signIn() {
-        val signInIntent = mGoogleSignInClient!!.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
-
-    private fun firebaseAuthWithGoogle(acct: GoogleSignInAccount) {
-        val credential = GoogleAuthProvider.getCredential(acct.idToken, null)
-        mAuth!!.signInWithCredential(credential)
-            .addOnCompleteListener(mActivity) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    //val user = mAuth!!.currentUser
-                    val navController = Navigation.findNavController(mView)
-                    navController.navigate(R.id.navigate_to_receipts_list)
-                } else {
-                    Toast.makeText(mActivity, "Sorry auth failed.", Toast.LENGTH_SHORT)
-                        .show()
-                }
-            }
-    }
-
+    // Quando na tela de login, esconde a barra de navegação.
     override fun onResume() {
         super.onResume()
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
     }
 
+    // Quando fora da tela de login, exibe a barra de navegação.
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
+    // Navega para a tela da lista de recibos.
     private fun navigateToReceiptsListFragment(userData: LoginResponse) {
         val direction = LoginScreenFragmentDirections.navigateToReceiptsList(userData)
         findNavController().navigate(direction)

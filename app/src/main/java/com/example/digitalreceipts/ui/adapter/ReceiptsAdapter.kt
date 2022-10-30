@@ -11,7 +11,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 /**
- * Essas constantes indicam o tipo de item que vai ser retornado.
+ * Constantes responsáveis por indicar qual o tipo de item que será
+ * retornado (header ou receipt).
  */
 private const val ITEM_VIEW_TYPE_HEADER = 0
 private const val ITEM_VIEW_TYPE_ITEM = 1
@@ -19,14 +20,14 @@ private const val ITEM_VIEW_TYPE_ITEM = 1
 /**
  * O adapter implementa a interface ListAdapter com DiffUtil; tanto a inflação do layout
  * quanto a vinculação de dados ocorrem na classe ViewHolder.
- * Ao invés de receber uma lista de Receipts, esse adapter espera uma List<DataItem>,
+ * Ao invés de receber uma lista de Receipts direto, esse adapter recebe um List<DataItem>,
  * que é a superclasse dos tipos concretos de dados (Receipts ou Header).
  */
 class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdapter<DataItem,
         DataItemViewHolder>(ReceiptsDiffCallback()) {
     /**
-     * Declarar um escopo de corrotina específico para o Adapter. Vai ser usado para as
-     * situações em que é necessário processar a lista.
+     * Escopo de corrotina específico para o Adapter. Responsável por processar a lista em
+     * concorrência e otimizar o desempenho.
      */
     private val adapterScope = CoroutineScope(Dispatchers.Default)
 
@@ -40,6 +41,7 @@ class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdap
 
     /**
      * Seleciona o binding dos dados conforme o tipo de ViewHolder.
+     * Caso recibos, todos os dados. Caso header, apenas as datas dos recibos.
      */
     override fun onBindViewHolder(holder: DataItemViewHolder, position: Int) {
         when (holder) {
@@ -55,7 +57,7 @@ class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdap
     }
 
     /**
-     * Determinar o tipo de ViewHolder a partir do objeto na posição da lista.
+     * A partir da posição do objeto da lista, retorna qual o tipo do ViewHolder.
      */
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -65,9 +67,9 @@ class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdap
     }
 
     /**
-     * Processa a lista recebida do repositório para agrupar os contatos
-     * conforme a primeira inicial e submete. O processamento acontece
-     * no escopo específico do Adapter para não bloquear a Thread principal.
+     * Processa a lista recebida (seja de uma api ou de um banco de dados) para agrupar
+     * os recibos conforme a data do mesmo e submete. O processamento acontece
+     * no escopo específico do Adapter (thread default) para não bloquear a Thread main.
      */
     fun addHeadersAndSubmitList(list: List<Receipt>?) {
 
@@ -81,7 +83,7 @@ class ReceiptsAdapter(private val receiptsListener: ReceiptsListener) : ListAdap
 
     /**
      * Essa classe implementa a interface DiffUtil.ItemCallback<T>. O código aqui é
-     * quase boilerplate.
+     * quase boilerplate. TODO entender melhor o Diff Callback
      */
     class ReceiptsDiffCallback : DiffUtil.ItemCallback<DataItem>() {
 

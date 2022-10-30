@@ -2,10 +2,13 @@ package com.example.digitalreceipts.ui.adapter
 
 import com.example.digitalreceipts.api.model.Receipt
 
+/**
+ * Essa classe é responsável por escutar as interações com os items da recyclerView.
+ * TODO entender melhor como atuam os contrutores dessa classe
+ */
 class ReceiptsListener(
-    val clickListener: (receipts: Receipt) -> Unit,
+    val clickListener: (receipts: Receipt) -> Unit, // TODO entender melhor o retorno Unit
     val longClickListener: (receipts: Receipt) -> Boolean
-    //val shareBtnClickListener: (view: View) -> Unit,
 ) {
     fun onClick(receipt: Receipt) {
         clickListener(receipt)
@@ -15,8 +18,4 @@ class ReceiptsListener(
         longClickListener(receipt)
         return true
     }
-
-    /*fun onShareBtnClick(view: View) {
-        shareBtnClickListener(view)
-    }*/
 }

@@ -7,6 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.digitalreceipts.databinding.HomeScreenFragmentBinding
 
+/**
+ * TODO
+ * "Lobby" das histórias
+ */
 class HomeScreenFragment : Fragment() {
     private val binding: HomeScreenFragmentBinding by lazy {
         HomeScreenFragmentBinding.inflate(layoutInflater)

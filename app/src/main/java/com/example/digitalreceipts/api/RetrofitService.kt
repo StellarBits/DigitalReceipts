@@ -8,6 +8,9 @@ import retrofit2.http.*
 
 private const val BASE_URL = "https://sidi-proj-capacitacao.herokuapp.com/api/"
 
+/**
+ * Endpoints.
+ */
 interface RetrofitService {
     @GET("v2/receipt")
     fun getReceipts(@Header("Authorization") token: String): Call<GetUserReceipts>
@@ -35,7 +38,7 @@ interface RetrofitService {
 }
 
 /**
- * A public Api object that exposes the lazy-initialized Retrofit service
+ * Singleton do retrofit.
  */
 object ReceiptApi {
     private val retrofit = Retrofit.Builder()

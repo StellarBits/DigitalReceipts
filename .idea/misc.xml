@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_gradient_background.xml" value="0.321" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.298" />
         <entry key="app/src/main/res/drawable/loading_animation.xml" value="0.2775" />
+        <entry key="app/src/main/res/drawable/ripple.xml" value="0.321" />
         <entry key="app/src/main/res/drawable/rounded_edge.xml" value="0.321" />
         <entry key="app/src/main/res/drawable/rounded_edit_text.xml" value="0.2775" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.298" />

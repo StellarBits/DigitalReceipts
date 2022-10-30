@@ -21,7 +21,7 @@
         android:layout_marginStart="@dimen/receipt_list_item_linear_layout_edge_margins"
         android:layout_marginEnd="@dimen/receipt_list_item_linear_layout_edge_margins"
         android:layout_marginBottom="@dimen/receipt_list_item_linear_layout_edge_margins"
-        android:background="@drawable/rounded_edge"
+        android:background="@drawable/ripple"
         android:clickable="true"
         android:focusable="true"
         android:onClick="@{() -> listener.onClick(receipt)}"

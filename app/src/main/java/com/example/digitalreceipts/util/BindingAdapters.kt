@@ -17,15 +17,25 @@ import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 
+/**
+ * Grava em uma constante o caminho físico das imagens na pasta drawable para serem carregadas
+ * pela biblioteca Coil.
+ */
 private const val IMAGES_DRAWABLE_PATH = "android.resource://com.example.digitalreceipts/drawable/"
+
 private const val TAG = "BindingAdapters"
 
+/**
+ * (Gambi) Busca e exibe o logo das lojas (armazenas no dispositivo) para contornar as
+ * imagens random, que são geradas e retornadas pelo servidor, e concatenar a ideia da
+ * API V1 com a da API V2.
+ */
 @BindingAdapter("bind:icon")
 fun loadIcon(imageView: ImageView, imageName: String?) {
     if (imageName != null) {
         val logo = imageName + "_logo"
 
-        // Load image using Coil (Recommended from Google)
+        // Carregando as imagens usando Coil (Recomendada pela Google)
         imageView.load(
             Uri.parse(
                 IMAGES_DRAWABLE_PATH + logo
@@ -36,10 +46,15 @@ fun loadIcon(imageView: ImageView, imageName: String?) {
     }
 }
 
+/**
+ * (Gambi) Busca e exibe a imagem de capa das lojas (armazenas no dispositivo) para contornar
+ * as imagens random, que são geradas e retornadas pelo servidor, e concatenar a ideia da
+ * API V1 com a da API V2.
+ */
 @BindingAdapter("bind:cover")
 fun loadCover(imageView: ImageView, imageName: String?) {
     if (imageName != null) {
-        // Load image using Coil (Recommended from Google)
+        // Carregando as imagens usando Coil (Recomendada pela Google)
         imageView.load(
             Uri.parse(
                 IMAGES_DRAWABLE_PATH + imageName
@@ -50,6 +65,11 @@ fun loadCover(imageView: ImageView, imageName: String?) {
     }
 }
 
+/**
+ * Formata o valor dos recibos. (Temporariamente feita para o Brasil).
+ * Se o locale for brasileiro, formata em reais com a vírgula separando as casas decimais;
+ * Para qualquer outra localização, ele formata no padrão norte americano.
+ */
 @SuppressLint("SetTextI18n")
 @BindingAdapter("bind:value")
 fun setValue(textView: TextView, receiptValue: Float?) {
@@ -57,7 +77,6 @@ fun setValue(textView: TextView, receiptValue: Float?) {
         val symbols = DecimalFormatSymbols(Locale.getDefault())
         val df = DecimalFormat("#,###,##0.00", symbols)
 
-        //val value = BigDecimal(receiptValue.toDouble()).setScale(2, RoundingMode.HALF_EVEN)
         val value = receiptValue.toDouble()
 
         textView.text =
@@ -68,15 +87,21 @@ fun setValue(textView: TextView, receiptValue: Float?) {
     }
 }
 
+/**
+ * Formata a data dos recibos.
+ */
 @BindingAdapter("bind:time")
 fun setTime(textView: TextView, receiptTime: Long?) {
     if (receiptTime != null) {
         val simpleDate = SimpleDateFormat("dd/MM/yyyy - hh:mm a", Locale.getDefault())
-        val currentDate = simpleDate.format(Date.from(Instant.ofEpochSecond(receiptTime)))
-        textView.text = currentDate
+        val receiptDate = simpleDate.format(Date.from(Instant.ofEpochSecond(receiptTime)))
+        textView.text = receiptDate
     }
 }
 
+/**
+ * Formata o header dos recibos.
+ */
 @SuppressLint("SimpleDateFormat")
 @BindingAdapter("bind:headerDate")
 fun setKey(textView: TextView, item: DataItem.Header) {
@@ -105,6 +130,10 @@ fun setKey(textView: TextView, item: DataItem.Header) {
         val dayDiff = localDateTime.until(now, ChronoUnit.DAYS)
         Log.i(TAG, "dayDiff: $dayDiff")
 
+        // Depois de formatar e ajustar a data, pega a diferença de dias entre a data atual
+        // e a data do recibo para nomear o header de acordo com a data do dia, informando
+        // o dia da semana que foi realizada a compra. Se estiver com um período maior
+        // que sete dias, apenas a data é colocada.
         textView.text = when(dayDiff.toInt()) {
             0 -> "Today"
             1 -> "Yesterday"
@@ -112,13 +141,16 @@ fun setKey(textView: TextView, item: DataItem.Header) {
                 val simpleDateFormat = SimpleDateFormat("EEEE")
                 val dayOfTheWeek = simpleDateFormat.format(receiptDate)
 
-                dayOfTheWeek
+                dayOfTheWeek.replaceFirstChar { dayOfTheWeek.first().uppercase() }
             }
             else -> {item.date}
         }
     }
 }
 
+/**
+ * Formata o tipo de pagamento e exibe a bandeira, em caso de pagamento com cartões.
+ */
 @BindingAdapter("bind:card")
 fun setCreditCard(textView: TextView, item: Receipt?){
     val paymentMethod = when(item?.paymentMethod ?: 6) {

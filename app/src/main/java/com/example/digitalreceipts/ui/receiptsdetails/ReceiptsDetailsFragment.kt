@@ -9,6 +9,9 @@ import androidx.navigation.fragment.navArgs
 import com.example.digitalreceipts.databinding.ReceiptsDetailsFragmentBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * Fragmento responsável pelo controle de UI da tela de detalhes dos recibos.
+ */
 class ReceiptsDetailsFragment : Fragment() {
     private val mViewModel: ReceiptsDetailsViewModel by viewModel()
 
@@ -22,11 +25,12 @@ class ReceiptsDetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        /**
-         * Define o campo _receivedCard no ViewModel caso receba um
-         * cartão como argumento na navegação, i.e., vai editar um cartão
-         * existente ao invés de criar um novo
-         */
+
+        // Recebe os dados do recibo selecionado como argumento da lista de recibos.
+        // Sei que não é uma boa prática tratar dados de UI no ViewModel, mas segundo
+        // o que entendi, ecolhi alimentar os campos para exibição no ViewModel para
+        // exercitar melhor o DataBinding e o LiveData/MutableLiveData, uma vez que
+        // notei que as referências passadas no XML vêm sempre do ViewModel.
         arguments.receipts.let {
             mViewModel.receiveReceipt(it)
         }

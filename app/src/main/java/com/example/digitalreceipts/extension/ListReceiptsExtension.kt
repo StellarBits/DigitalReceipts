@@ -9,8 +9,7 @@ import java.time.Instant
 import java.util.*
 
 /**
- * Uma função de extensão para ordenar a lista alfabeticamente pelo
- * nome do contato.
+ * Função para ordenar a lista de forma descendente pela data do recibo.
  */
 fun LiveData<List<Receipt>>.sortedByDate(): LiveData<List<Receipt>> =
     this.map { list ->
@@ -20,9 +19,8 @@ fun LiveData<List<Receipt>>.sortedByDate(): LiveData<List<Receipt>> =
     }
 
 /**
- * Essa função de extensão é usada para concatenar a lista de Receipts
- * com os cabeçalhos gerados a partir da primeira letra do nome. Em outras
- * palavras: agrupar os contatos pela inicial.
+ * Função para concatenar a lista de recibos com os headers gerados a partir da data dos mesmos.
+ * Essa função grupa os recibos pela data.
  */
 fun List<Receipt>.toListOfDataItem(): List<DataItem> {
 

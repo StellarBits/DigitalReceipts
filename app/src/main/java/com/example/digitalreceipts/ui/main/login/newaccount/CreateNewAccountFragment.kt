@@ -12,21 +12,31 @@ import com.example.digitalreceipts.databinding.CreateNewAccountFragmentBinding
 import com.example.digitalreceipts.ui.custom.dialog.ProgressHUD
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+/**
+ * Fragmento responsável pelo controle de UI da tela de criação de usuário.
+ */
 class CreateNewAccountFragment : Fragment() {
 
+    // Instância do ViewModel através da injeção de dependência.
     private val mViewModel: CreateNewAccountViewModel by viewModel()
 
+    // Ligando o layout com o binding para acesso dos componentes.
     private val binding: CreateNewAccountFragmentBinding by lazy {
         CreateNewAccountFragmentBinding.inflate(layoutInflater)
     }
 
+    // Instância do dialog de loading.
     private lateinit var mProgressHUD: ProgressHUD
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        // Click do botão de criar nova conta.
         binding.btRegister.setOnClickListener {
+
+            // Cria o body com os dados necessários para criar a nova conta.
             val newUser = NewUser(
                 binding.etName.text.toString(),
                 binding.etEmail.text.toString(),
@@ -36,6 +46,7 @@ class CreateNewAccountFragment : Fragment() {
                 binding.scAgree.isChecked
             )
 
+            // Cria o dialog de loading.
             mProgressHUD = ProgressHUD.show(
                 context, "Creating user",
                 cancelable = false,
@@ -44,14 +55,19 @@ class CreateNewAccountFragment : Fragment() {
 
             mProgressHUD.show()
 
+            // Envia a requisição com o novo usuário.
+            // TODO fazer o tratamento do "agree terms"
             mViewModel.createNewUser(newUser)
         }
 
+        // Resposta da API depois da requisição.
         mViewModel.apiResponse.observe(viewLifecycleOwner) {
             Log.i("JAO", "Observer code result: $it")
 
+            // Dispensa o dialog de loading anterior.
             mProgressHUD.dismiss()
 
+            // Cria dialog com a reposta da requisição vinda do servidor.
             mProgressHUD = ProgressHUD.show(
                 context, it.resultMessage,
                 cancelable = true,
@@ -60,6 +76,7 @@ class CreateNewAccountFragment : Fragment() {
 
             mProgressHUD.show()
 
+            // Se a requisição foi realizada com sucesso, navega para a tela anterior.
             if (it.code == 201) {
                 findNavController().popBackStack()
             }
